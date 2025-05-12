@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
   late SharedPreferences prefs;
+
+  HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

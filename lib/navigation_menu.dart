@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:caferesto/features/shop/screens/home/home.dart';
-import 'package:caferesto/pages/coffeepage.dart';
+import 'package:caferesto/features/shop/screens/store/store.dart';
 import 'package:caferesto/pages/home.page.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
@@ -45,8 +45,8 @@ class NavigationController extends GetxController {
 
   final screens = [
     HomeScreen(),
+    StoreScreen(),
     HomePage(),
-    const CoffeePage(),
     Container(
       color: Colors.deepPurple,
     ),
