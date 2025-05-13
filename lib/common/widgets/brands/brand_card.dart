@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/enums.dart';
-import '../../../../utils/constants/image_strings.dart';
-import '../../../../utils/constants/sizes.dart';
-import '../../../../utils/helpers/helper_functions.dart';
-import '../../images/circular_image.dart';
-import '../../texts/brand_title_text_with_verified_icon.dart';
-import 'product_card_vertical.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/enums.dart';
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
+import '../images/circular_image.dart';
+import '../texts/brand_title_text_with_verified_icon.dart';
+import '../products/product_cards/product_card_vertical.dart';
 
 class BrandCard extends StatelessWidget {
   const BrandCard({

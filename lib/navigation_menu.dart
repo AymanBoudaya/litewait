@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import 'features/shop/screens/wishlist/wishlist.dart';
+
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
   @override
@@ -46,9 +48,7 @@ class NavigationController extends GetxController {
   final screens = [
     HomeScreen(),
     StoreScreen(),
+    FavoriteScreen(),
     HomePage(),
-    Container(
-      color: Colors.deepPurple,
-    ),
   ];
 }
