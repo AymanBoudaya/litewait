@@ -57,6 +57,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: TSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -73,10 +74,16 @@ class HomeScreen extends StatelessWidget {
                         TImages.promoBanner3
                       ],
                     ),
-                      const SizedBox(height: TSizes.spaceBtwSections,),
+                    const SizedBox(
+                      height: TSizes.spaceBtwSections,
+                    ),
 
                     /// Popular products
-                    GridLayout(itemCount: 10, itemBuilder: (_ , index ) => const TProductCardVertical()  ,)],
+                    GridLayout(
+                      itemCount: 10,
+                      itemBuilder: (_, index) => const TProductCardVertical(),
+                    )
+                  ],
                 )),
           ],
         ),

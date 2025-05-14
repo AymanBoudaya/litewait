@@ -8,7 +8,7 @@ class CircularImage extends StatelessWidget {
     super.key,
     this.fit = BoxFit.cover,
     required this.image,
-    required this.isNetworkImage,
+    this.isNetworkImage = false,
     this.overlayColor,
     this.backgroundColor,
     this.width = 56,
@@ -31,19 +31,20 @@ class CircularImage extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         border: Border.all(
-          color: TColors.buttonPrimary,
+          color: TColors.success,
           width: 2,
         ),
         color: TColors.grey,
-        borderRadius: BorderRadius.circular(
-          100,
-        ),
-
+        borderRadius: BorderRadius.circular(100),
       ),
-      child: Image(
-        fit : fit,
-        image: isNetworkImage ? NetworkImage(image) : AssetImage(image) as ImageProvider,
-        color: overlayColor,
+      child: ClipOval(
+        child: Image(
+          fit: fit,
+          image: isNetworkImage
+              ? NetworkImage(image)
+              : AssetImage(image) as ImageProvider,
+          color: overlayColor,
+        ),
       ),
     );
   }

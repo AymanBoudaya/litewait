@@ -3,8 +3,10 @@ import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/screens/product_details/product_detail.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../styles/shadows.dart';
@@ -21,7 +23,7 @@ class TProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
           width: 180,
           padding: const EdgeInsets.all(1),
