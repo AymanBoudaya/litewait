@@ -10,6 +10,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../address/address.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -32,7 +33,8 @@ class SettingsScreen extends StatelessWidget {
                             .apply(color: TColors.white))),
 
                 /// Profile Picture card
-                TUserProfileTile(onPressed : () => Get.to(() => const ProfileScreen())),
+                TUserProfileTile(
+                    onPressed: () => Get.to(() => const ProfileScreen())),
                 const SizedBox(height: TSizes.spaceBtwSections),
               ],
             ),
@@ -54,7 +56,7 @@ class SettingsScreen extends StatelessWidget {
                     title: "Mes Adresses",
                     subTitle: "Mes adresses de livraison",
                     icon: Iconsax.safe_home,
-                    onTap: () {}),
+                    onTap: () => Get.to(() => const UserAddressScreen())),
                 TSettingsMenuTile(
                     title: "Mon Panier",
                     subTitle: "Ajouter, modifier ou supprimer des articles",

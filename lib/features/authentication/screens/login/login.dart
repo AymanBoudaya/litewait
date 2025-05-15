@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
             /// Divider
             TFormDivider(dark: dark),
             const SizedBox(
-              height: TSizes.spaceBtwSections,
+              height: TSizes.spaceBtwSections / 2,
             ),
 
             /// Footer

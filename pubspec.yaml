@@ -39,7 +39,6 @@ dependencies:
   url_launcher:
   flutter_native_splash:
   smooth_page_indicator:
-  carousel_slider:
 
   # Icons
   iconsax:
@@ -53,6 +52,12 @@ dependencies:
   firebase_storage:
   lottie:
   connectivity_plus:
+
+  # Product Specific
+  readmore:
+  carousel_slider:
+  flutter_rating_bar:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -86,6 +91,7 @@ flutter:
     - assets/images/user/
     - assets/icons/categories/
     - assets/icons/brands/
+    - assets/images/reviews/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
