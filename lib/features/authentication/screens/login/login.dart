@@ -6,6 +6,9 @@ import 'package:caferesto/common/widgets.login_signup/social_buttons.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../utils/constants/text_strings.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -27,13 +30,13 @@ class LoginScreen extends StatelessWidget {
             const TLoginForm(),
 
             /// Divider
-            TFormDivider(dark: dark),
+            TFormDivider(dividerText: TTexts.orSignInWith.capitalize!),
             const SizedBox(
-              height: TSizes.spaceBtwSections / 2,
+              height: TSizes.spaceBtwSections,
             ),
 
             /// Footer
-            const TSocialButtons()
+            const TSocialButtons(),
           ],
         ),
       ),

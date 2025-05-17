@@ -1,3 +1,4 @@
+import 'package:caferesto/features/authentication/screens/signup.widgets/signup.dart';
 import 'package:caferesto/navigation_menu.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
@@ -71,7 +72,7 @@ class TLoginForm extends StatelessWidget {
           SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                  onPressed: () {}, child: const Text(TTexts.createAccount)))
+                  onPressed: () => Get.to(() =>const SignupScreen() ), child: const Text(TTexts.createAccount)))
         ],
       ),
     ));
