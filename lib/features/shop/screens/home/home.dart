@@ -1,3 +1,6 @@
+import 'package:caferesto/features/shop/screens/all_products/all_products.dart';
+import 'package:get/get.dart';
+
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
@@ -67,6 +70,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(TSizes.defaultSpace),
                 child: Column(
                   children: [
+                    /// --PromoSlider
                     const TPromoSlider(
                       banners: [
                         TImages.promoBanner1,
@@ -76,6 +80,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: TSizes.spaceBtwSections,
+                    ),
+
+                    /// -- Heading
+                    TSectionHeading(
+                      title: 'Produits Populaires',
+                      onPressed: () => Get.to(() => const AllProducts()),
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtwItems,
                     ),
 
                     /// Popular products

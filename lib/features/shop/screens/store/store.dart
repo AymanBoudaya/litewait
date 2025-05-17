@@ -3,9 +3,11 @@ import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:caferesto/common/widgets/brands/brand_card.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
+import 'package:caferesto/features/shop/screens/brand/all_brands.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
@@ -67,7 +69,7 @@ class StoreScreen extends StatelessWidget {
                           /// Featured Brands
                           TSectionHeading(
                             title: 'Marques Populaires',
-                            onPressed: () {},
+                            onPressed: () => Get.to(()=> const AllBrandsScreen()),
                           ),
                           const SizedBox(
                             height: TSizes.spaceBtwItems / 1.5,

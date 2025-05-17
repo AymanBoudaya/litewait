@@ -2,6 +2,7 @@ import 'package:caferesto/common/widgets/appbar/appbar.dart';
 import 'package:caferesto/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
 import 'package:caferesto/features/personalization/screens/profile/profile.dart';
+import 'package:caferesto/features/shop/screens/order/order.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,7 +67,7 @@ class SettingsScreen extends StatelessWidget {
                     title: "Mes Commandes",
                     subTitle: "Commandes passées et en cours",
                     icon: Iconsax.bag_tick,
-                    onTap: () {}),
+                    onTap: () => Get.to(() => const OrderScreen())),
                 TSettingsMenuTile(
                     title: "Compte Bancaire",
                     subTitle: "Mes informations bancaires",

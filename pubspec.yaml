@@ -91,6 +91,7 @@ flutter:
     - assets/images/user/
     - assets/icons/categories/
     - assets/icons/brands/
+    - assets/icons/payment_methods/
     - assets/images/reviews/
 
   # An image asset can refer to one or more resolution-specific "variants", see
