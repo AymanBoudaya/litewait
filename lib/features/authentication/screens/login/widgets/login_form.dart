@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 
 import 'package:iconsax/iconsax.dart';
 
+import '../../password-config/forget_password.dart';
+
 class TLoginForm extends StatelessWidget {
   const TLoginForm({
     super.key,
@@ -50,7 +52,8 @@ class TLoginForm extends StatelessWidget {
 
               /// Forget Password
               TextButton(
-                  onPressed: () {}, child: const Text(TTexts.forgetPassword))
+                  onPressed: () => Get.to(() => ForgetPassword()),
+                  child: const Text(TTexts.forgetPassword))
             ],
           ),
           const SizedBox(
@@ -72,7 +75,8 @@ class TLoginForm extends StatelessWidget {
           SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                  onPressed: () => Get.to(() =>const SignupScreen() ), child: const Text(TTexts.createAccount)))
+                  onPressed: () => Get.to(() => const SignupScreen()),
+                  child: const Text(TTexts.createAccount)))
         ],
       ),
     ));
