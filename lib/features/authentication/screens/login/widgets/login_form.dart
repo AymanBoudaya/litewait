@@ -20,6 +20,7 @@ class TLoginForm extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Email
           TextFormField(
@@ -43,16 +44,18 @@ class TLoginForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               /// Remember Me
-              Row(
-                children: [
-                  Checkbox(value: true, onChanged: (value) {}),
-                  const Text(TTexts.rememberMe)
-                ],
+              Flexible(
+                child: Row(
+                  children: [
+                    Checkbox(value: true, onChanged: (value) {}),
+                    Flexible(child: const Text(TTexts.rememberMe))
+                  ],
+                ),
               ),
 
               /// Forget Password
               TextButton(
-                  onPressed: () => Get.to(() => ForgetPassword()),
+                  onPressed: () => Get.to(() => const ForgetPassword()),
                   child: const Text(TTexts.forgetPassword))
             ],
           ),

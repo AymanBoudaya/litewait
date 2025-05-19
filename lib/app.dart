@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'bindings/general_binding.dart';
+
 class App extends StatelessWidget {
   final routes = {
     '/home': (context) => HomeScreen(),
@@ -20,6 +22,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
+      initialBinding: GeneralBinding(),
       debugShowCheckedModeBanner: false,
       routes: routes,
       home: FutureBuilder(

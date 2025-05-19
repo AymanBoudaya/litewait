@@ -39,6 +39,7 @@ dependencies:
   url_launcher:
   flutter_native_splash:
   smooth_page_indicator:
+  lottie:
 
   # Icons
   iconsax:
@@ -50,7 +51,6 @@ dependencies:
   get:
   get_storage:
   firebase_storage:
-  lottie:
   connectivity_plus:
 
   # Product Specific
