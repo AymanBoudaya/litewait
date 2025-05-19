@@ -1,9 +1,11 @@
 import 'package:caferesto/utils/exceptions/firebase_exceptions.dart';
 import 'package:caferesto/utils/exceptions/format_exceptions.dart';
 import 'package:caferesto/utils/exceptions/platform_exceptions.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../../features/personalization/models/user_model.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -22,7 +24,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw "Something went wrong. Please try again"
+      throw "Something went wrong. Please try again";
     }
   }
 }
