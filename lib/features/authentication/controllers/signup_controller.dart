@@ -1,9 +1,13 @@
+import 'package:caferesto/features/personalization/models/user_model.dart';
+import 'package:caferesto/src/user_repo.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:caferesto/utils/helpers/network_manager.dart';
 import 'package:caferesto/utils/popups/full_screen_loader.dart';
 import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../screens/signup.widgets/verify_email.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
@@ -46,6 +50,34 @@ class SignupController extends GetxController {
         return;
       }
 
+      /// Register user in the firebase auth & save user data in firebase
+      final userCredential = await AuthenticationRepository.instance
+          .registerWithEmailAndPassword(
+              email.text.trim(), password.text.trim());
+
+      /// Save authenticated user data in the firebase firestore
+      ///
+      final newUser = UserModel(
+          id: userCredential.user!.uid,
+          firstName: firstName.text.trim(),
+          lastName: lastName.text.trim(),
+          username: username.text.trim(),
+          email: email.text.trim(),
+          phoneNumber: phoneNumber.text.trim(),
+          profilePicture: '');
+
+      final userRepository = Get.put(UserRepository());
+      await userRepository.saveUserRecord(newUser);
+
+      /// Show success Message
+      ///
+      TLoaders.successSnackBar(
+          title: "Félicitations!",
+          message:
+              "Votre compte à été crée! Vérifier votre email pour continuer.");
+
+      /// Move to verify email screen
+      Get.to(() => const VerifyEmailScreen());
       // >>> Here goes the logic to send data to backend (API or Firebase)
       print("All validations passed. Ready to register user.");
     } catch (e) {
