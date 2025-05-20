@@ -6,9 +6,9 @@ import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../data/repositories/authentication/authentication_repository.dart';
-import '../../../data/repositories/user/user_repository.dart';
-import '../screens/signup.widgets/verify_email.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
+import '../../../../data/repositories/user/user_repository.dart';
+import '../../screens/signup.widgets/verify_email.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
@@ -72,14 +72,13 @@ class SignupController extends GetxController {
       await userRepository.saveUserRecord(newUser);
 
       /// Show success Message
-      ///
       TLoaders.successSnackBar(
           title: "Félicitations!",
           message:
               "Votre compte à été crée! Vérifier votre email pour continuer.");
 
       /// Move to verify email screen
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(email: email.text.trim(),));
       // >>> Here goes the logic to send data to backend (API or Firebase)
       print("All validations passed. Ready to register user.");
     } catch (e) {

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
-import '../../../controllers/signup_controller.dart';
+import '../../../controllers/signup/signup_controller.dart';
 
 class TermsAndConditionsCheckbox extends StatelessWidget {
   const TermsAndConditionsCheckbox({

@@ -1,5 +1,5 @@
-import 'package:caferesto/common/widgets/success_screen/success_screen.dart';
-import 'package:caferesto/features/authentication/screens/login/login.dart';
+import 'package:caferesto/data/repositories/authentication/authentication_repository.dart';
+import 'package:caferesto/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
@@ -10,16 +10,17 @@ import 'package:get/get.dart';
 import '../../../../utils/constants/sizes.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
-
+  const VerifyEmailScreen({super.key, this.email});
+  final String? email;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Get.offAll(() => const LoginScreen()),
+            onPressed: () => AuthenticationRepository.instance.logout(),
             icon: const Icon(CupertinoIcons.clear),
           ),
         ],
@@ -44,7 +45,7 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
               Text(
-                'USERMAIL@GMAIL.COM',
+                email ?? "",
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -60,26 +61,19 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Get.offAll(() => SuccessScreen(
-                        image: TImages.staticSuccessIllustration,
-                        title: TTexts.yourAccountCreatedTitle,
-                        subTitle: TTexts.yourAccountCreatedSubTitle,
-                        onPressed: () => Get.to(() => const LoginScreen()),
-                      )),
+                  onPressed: () => controller.checkEmailVerificationStatus(),
                   child: const Text(TTexts.tContinue),
                 ),
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
 
               /// Button: Renvoyer Email
-              TextButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Lien de confirmation renvoyé.")),
-                  );
-                },
-                child: const Text(TTexts.resendEmail),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () => controller.sendEmailVerification(),
+                  child: const Text(TTexts.resendEmail),
+                ),
               ),
             ],
           ),
