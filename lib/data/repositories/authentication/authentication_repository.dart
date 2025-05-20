@@ -21,7 +21,7 @@ class AuthenticationRepository extends GetxController {
     //super.onReady();
     print('[DEBUG] onReady called');
     // Remove the native splash screen
-    FlutterNativeSplash.remove();
+    //FlutterNativeSplash.remove();
 
     // Redirect to the appropriate screen
     screenRedirect();
@@ -33,15 +33,14 @@ class AuthenticationRepository extends GetxController {
     deviceStorage.writeIfNull('IsFirstTime', true);
 
     // Check if it's the first time launching the app
-    if (deviceStorage.read('IsFirstTime') == true) {
+    deviceStorage.read('IsFirstTime') != true ?
       // Redirect to OnBoarding Screen
       Get.offAll(() =>
-          const LoginScreen()); // changer a onbroding screen apres la cree
-    } else {
-      // Redirect to Login Screen
+          const LoginScreen()) : // Pour plus de rapidité cas le plus fréquent
+      // Redirect to On barding Screen
       Get.offAll(() => const LoginScreen());
     }
-  }
+  
 
   /* --- Email & Password sign-in ---*/
   // [EmailAuthentication] - REGISTER

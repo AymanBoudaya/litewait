@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bindings/general_binding.dart';
+import 'utils/constants/colors.dart';
 
 class App extends StatelessWidget {
   final routes = {
@@ -25,7 +26,25 @@ class App extends StatelessWidget {
       initialBinding: GeneralBinding(),
       debugShowCheckedModeBanner: false,
       routes: routes,
-      home: FutureBuilder(
+      home: const Scaffold(
+          backgroundColor: TColors.primary,
+          body: Center(
+              child: CircularProgressIndicator(
+            color: Colors.white,
+          )),
+        ),
+    );
+  }
+}
+/*const Scaffold(
+          backgroundColor: TColors.primary,
+          body: Center(
+              child: CircularProgressIndicator(
+            color: Colors.white,
+          )),
+        )*/
+/*
+FutureBuilder(
         future: SharedPreferences.getInstance(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -34,7 +53,4 @@ class App extends StatelessWidget {
           }
           return const LoginScreen();
         },
-      ),
-    );
-  }
-}
+      ),*/
