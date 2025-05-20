@@ -25,7 +25,7 @@ class TSignupform extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: controller.firstname,
+                  controller: controller.firstName,
                   validator: (value) =>
                       TValidator.validateEmptyText('First name', value),
                   expands: false,
@@ -38,7 +38,7 @@ class TSignupform extends StatelessWidget {
               const SizedBox(width: TSizes.spaceBtwInputFields),
               Expanded(
                 child: TextFormField(
-                  controller: controller.lastname,
+                  controller: controller.lastName,
                   validator: (value) =>
                       TValidator.validateEmptyText('Last name', value),
                   expands: false,
@@ -78,7 +78,7 @@ class TSignupform extends StatelessWidget {
 
           /// Numéro de téléphone
           TextFormField(
-            controller: controller.phonenumber,
+            controller: controller.phoneNumber,
             validator: (value) => TValidator.validatePhoneNumber(value),
             decoration: const InputDecoration(
               labelText: TTexts.phoneNo,

@@ -1,5 +1,4 @@
 import 'package:caferesto/features/personalization/models/user_model.dart';
-import 'package:caferesto/src/user_repo.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:caferesto/utils/helpers/network_manager.dart';
 import 'package:caferesto/utils/popups/full_screen_loader.dart';
@@ -7,6 +6,8 @@ import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../data/repositories/authentication/authentication_repository.dart';
+import '../../../data/repositories/user/user_repository.dart';
 import '../screens/signup.widgets/verify_email.dart';
 
 class SignupController extends GetxController {
@@ -14,14 +15,15 @@ class SignupController extends GetxController {
   final hidePassword = true.obs;
   final privacyPolicy = true.obs;
   final email = TextEditingController();
-  final lastname = TextEditingController();
-  final firstname = TextEditingController();
+  final lastName = TextEditingController();
+  final firstName = TextEditingController();
   final username = TextEditingController();
   final password = TextEditingController();
-  final phonenumber = TextEditingController();
+  final phoneNumber = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
-//signup
-  Future<void> signup() async {
+
+  /// -- SIGNUP
+  void signup() async {
     try {
       // Start loading
       print("Tentative d'inscription...");

@@ -20,10 +20,16 @@ class UserModel {
     required this.profilePicture,
   });
 
+  /// Helper function to get the full name
   String get fullName => '$firstName $lastName';
+
+  /// Helper function to format phone number
   String get formattedPhoneNo => TFormatter.formatPhoneNumber(phoneNumber);
+
+  /// Static function to split full name into first and last name
   static List<String> nameParts(fullName) => fullName.split(" ");
-  //
+
+  /// Static function to generate a username from the full name
   static String generateUsername(fullName) {
     List<String> nameParts = fullName.split(" ");
     String firstName = nameParts[0].toLowerCase();
@@ -34,7 +40,7 @@ class UserModel {
     return usernameWithPrefix;
   }
 
-  ///
+  ///Static function to create an empty user model
   static UserModel empty() => UserModel(
       id: "",
       firstName: "",
