@@ -10,6 +10,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
+import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../address/address.dart';
 
@@ -112,6 +113,9 @@ class SettingsScreen extends StatelessWidget {
                     title: "Qualité image HD",
                     subTitle: "Définir la qualité d'image haute définition",
                     trailing: Switch(value: false, onChanged: (value) {})),
+              SizedBox(height: TSizes.spaceBtwSections,),
+              SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () => AuthenticationRepository.instance.logout(), child: Text("Logout")))
+              
               ]))
         ],
       )),

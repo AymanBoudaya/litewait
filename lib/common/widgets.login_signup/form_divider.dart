@@ -1,8 +1,6 @@
 import 'package:caferesto/utils/constants/colors.dart';
-import 'package:caferesto/utils/constants/text_strings.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 
 class TFormDivider extends StatelessWidget {
   const TFormDivider({

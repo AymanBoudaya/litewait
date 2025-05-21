@@ -28,8 +28,8 @@ class SignupController extends GetxController {
       // Start loading
       print("Tentative d'inscription...");
       TFullScreenLoader.openLoadingDialog(
-        "We are processing your information",
-        TImages.animalIcon,
+        "Nous sommes en train de traiter  vos informations...",
+        TImages.docerAnimation,
       );
 
       // Check internet connection

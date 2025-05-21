@@ -4,7 +4,6 @@ import 'package:caferesto/features/shop/screens/store/store.dart';
 import 'package:caferesto/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bindings/general_binding.dart';
 import 'utils/constants/colors.dart';
