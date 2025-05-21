@@ -1,4 +1,5 @@
 import 'package:caferesto/data/repositories/authentication/authentication_repository.dart';
+import 'package:caferesto/features/personalization/controllers/user_controller.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:caferesto/utils/helpers/network_manager.dart';
 import 'package:caferesto/utils/popups/full_screen_loader.dart';
@@ -10,6 +11,7 @@ import '../../../../utils/popups/loaders.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
+  final userController = Get.put(UserController());
 
   /// Variables
   final rememberMe = false.obs;
@@ -18,6 +20,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
   @override
   void onInit() {
     email.text = localStorage.read("REMEMBER_ME_EMAIL") ?? '';
@@ -63,6 +66,41 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
+    }
+  }
+
+  /// -- Google Sign In Authentication
+  Future<void> googleSignIn() async {
+    try {
+      // Start loading
+      TFullScreenLoader.openLoadingDialog(
+        "Authentification en cours...",
+        TImages.docerAnimation,
+      );
+
+      // Check internet connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Login user using Google authentication
+      final userCredentials = await AuthenticationRepository.instance
+          .signInWithGoogle();
+
+      // Save user record in Firestore
+      await userController.saveUserRecord(userCredentials);
+      // Remove Loader
+      TFullScreenLoader.stopLoading();
+
+      // Redirect
+      AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+        print("Google SignIn Error: $e"); // Add this
+
       TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
     }
   }
