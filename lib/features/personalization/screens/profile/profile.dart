@@ -2,10 +2,13 @@ import 'package:caferesto/common/widgets/images/circular_image.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../controllers/user_controller.dart';
+import 'widgets/change_name.dart';
 import 'widgets/profile_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
         appBar: TAppBar(
           showBackArrow: true,
@@ -52,10 +56,12 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwItems),
 
                     TProfileMenu(
-                        title: "Nom", value: "Ali Karray", onPressed: () {}),
+                        title: "Nom",
+                        value: controller.user.value.fullName,
+                        onPressed: () => Get.to(() => ChangeName())),
                     TProfileMenu(
                         title: "Nom d'utilisateur",
-                        value: "Ali Karray",
+                        value: controller.user.value.username,
                         onPressed: () {}),
 
                     const SizedBox(height: TSizes.spaceBtwItems),
@@ -64,22 +70,21 @@ class ProfileScreen extends StatelessWidget {
 
                     /// Heading Personal Info
                     const TSectionHeading(
-                        title: 'Informations personnelles',
-                        showActionButton: false),
+                        title: 'Infos personnelles', showActionButton: false),
                     const SizedBox(height: TSizes.spaceBtwItems),
 
                     TProfileMenu(
                         title: "ID utilisateur",
-                        value: "16564",
-                        icon : Iconsax.copy,
+                        value: controller.user.value.id,
+                        icon: Iconsax.copy,
                         onPressed: () {}),
                     TProfileMenu(
                         title: "E-mail",
-                        value: "ali.karray@gmail.com",
+                        value: controller.user.value.email,
                         onPressed: () {}),
                     TProfileMenu(
                         title: "Téléphone",
-                        value: "+216 55 555 555",
+                        value: controller.user.value.phoneNumber,
                         onPressed: () {}),
                     TProfileMenu(
                         title: "Sexe", value: "Male", onPressed: () {}),
@@ -87,18 +92,19 @@ class ProfileScreen extends StatelessWidget {
                         title: "Date de naissance",
                         value: "10 Oct 1988",
                         onPressed: () {}),
-                        const Divider(),
+                    const Divider(),
                     const SizedBox(height: TSizes.spaceBtwItems),
 
                     Center(
-                        child: TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Fermer le compte',
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  ),
-                            )),
+                      child: TextButton(
+                          onPressed: () =>
+                              controller.deleteAccountWarningPopup(),
+                          child: const Text(
+                            'Fermer le compte',
+                            style: TextStyle(
+                              color: Colors.red,
+                            ),
+                          )),
                     )
                   ],
                 ))));

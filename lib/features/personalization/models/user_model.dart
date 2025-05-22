@@ -1,4 +1,5 @@
 import 'package:caferesto/utils/formatters/formatter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String id;
@@ -62,13 +63,22 @@ class UserModel {
       'ProfilePicture': profilePicture,
     };
   }
-/*
+
   /// Factory Method
   factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
-      final data = document.data!;
-      return UserModel(id: document.id, firstName: data['FirstName'], lastName:data['LastName'] , username:data['Username'], email:data['Email'] , phoneNumber:data['PhoneNumber'] , profilePicture: data['ProfilePicture'])
+      final data = document.data()!;
+      return UserModel(
+          id: document.id,
+          firstName: data['FirstName'] ?? '',
+          lastName: data['LastName'] ?? '',
+          username: data['Username'] ?? '',
+          email: data['Email'] ?? '',
+          phoneNumber: data['PhoneNumber'] ?? '',
+          profilePicture: data['ProfilePicture'] ?? '');
+    } else {
+      return UserModel.empty();
     }
-  }*/
+  }
 }

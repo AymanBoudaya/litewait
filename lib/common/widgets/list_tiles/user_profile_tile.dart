@@ -3,6 +3,7 @@ import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../features/personalization/controllers/user_controller.dart';
 import '../images/circular_image.dart';
 
 class TUserProfileTile extends StatelessWidget {
@@ -15,15 +16,16 @@ class TUserProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return ListTile(
       leading:
           CircularImage(image: TImages.user, width: 50, height: 50, padding: 0),
-      title: Text('Ali Karray',
+      title: Text(controller.user.value.fullName,
           style: Theme.of(context)
               .textTheme
               .headlineSmall!
               .apply(color: TColors.white)),
-      subtitle: Text('ali.karray@gmail.com',
+      subtitle: Text(controller.user.value.email,
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
