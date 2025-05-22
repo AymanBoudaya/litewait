@@ -135,26 +135,16 @@ class AuthenticationRepository extends GetxController {
   Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
-      print("🔹 Starting Google Sign-In");
-
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
-      if (userAccount == null) {
-        print("❌ Sign-in aborted by user");
-        throw Exception("Google Sign-In aborted");
-      }
-
-      print("✅ Google user selected: ${userAccount.email}");
 
       final GoogleSignInAuthentication? googleAuth =
           await userAccount?.authentication;
-      print("✅ Auth received");
 
       // Create a new credential
       final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      print("🔐 Signing in with Firebase credentials...");
       // Once signed in, return the UserCredential
       return await _auth.signInWithCredential(credentials);
     } on FirebaseAuthException catch (e) {
@@ -166,8 +156,25 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      print("❌ signInWithGoogle error: $e");
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
+  /// [EmailAuthentication] - FORGOT PASSWORD
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(
+        email: email,
+      );
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const FormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
       throw 'Something went wrong. Please try again';
     }
   }

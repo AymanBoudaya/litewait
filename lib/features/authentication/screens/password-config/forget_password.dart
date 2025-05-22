@@ -1,5 +1,6 @@
 import 'package:caferesto/features/authentication/screens/password-config/reset_password.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
+import 'package:caferesto/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -7,12 +8,14 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
+import '../../controllers/forget_password/forget_password_controller.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -36,10 +39,15 @@ class ForgetPassword extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwItems * 2),
 
             /// Champ Email
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: TTexts.email,
-                prefixIcon: Icon(Iconsax.direct_right),
+            Form(
+              key: controller.ForgetPasswordFormKey,
+              child: TextFormField(
+                controller: controller.email,
+                validator: TValidator.validateEmail ,
+                decoration: const InputDecoration(
+                  labelText: TTexts.email,
+                  prefixIcon: Icon(Iconsax.direct_right),
+                ),
               ),
             ),
 
@@ -49,7 +57,7 @@ class ForgetPassword extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.off(() => const ResetPassword()),
+                onPressed: () => controller.sendPasswordResetEmail(),
                 child: const Text(TTexts.submit),
               ),
             )
