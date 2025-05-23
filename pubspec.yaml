@@ -41,6 +41,7 @@ dependencies:
   smooth_page_indicator:
   lottie:
   shimmer:
+  cached_network_image:
 
   # Icons
   iconsax:

@@ -19,7 +19,7 @@ class TUserProfileTile extends StatelessWidget {
     final controller = UserController.instance;
     return ListTile(
       leading:
-          CircularImage(image: TImages.user, width: 50, height: 50, padding: 0),
+          CircularImage(image: TImages.user, width: 60, height: 60, padding: 0),
       title: Text(controller.user.value.fullName,
           style: Theme.of(context)
               .textTheme

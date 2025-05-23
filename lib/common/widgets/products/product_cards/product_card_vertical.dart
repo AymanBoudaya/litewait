@@ -100,7 +100,7 @@ class TProductCardVertical extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           /// Price
-                          ProductPriceText(price: '2.99', isLarge: true,),
+                          ProductPriceText(price: '2.99'),
 
                           /// Add To cart button
                           Container(

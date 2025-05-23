@@ -57,7 +57,7 @@ class StoreScreen extends StatelessWidget {
                             height: TSizes.spaceBtwItems,
                           ),
                           const TSearchContainer(
-                            text: 'Rechercher dans le Store',
+                            text: 'Rechercher un produit',
                             showBorder: true,
                             showBackground: false,
                             padding: EdgeInsets.zero,

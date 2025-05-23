@@ -35,21 +35,3 @@ class App extends StatelessWidget {
     );
   }
 }
-/*const Scaffold(
-          backgroundColor: TColors.primary,
-          body: Center(
-              child: CircularProgressIndicator(
-            color: Colors.white,
-          )),
-        )*/
-/*
-FutureBuilder(
-        future: SharedPreferences.getInstance(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            bool conn = snapshot.data?.getBool('connecte') ?? false;
-            if (conn) return HomeScreen();
-          }
-          return const LoginScreen();
-        },
-      ),*/

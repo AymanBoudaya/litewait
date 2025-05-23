@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
-import '../../../../../utils/constants/image_strings.dart';
+import '../../../../../common/widgets/shimmer/category_shimmer.dart';
+import '../../../../shop/controllers/category_controller.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({
@@ -12,19 +13,37 @@ class THomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: 6,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (_, index) {
-            return TVerticalImageText(
-              image: TImages.shoeIcon,
-              title: 'Catégories de cafés',
-              onTap: () => Get.to(()=> const SubCategoriesScreen() ),
-            );
-          }),
-    );
+    final categoryController = Get.put(CategoryController());
+    return Obx(() {
+      if (categoryController.isLoading.value) {
+        return const TCategoryShimmer();
+      }
+      if (categoryController.allCategories.isEmpty) {
+        return Center(
+          child: Text(
+            'Aucune catégorie trouvée',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .apply(color: Colors.white),
+          ),
+        );
+      }
+      return SizedBox(
+        height: 135,
+        child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: categoryController.featuredCategories.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              final category = categoryController.allCategories[index];
+              return TVerticalImageText(
+                image: category.image,
+                title: category.name,
+                onTap: () => Get.to(() => const SubCategoriesScreen()),
+              );
+            }),
+      );
+    });
   }
 }

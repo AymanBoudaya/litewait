@@ -92,9 +92,7 @@ class SettingsScreen extends StatelessWidget {
 
                 /// App Settings
                 SizedBox(height: TSizes.spaceBtwSections),
-                TSectionHeading(
-                    title: "Paramètres de l'application",
-                    showActionButton: false),
+                TSectionHeading(title: "Paramètres", showActionButton: false),
                 SizedBox(height: TSizes.spaceBtwItems),
                 TSettingsMenuTile(
                     icon: Iconsax.location,
@@ -113,9 +111,15 @@ class SettingsScreen extends StatelessWidget {
                     title: "Qualité image HD",
                     subTitle: "Définir la qualité d'image haute définition",
                     trailing: Switch(value: false, onChanged: (value) {})),
-              SizedBox(height: TSizes.spaceBtwSections,),
-              SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () => AuthenticationRepository.instance.logout(), child: Text("Logout")))
-              
+                SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                        onPressed: () =>
+                            AuthenticationRepository.instance.logout(),
+                        child: Text("Logout")))
               ]))
         ],
       )),
