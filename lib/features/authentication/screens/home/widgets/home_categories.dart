@@ -30,8 +30,9 @@ class THomeCategories extends StatelessWidget {
         );
       }
       return SizedBox(
-        height: 135,
+        height: 120,
         child: ListView.builder(
+            padding: const EdgeInsets.only(left: 16),
             shrinkWrap: true,
             itemCount: categoryController.featuredCategories.length,
             scrollDirection: Axis.horizontal,

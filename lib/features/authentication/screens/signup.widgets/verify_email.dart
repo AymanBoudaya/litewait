@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/constants/sizes.dart';
+import '../login/login.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
   const VerifyEmailScreen({super.key, this.email});
@@ -20,7 +21,10 @@ class VerifyEmailScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => AuthenticationRepository.instance.logout(),
+            onPressed: () {
+              Get.offAll(() => LoginScreen());
+              AuthenticationRepository.instance.logout();
+            },
             icon: const Icon(CupertinoIcons.clear),
           ),
         ],
@@ -71,7 +75,7 @@ class VerifyEmailScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () => controller.sendEmailVerification(),
+                  onPressed: () => controller.resendVerificationEmail(),
                   child: const Text(TTexts.resendEmail),
                 ),
               ),

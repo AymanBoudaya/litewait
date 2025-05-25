@@ -39,26 +39,24 @@ class HomeScreen extends StatelessWidget {
                   ),
 
                   /// Categories
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: TSizes.defaultSpace,
-                    ),
-                    child: Column(
-                      children: [
-                        /// -- Heading
-                        TSectionHeading(
+                  Column(
+                    children: [
+                      /// -- Heading
+                      Padding(
+                        padding: const EdgeInsets.only(left : TSizes.defaultSpace),
+                        child: TSectionHeading(
                           title: 'Catégories Populaires',
                           showActionButton: false,
                           textColor: Colors.white,
                         ),
-                        const SizedBox(
-                          height: TSizes.spaceBtwItems,
-                        ),
-
-                        /// Categories List
-                        THomeCategories()
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: TSizes.spaceBtwItems,
+                      ),
+                  
+                      /// Categories List
+                      THomeCategories()
+                    ],
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections),
                 ],

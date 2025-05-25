@@ -26,7 +26,6 @@ class SignupController extends GetxController {
   void signup() async {
     try {
       // Start loading
-      print("Tentative d'inscription...");
       TFullScreenLoader.openLoadingDialog(
         "Nous sommes en train de traiter  vos informations...",
         TImages.docerAnimation,
@@ -57,8 +56,16 @@ class SignupController extends GetxController {
           .registerWithEmailAndPassword(
               email.text.trim(), password.text.trim());
 
+      // Add explicit reload after registration
+      await userCredential.user?.sendEmailVerification();
+
+      // Show email sent confirmation
+      TLoaders.successSnackBar(
+          title: 'Email de Vérification Envoyé',
+          message:
+              'Veuillez vérifier votre boîte de réception pour le lien de confirmation.');
+
       /// Save authenticated user data in the firebase firestore
-      ///
       final newUser = UserModel(
           id: userCredential.user!.uid,
           firstName: firstName.text.trim(),
@@ -71,19 +78,12 @@ class SignupController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-      /// Show success Message
-      TLoaders.successSnackBar(
-          title: "Félicitations!",
-          message:
-              "Votre compte à été crée! Vérifier votre email pour continuer.");
-
       /// Move to verify email screen
-      Get.to(() => VerifyEmailScreen(email: email.text.trim(),));
+      Get.off(() => VerifyEmailScreen(email: email.text.trim()));
+
       // >>> Here goes the logic to send data to backend (API or Firebase)
-      print("All validations passed. Ready to register user.");
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
-      print("Erreur lors de l'inscription : $e");
     } finally {
       TFullScreenLoader.stopLoading();
     }

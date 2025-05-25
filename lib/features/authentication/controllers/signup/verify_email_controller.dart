@@ -8,25 +8,33 @@ import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../../screens/login/login.dart';
+
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
-
+  Timer? _timer; // Add timer reference
   /// Send email whenever verify screen appears & set timer for autoredirect
   @override
-  void onInit() {
-    sendEmailVerification();
+  void onReady() {
     setTimerForAutoRedirect();
-    super.onInit();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    _timer?.cancel(); // Clean up timer
+    super.onClose();
   }
 
   /// Send email verification link
-  sendEmailVerification() async {
+  resendVerificationEmail() async {
     try {
-      await AuthenticationRepository.instance.sendEmailVerification();
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null || !user!.emailVerified)
+        await user.sendEmailVerification();
       TLoaders.successSnackBar(
-          title: 'Email Sent',
-          message:
-              "Veuillez consulter votre boîte de réception et vérifier votre email.");
+          title: 'Email Renvoyé',
+          message: 'Nouvel email de vérification envoyé!');
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap !', message: e.toString());
     }
@@ -34,17 +42,15 @@ class VerifyEmailController extends GetxController {
 
   /// Timer to automatically redirect on Email verification
   setTimerForAutoRedirect() {
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       await FirebaseAuth.instance.currentUser?.reload();
       final user = FirebaseAuth.instance.currentUser;
       if (user?.emailVerified ?? false) {
         timer.cancel();
-        Get.off(() => SuccessScreen(
-            image: TImages.staticSuccessIllustration,
-            title: TTexts.yourAccountCreatedTitle,
-            subTitle: TTexts.yourAccountCreatedSubTitle,
-            onPressed: () =>
-                AuthenticationRepository.instance.screenRedirect()));
+        Get.offAll(() => LoginScreen());
+        TLoaders.successSnackBar(
+            title: 'Vérification Réussie',
+            message: 'Votre email a été vérifié avec succès!');
       }
     });
   }
@@ -52,13 +58,13 @@ class VerifyEmailController extends GetxController {
   /// Manually check if email is verified
   checkEmailVerificationStatus() async {
     final currentUser = FirebaseAuth.instance.currentUser;
+    await currentUser?.reload(); // Add reload before checking
     if (currentUser != null && currentUser.emailVerified) {
       Get.off(() => SuccessScreen(
-          image: TImages.staticSuccessIllustration,
+          image: TImages.successfullyRegisterAnimation,
           title: TTexts.yourAccountCreatedTitle,
           subTitle: TTexts.yourAccountCreatedSubTitle,
           onPressed: () => AuthenticationRepository.instance.screenRedirect()));
-      
     }
   }
 }

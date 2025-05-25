@@ -1,6 +1,3 @@
-import 'package:caferesto/features/authentication/screens/login/login.dart';
-import 'package:caferesto/features/shop/screens/home/home.dart';
-import 'package:caferesto/features/shop/screens/store/store.dart';
 import 'package:caferesto/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,13 +6,7 @@ import 'bindings/general_binding.dart';
 import 'utils/constants/colors.dart';
 
 class App extends StatelessWidget {
-  final routes = {
-    '/home': (context) => HomeScreen(),
-    '/store': (context) => const StoreScreen(),
-    '/authentification': (context) => const LoginScreen(),
-  };
-
-  App({super.key});
+  const App({super.key});
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -24,14 +15,13 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       initialBinding: GeneralBinding(),
       debugShowCheckedModeBanner: false,
-      routes: routes,
       home: const Scaffold(
-          backgroundColor: TColors.primary,
-          body: Center(
-              child: CircularProgressIndicator(
-            color: Colors.white,
-          )),
-        ),
+        backgroundColor: TColors.primary,
+        body: Center(
+            child: CircularProgressIndicator(
+          color: Colors.white,
+        )),
+      ),
     );
   }
 }

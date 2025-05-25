@@ -2,6 +2,7 @@ import 'package:caferesto/common/styles/spacing_styles.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../utils/constants/sizes.dart';
 
@@ -24,9 +25,9 @@ class SuccessScreen extends StatelessWidget {
         child: Column(
           children: [
             /// Image
-            Image(
-              image: AssetImage(image),
-              width: THelperFunctions.screenWidth() * 0.6,
+            Lottie.asset(
+              image,
+              width: MediaQuery.of(context).size.width * 0.6,
             ),
             const SizedBox(
               height: TSizes.spaceBtwSections,
@@ -52,8 +53,9 @@ class SuccessScreen extends StatelessWidget {
 
             /// Buttons
             SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(onPressed: onPressed, child: const Text(TTexts.tContinue)))
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: onPressed, child: const Text(TTexts.tContinue)))
           ],
         ),
       )),

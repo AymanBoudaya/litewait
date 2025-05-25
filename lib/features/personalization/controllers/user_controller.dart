@@ -105,7 +105,6 @@ class UserController extends GetxController {
   void deleteUserAccount() async {
     try {
       // Start Loading
-      print("Deleting account !!!");
       TFullScreenLoader.openLoadingDialog(
           "Nous sommes en train de supprimer votre compte...",
           TImages.docerAnimation);
@@ -121,7 +120,6 @@ class UserController extends GetxController {
         if (provider == 'google.com') {
           await auth.signInWithGoogle();
           await auth.deleteAccount();
-          print("✅ Account deleted");
           TFullScreenLoader.stopLoading();
           Get.offAll(() => const LoginScreen());
         } else if (provider == 'password') {
@@ -130,8 +128,6 @@ class UserController extends GetxController {
         }
       }
     } catch (e) {
-        print("❌ Deletion error: $e");
-
       // Remove Loader
       TFullScreenLoader.stopLoading();
 

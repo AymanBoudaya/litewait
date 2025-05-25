@@ -14,8 +14,8 @@ class CircularImage extends StatelessWidget {
     this.isNetworkImage = false,
     this.overlayColor,
     this.backgroundColor,
-    this.width = 80,
-    this.height = 80,
+    this.width = 70,
+    this.height = 70,
     this.padding = TSizes.sm,
   });
 
@@ -54,7 +54,7 @@ class CircularImage extends StatelessWidget {
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
                               const TShimmerEffect(
-                                  width: 55, height: 55, radius: 55),
+                                  width: 70, height: 70, radius: 100),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                     )
