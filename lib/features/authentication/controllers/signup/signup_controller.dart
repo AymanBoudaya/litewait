@@ -3,6 +3,7 @@ import 'package:caferesto/utils/constants/image_strings.dart';
 import 'package:caferesto/utils/helpers/network_manager.dart';
 import 'package:caferesto/utils/popups/full_screen_loader.dart';
 import 'package:caferesto/utils/popups/loaders.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ import '../../screens/signup.widgets/verify_email.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
+
   final hidePassword = true.obs;
   final privacyPolicy = true.obs;
   final email = TextEditingController();
@@ -24,68 +26,80 @@ class SignupController extends GetxController {
 
   /// -- SIGNUP
   void signup() async {
-    try {
-      // Start loading
-      TFullScreenLoader.openLoadingDialog(
-        "Nous sommes en train de traiter  vos informations...",
-        TImages.docerAnimation,
-      );
+    TFullScreenLoader.openLoadingDialog(
+      "Nous sommes en train de traiter vos informations...",
+      TImages.docerAnimation,
+    );
 
-      // Check internet connection
+    try {
+      // 1. Check internet connection
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        return;
-      }
-
-      // Validate form
-      if (!signupFormKey.currentState!.validate()) {
-        return;
-      }
-
-      // Check privacy policy
-      if (!privacyPolicy.value) {
+        TFullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(
-          title: 'Accept Privacy Policy',
-          message: 'You must read and accept the privacy policy.',
+          title: 'Pas de connexion',
+          message: 'Veuillez vérifier votre connexion internet.',
         );
         return;
       }
 
-      /// Register user in the firebase auth & save user data in firebase
+      // 2. Validate form
+      if (!signupFormKey.currentState!.validate()) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // 3. Check privacy policy
+      if (!privacyPolicy.value) {
+        TFullScreenLoader.stopLoading();
+        TLoaders.warningSnackBar(
+          title: 'Politique de confidentialité',
+          message: 'Veuillez accepter la politique de confidentialité.',
+        );
+        return;
+      }
+
+      // 4. Register with Firebase
       final userCredential = await AuthenticationRepository.instance
           .registerWithEmailAndPassword(
               email.text.trim(), password.text.trim());
 
-      // Add explicit reload after registration
-      await userCredential.user?.sendEmailVerification();
+      // 5. Ensure user is loaded
+      await Future.delayed(const Duration(seconds: 1));
+      await FirebaseAuth.instance.currentUser?.reload();
+      final user = FirebaseAuth.instance.currentUser;
 
-      // Show email sent confirmation
-      TLoaders.successSnackBar(
-          title: 'Email de Vérification Envoyé',
-          message:
-              'Veuillez vérifier votre boîte de réception pour le lien de confirmation.');
+      if (user == null) {
+        throw Exception(
+            "L'utilisateur n'a pas pu être chargé après l'inscription.");
+      }
 
-      /// Save authenticated user data in the firebase firestore
+      // 6. Save user data to Firestore
       final newUser = UserModel(
-          id: userCredential.user!.uid,
-          firstName: firstName.text.trim(),
-          lastName: lastName.text.trim(),
-          username: username.text.trim(),
-          email: email.text.trim(),
-          phoneNumber: phoneNumber.text.trim(),
-          profilePicture: '');
+        id: user.uid,
+        firstName: firstName.text.trim(),
+        lastName: lastName.text.trim(),
+        username: username.text.trim(),
+        email: email.text.trim(),
+        phoneNumber: phoneNumber.text.trim(),
+        profilePicture: '',
+      );
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-      /// Move to verify email screen
-      Get.off(() => VerifyEmailScreen(email: email.text.trim()));
-
-      // >>> Here goes the logic to send data to backend (API or Firebase)
-    } catch (e) {
-      TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
-    } finally {
+      // 7. Navigate to verify email screen
       TFullScreenLoader.stopLoading();
+      TLoaders.successSnackBar(
+        title: "Félicitations!",
+        message:
+            "Votre compte a été créé! Vérifiez votre email pour continuer.",
+      );
+
+      Get.off(() => VerifyEmailScreen(email: email.text.trim()));
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
     }
   }
 }
