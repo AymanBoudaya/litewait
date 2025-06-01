@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:caferesto/data/repositories/authentication/authentication_repository.dart';
 import 'package:caferesto/features/personalization/controllers/user_controller.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
@@ -56,7 +58,7 @@ class LoginController extends GetxController {
       }
 
       // Login user using Email and Password authentication
-      final UserCredentials = await AuthenticationRepository.instance
+      final userCredentials = await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Remove Loader
@@ -99,8 +101,6 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
-        print("Google SignIn Error: $e"); // Add this
-
       TLoaders.errorSnackBar(title: 'Oh snap !', message: e.toString());
     }
   }

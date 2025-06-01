@@ -1,7 +1,9 @@
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TSortableProducts extends StatelessWidget {
@@ -11,6 +13,7 @@ class TSortableProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Column(
       children: [
         /// DropDown
@@ -33,7 +36,7 @@ class TSortableProducts extends StatelessWidget {
         /// Products
         GridLayout(
             itemCount: 8,
-            itemBuilder: (_, index) => const TProductCardVertical())
+            itemBuilder: (_, index) => TProductCardVertical(product : controller.featuredProducts[index]))
       ],
     );
   }

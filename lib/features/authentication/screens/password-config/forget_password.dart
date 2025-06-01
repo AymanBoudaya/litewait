@@ -1,4 +1,3 @@
-import 'package:caferesto/features/authentication/screens/password-config/reset_password.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
 import 'package:caferesto/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class ForgetPassword extends StatelessWidget {
 
             /// Champ Email
             Form(
-              key: controller.ForgetPasswordFormKey,
+              key: controller.forgetPasswordFormKey,
               child: TextFormField(
                 controller: controller.email,
                 validator: TValidator.validateEmail ,

@@ -2,6 +2,7 @@ import 'package:caferesto/common/widgets/appbar/appbar.dart';
 import 'package:caferesto/common/widgets/icons/t_circular_icon.dart';
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/features/shop/screens/home/home.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -30,8 +32,10 @@ class FavoriteScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     GridLayout(
-                        itemCount: 6,
-                        itemBuilder: (_, index) => const TProductCardVertical())
+                        itemCount: controller.featuredProducts.length,
+                        itemBuilder: (_, index) => TProductCardVertical(
+                              product: controller.featuredProducts[index],
+                            ))
                   ],
                 ))));
   }

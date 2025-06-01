@@ -13,11 +13,11 @@ class ForgetPasswordController extends GetxController {
 
   /// Variables
   final email = TextEditingController();
-  GlobalKey<FormState> ForgetPasswordFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
 
   /// Send Reset Password Email
   Future<void> sendPasswordResetEmail() async {
-    if (ForgetPasswordFormKey.currentState!.validate()) {
+    if (forgetPasswordFormKey.currentState!.validate()) {
       try {
         // Start loading
         TFullScreenLoader.openLoadingDialog(
@@ -31,7 +31,7 @@ class ForgetPasswordController extends GetxController {
         }
 
         // Form Validation
-        if (!ForgetPasswordFormKey.currentState!.validate()) {
+        if (!forgetPasswordFormKey.currentState!.validate()) {
           TFullScreenLoader.stopLoading();
           return;
         }
@@ -39,32 +39,33 @@ class ForgetPasswordController extends GetxController {
         await AuthenticationRepository.instance
             .sendPasswordResetEmail(email.text.trim());
 
-
         // Stop loading
         TFullScreenLoader.stopLoading();
         // Show success message
-        TLoaders.successSnackBar(title: 'Email sent', message: 'Email Link sent to Reset your Password'.tr);
+        TLoaders.successSnackBar(
+            title: 'Email sent',
+            message: 'Email Link sent to Reset your Password'.tr);
 
         // Redirect
         Get.to(() => ResetPassword(email: email.text.trim()));
       } catch (e) {
-          TFullScreenLoader.stopLoading();
-          TLoaders.errorSnackBar(
-            title: 'Oh Snap !',
-            message: e.toString(),
-          );
-        }
-      } else {
         TFullScreenLoader.stopLoading();
         TLoaders.errorSnackBar(
-          title: 'Error',
-          message: 'Please enter a valid email address'.tr,
+          title: 'Oh Snap !',
+          message: e.toString(),
         );
       }
+    } else {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(
+        title: 'Error',
+        message: 'Please enter a valid email address'.tr,
+      );
     }
+  }
 
-    resendPasswordResetEmail(String email) async {
-      if (ForgetPasswordFormKey.currentState!.validate()) {
+  resendPasswordResetEmail(String email) async {
+    if (forgetPasswordFormKey.currentState!.validate()) {
       try {
         // Start loading
         TFullScreenLoader.openLoadingDialog(
@@ -77,29 +78,27 @@ class ForgetPasswordController extends GetxController {
           return;
         }
 
-            await AuthenticationRepository.instance
-            .sendPasswordResetEmail(email);
-
+        await AuthenticationRepository.instance.sendPasswordResetEmail(email);
 
         // Stop loading
         TFullScreenLoader.stopLoading();
         // Show success message
-        TLoaders.successSnackBar(title: 'Email sent', message: 'Email Link sent to Reset your Password'.tr);
-
+        TLoaders.successSnackBar(
+            title: 'Email sent',
+            message: 'Email Link sent to Reset your Password'.tr);
       } catch (e) {
-          TFullScreenLoader.stopLoading();
-          TLoaders.errorSnackBar(
-            title: 'Oh Snap !',
-            message: e.toString(),
-          );
-        }
-      } else {
         TFullScreenLoader.stopLoading();
         TLoaders.errorSnackBar(
-          title: 'Error',
-          message: 'Please enter a valid email address'.tr,
+          title: 'Oh Snap !',
+          message: e.toString(),
         );
       }
+    } else {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(
+        title: 'Error',
+        message: 'Please enter a valid email address'.tr,
+      );
     }
   }
-
+}

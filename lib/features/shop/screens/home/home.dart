@@ -8,6 +8,7 @@ import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../authentication/screens/home/widgets/home_categories.dart';
+import '../../controllers/product/product_controller.dart';
 import 'widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -91,8 +93,8 @@ class HomeScreen extends StatelessWidget {
 
                     /// Popular products
                     GridLayout(
-                      itemCount: 10,
-                      itemBuilder: (_, index) => const TProductCardVertical(),
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index],),
                     )
                   ],
                 )),

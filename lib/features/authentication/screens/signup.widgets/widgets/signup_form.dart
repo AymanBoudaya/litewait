@@ -28,7 +28,6 @@ class TSignupform extends StatelessWidget {
                   controller: controller.firstName,
                   validator: (value) =>
                       TValidator.validateEmptyText('First name', value),
-                  expands: false,
                   decoration: const InputDecoration(
                     labelText: TTexts.firstName,
                     prefixIcon: Icon(Iconsax.user),
@@ -41,7 +40,6 @@ class TSignupform extends StatelessWidget {
                   controller: controller.lastName,
                   validator: (value) =>
                       TValidator.validateEmptyText('Last name', value),
-                  expands: false,
                   decoration: const InputDecoration(
                     labelText: TTexts.lastName,
                     prefixIcon: Icon(Iconsax.user),
@@ -57,7 +55,6 @@ class TSignupform extends StatelessWidget {
             controller: controller.username,
             validator: (value) =>
                 TValidator.validateEmptyText('Username', value),
-            expands: false,
             decoration: const InputDecoration(
               labelText: TTexts.username,
               prefixIcon: Icon(Iconsax.user_edit),

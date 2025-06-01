@@ -1,6 +1,5 @@
 import 'package:caferesto/common/styles/spacing_styles.dart';
 import 'package:caferesto/utils/constants/text_strings.dart';
-import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

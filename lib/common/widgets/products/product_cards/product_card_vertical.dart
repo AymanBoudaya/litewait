@@ -1,13 +1,17 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:caferesto/common/widgets/icons/t_circular_icon.dart';
 import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
+import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/models/product_model.dart';
 import '../../../../features/shop/screens/product_details/product_detail.dart';
-import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../styles/shadows.dart';
 import '../../texts/brand_title_text_with_verified_icon.dart';
@@ -17,13 +21,21 @@ import '../../texts/product_title_text.dart';
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage =
+        controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailScreen()),
+      onTap: () => Get.to(() => ProductDetailScreen(
+            product: product,
+          )),
       child: Container(
           width: 180,
           padding: const EdgeInsets.all(1),
@@ -43,10 +55,10 @@ class TProductCardVertical extends StatelessWidget {
                     children: [
                       /// Thubnail Image
                       TRoundedImage(
-                        imageUrl: TImages.productImage1,
+                        imageUrl: product.thumbnail,
                         applyImageRadius: true,
                       ),
-      
+
                       /// Sale Tag
                       Positioned(
                         top: 12,
@@ -56,7 +68,7 @@ class TProductCardVertical extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: TSizes.xs, horizontal: TSizes.sm),
                           child: Text(
-                            '25%',
+                            '$salePercentage%',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge!
@@ -64,7 +76,7 @@ class TProductCardVertical extends StatelessWidget {
                           ),
                         ),
                       ),
-      
+
                       /// Favorite Icon
                       Positioned(
                           top: 0,
@@ -78,7 +90,7 @@ class TProductCardVertical extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems / 2,
               ),
-      
+
               /// Details
               Padding(
                   padding: const EdgeInsets.only(left: TSizes.sm),
@@ -87,20 +99,51 @@ class TProductCardVertical extends StatelessWidget {
                     children: [
                       /// Title
                       TProductTitleText(
-                        title: 'Café au lait',
+                        title: product.title,
                         smallSize: true,
                       ),
                       const SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      BrandTitleWithVerifiedIcon(title: 'Mokador',),
-      
-      
+                      BrandTitleWithVerifiedIcon(
+                        title: product.brand!.name,
+                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           /// Price
-                          ProductPriceText(price: '2.99'),
+                          Flexible(
+                            child: Column(
+                              children: [
+                          if (product.productType ==
+                                  ProductType.single.toString() &&
+                              product.salePrice > 0)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: TSizes.sm),
+                                  child: Text(
+                                    product.price.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .apply(
+                                          color: TColors.textSecondary,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: TSizes.sm),
+                                  child: ProductPriceText(
+                                    price: controller.getProductPrice(product),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
 
                           /// Add To cart button
                           Container(
@@ -108,7 +151,8 @@ class TProductCardVertical extends StatelessWidget {
                               color: TColors.dark,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(TSizes.cardRadiusMd),
-                                bottomRight: Radius.circular(TSizes.productImageRadius),
+                                bottomRight:
+                                    Radius.circular(TSizes.productImageRadius),
                               ),
                             ),
                             child: const SizedBox(
@@ -131,8 +175,6 @@ class TProductCardVertical extends StatelessWidget {
     );
   }
 }
-
-
 
 class TRoundedContainer extends StatelessWidget {
   const TRoundedContainer({

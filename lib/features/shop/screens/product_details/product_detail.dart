@@ -7,13 +7,16 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../models/product_model.dart';
 import 'widgets/bottom_add_to_cart_widget.dart';
 import 'widgets/product_attributes.dart';
 import 'widgets/product_detail_image_slider.dart';
 import 'widgets/rating_share_widget.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
