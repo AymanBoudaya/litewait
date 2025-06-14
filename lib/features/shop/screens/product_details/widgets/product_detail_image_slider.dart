@@ -9,11 +9,14 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/icons/t_circular_icon.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
+import '../../../models/product_model.dart';
 
 class TProductImageSlider extends StatelessWidget {
   const TProductImageSlider({
-    super.key,
+    super.key, required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

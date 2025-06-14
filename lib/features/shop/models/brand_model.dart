@@ -3,14 +3,14 @@ class BrandModel {
   String name;
   String image;
   bool? isFeatured;
-  int? productCount;
+  int? productsCount;
 
   BrandModel({
     required this.id,
     required this.name,
     required this.image,
     this.isFeatured,
-    this.productCount,
+    this.productsCount,
   });
 
   // Empty Helper Function
@@ -28,19 +28,23 @@ class BrandModel {
       'Id': id,
       'Name': name,
       'Image': image,
-      'ProductsCount': productCount,
+      'ProductsCount': productsCount,
       'IsFeatured': isFeatured,
     };
   }
 
   /// Map from firebase to user model
-  factory BrandModel.fromJson(Map<String, dynamic> json) {
+  factory BrandModel.fromJson(Map<String, dynamic> document) {
+    final data = document;
+    if (data.isEmpty) {
+      return BrandModel.empty();
+    }
     return BrandModel(
-      id: json['Id'] ?? '',
-      name: json['Name'] ?? '',
-      image: json['Image'] ?? '',
-      isFeatured: json['IsFeatured'] as bool? ?? false,
-      productCount: json['ProductsCount'] as int?,
+      id: data['Id'] ?? '',
+      name: data['Name'] ?? '',
+      image: data['Image'] ?? '',
+      isFeatured: data['IsFeatured'] as bool? ?? false,
+      productsCount: data['ProductsCount'] as int?,
     );
   }
 }

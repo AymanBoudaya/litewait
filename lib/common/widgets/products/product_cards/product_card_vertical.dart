@@ -49,11 +49,12 @@ class TProductCardVertical extends StatelessWidget {
               /// Thumbnail
               TRoundedContainer(
                   height: 180,
+                  width : 180,
                   padding: const EdgeInsets.all(TSizes.sm),
                   backgroundColor: dark ? TColors.dark : TColors.light,
                   child: Stack(
                     children: [
-                      /// Thubnail Image
+                      /// -- Thumbnail Image
                       TRoundedImage(
                         imageUrl: product.thumbnail,
                         applyImageRadius: true,
@@ -77,7 +78,7 @@ class TProductCardVertical extends StatelessWidget {
                         ),
                       ),
 
-                      /// Favorite Icon
+                      /// -- Favorite Icon Button
                       Positioned(
                           top: 0,
                           right: 0,

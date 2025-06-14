@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
+import '../../../../common/widgets/shimmer/vertical_product_shimmer.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
@@ -45,7 +46,8 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       /// -- Heading
                       Padding(
-                        padding: const EdgeInsets.only(left : TSizes.defaultSpace),
+                        padding:
+                            const EdgeInsets.only(left: TSizes.defaultSpace),
                         child: TSectionHeading(
                           title: 'Catégories Populaires',
                           showActionButton: false,
@@ -55,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(
                         height: TSizes.spaceBtwItems,
                       ),
-                  
+
                       /// Categories List
                       THomeCategories()
                     ],
@@ -92,10 +94,24 @@ class HomeScreen extends StatelessWidget {
                     ),
 
                     /// Popular products
-                    GridLayout(
-                      itemCount: controller.featuredProducts.length,
-                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index],),
-                    )
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return const TVerticalProductShimmer(
+                      
+                        );
+                      }
+                      if (controller.featuredProducts.isEmpty) {
+                        return const Center(
+                          child: Text('Aucun produit trouvé'),
+                        );
+                      }
+                      return GridLayout(
+                        itemCount: controller.featuredProducts.length,
+                        itemBuilder: (_, index) => TProductCardVertical(
+                          product: controller.featuredProducts[index],
+                        ),
+                      );
+                    })
                   ],
                 )),
           ],

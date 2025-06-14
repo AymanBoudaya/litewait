@@ -1,5 +1,5 @@
-/*
-import 'package:get/get_core/src/get_main.dart';
+
+import 'package:get/get.dart';
 class ImagesController extends GetxController {
   // Singleton instance
   static ImagesController get instance => Get.find();
@@ -22,4 +22,4 @@ class ImagesController extends GetxController {
   void clearImages() {
     images.clear();
 }
-  }*/
+  }

@@ -25,10 +25,10 @@ class ProductDetailScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            /// Product Image Slider
-            TProductImageSlider(),
+            /// 1 - Product Image Slider
+            TProductImageSlider(product : product),
 
-            /// Product Details
+            /// 2 - Product Details
             Padding(
                 padding: EdgeInsets.only(
                     right: TSizes.defaultSpace,
@@ -38,10 +38,10 @@ class ProductDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    /// Rating and share
+                    /// - Rating & share
                     TRatingAndShare(),
 
-                    /// Price title stock and brand
+                    /// - Price title stock and brand
                     TProductMetaData(),
 
                     /// Attributes

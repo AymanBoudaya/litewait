@@ -11,14 +11,28 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
+import '../../../../data/repositories/product/product_repository.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../address/address.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+    final controller = ProductRepository.instance;
+    void uploadDummyData() async {
+      try {
+        await controller.uploadDummyData();
+        Get.snackbar("Succès", "Données factices chargées avec succès",
+            snackPosition: SnackPosition.BOTTOM);
+      } catch (e) {
+        Get.snackbar("Erreur", e.toString(),
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    }
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
@@ -111,6 +125,18 @@ class SettingsScreen extends StatelessWidget {
                     title: "Qualité image HD",
                     subTitle: "Définir la qualité d'image haute définition",
                     trailing: Switch(value: false, onChanged: (value) {})),
+
+                    
+                /// Developer Section - Dummy Data Upload
+                SizedBox(height: TSizes.spaceBtwSections),
+                TSectionHeading(title: "Développement", showActionButton: false),
+                SizedBox(height: TSizes.spaceBtwItems),
+                TSettingsMenuTile(
+                  icon: Iconsax.document_upload,
+                  title: "Charger des données factices",
+                  subTitle: "Insère des données test dans l'application",
+                  onTap: uploadDummyData,
+                ),
                 SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
