@@ -1,25 +1,70 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:caferesto/features/shop/models/product_model.dart';
+import 'package:caferesto/utils/constants/sizes.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class ImagesController extends GetxController {
   // Singleton instance
   static ImagesController get instance => Get.find();
 
-  // Reactive variables
-  final RxList<String> images = <String>[].obs;
-//final RxBool isLoading = false.obs;
+  // variables
+  RxString selectedProductImage = ''.obs;
 
-  // Method to add an image
-  void addImage(String imageUrl) {
-    images.add(imageUrl);
+  /// -- Set all images from product and variations
+  List<String> getAllProductImages(ProductModel product) {
+    Set<String> images = {};
+
+    // Load thmbnail image
+    if (product.thumbnail.isNotEmpty) {
+      images.add(product.thumbnail);
+    }
+
+    // Assign Thumbnail image to selectedProductImage
+    selectedProductImage.value = product.thumbnail;
+
+    // Get images from product model if not null
+    if (product.images != null) {
+      images.addAll(product.images!);
+    }
+
+    // Get all images from the product Variations if not null
+    if (product.productVariations != null ||
+        product.productVariations!.isNotEmpty) {
+      images.addAll(
+          product.productVariations!.map((variation) => variation.image));
+    }
+
+    return images.toList();
   }
 
-  // Method to remove an image
-  void removeImage(String imageUrl) {
-    images.remove(imageUrl);
+  /// -- Show image popup
+  void showEnlargedImage(String image) {
+    Get.to(
+      fullscreenDialog: true,
+      () => Dialog.fullscreen(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: TSizes.defaultSpace * 2,
+                  horizontal: TSizes.defaultSpace),
+              child: CachedNetworkImage(
+                imageUrl: image,
+              )),
+          const SizedBox(height: TSizes.spaceBtwSections),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+                width: 150,
+                child: OutlinedButton(
+                    onPressed: () => Get.back(), child: const Text('Close'))),
+          ),
+        ],
+      )),
+    );
   }
-
-  // Method to clear all images
-  void clearImages() {
-    images.clear();
 }
-  }

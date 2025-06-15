@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../utils/constants/enums.dart';
 import '../../models/product_model.dart';
 import 'widgets/bottom_add_to_cart_widget.dart';
 import 'widgets/product_attributes.dart';
@@ -26,7 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
             child: Column(
           children: [
             /// 1 - Product Image Slider
-            TProductImageSlider(product : product),
+            TProductImageSlider(product: product),
 
             /// 2 - Product Details
             Padding(
@@ -42,10 +43,14 @@ class ProductDetailScreen extends StatelessWidget {
                     TRatingAndShare(),
 
                     /// - Price title stock and brand
-                    TProductMetaData(),
+                    TProductMetaData(product: product),
+                    const SizedBox(
+                      height: TSizes.sm,
+                    ),
 
                     /// Attributes
-                    TProductAttributes(),
+                    if (product.productType == ProductType.variable.toString())
+                      TProductAttributes(product : product),
                     const SizedBox(
                       height: TSizes.spaceBtwSections,
                     ),
@@ -69,7 +74,7 @@ class ProductDetailScreen extends StatelessWidget {
                       height: TSizes.spaceBtwItems,
                     ),
                     ReadMoreText(
-                      'Une description du produit qui contient plusieurs lignes. ligne 1 ligne 2 ligne 3 ligne 12 packages have newer versions incompatible with dependency constraints.',
+                      product.description ?? '',
                       trimLines: 2,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: 'Voir plus',

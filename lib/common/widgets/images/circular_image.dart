@@ -28,14 +28,15 @@ class CircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Container(
       width: width,
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         border: Border.all(
-          color: TColors.success,
-          width: 2,
+          color: dark ? Colors.white : TColors.black.withOpacity(0.1),
+          width: 1,
         ),
         color: backgroundColor ??
             (THelperFunctions.isDarkMode(context)
