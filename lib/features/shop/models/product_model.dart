@@ -84,28 +84,25 @@ class ProductModel {
   }
 
   /// Convert JSON structure to model
-  factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory ProductModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) {
       return ProductModel.empty();
     }
     final data = document.data()!;
     return ProductModel(
       id: document.id,
-      sku: data['SKU'],
+      sku: data['SKU'] ?? '',
       title: data['Title'] ?? '',
       stock: data['Stock'] ?? 0,
       price: double.parse((data['Price'] ?? 0.0).toString()),
       thumbnail: data['Thumbnail'] ?? '',
-      brand: data['Brand'] != null
-          ? BrandModel.fromJson(data['Brand'])
-          : null,
-      date: data['Date'] != null
-          ? DateTime.parse(data['Date'])
-          : null,
+      brand: data['Brand'] != null ? BrandModel.fromJson(data['Brand']) : null,
+      date: data['Date'] != null ? DateTime.parse(data['Date']) : null,
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
-      isFeatured: data['IsFeatured'] ?? false, 
-      categoryId: data['CategoryId'],
-      description: data['Description'],
+      isFeatured: data['IsFeatured'] ?? false,
+      categoryId: data['CategoryId'] ?? '',
+      description: data['Description'] ?? '',
       productType: data['ProductType'] ?? '',
       images: List<String>.from(data['Images'] ?? []),
       productAttributes: (data['ProductAttributes'] as List?)
@@ -117,27 +114,23 @@ class ProductModel {
     );
   }
 
-  
   /// Convert JSON structure to model
-  factory ProductModel.fromQuerySnapshot(QueryDocumentSnapshot<Object?> document) {
+  factory ProductModel.fromQuerySnapshot(
+      QueryDocumentSnapshot<Object?> document) {
     final data = document.data()! as Map<String, dynamic>;
     return ProductModel(
       id: document.id,
-      sku: data['SKU'],
+      sku: data['SKU'] ?? '',
       title: data['Title'] ?? '',
       stock: data['Stock'] ?? 0,
       price: double.parse((data['Price'] ?? 0.0).toString()),
       thumbnail: data['Thumbnail'] ?? '',
-      brand: data['Brand'] != null
-          ? BrandModel.fromJson(data['Brand'])
-          : null,
-      date: data['Date'] != null
-          ? DateTime.parse(data['Date'])
-          : null,
+      brand: data['Brand'] != null ? BrandModel.fromJson(data['Brand']) : null,
+      date: data['Date'] != null ? DateTime.parse(data['Date']) : null,
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
-      isFeatured: data['IsFeatured'] ?? false, 
-      categoryId: data['CategoryId'],
-      description: data['Description'],
+      isFeatured: data['IsFeatured'] ?? false,
+      categoryId: data['CategoryId'] ?? '',
+      description: data['Description'] ?? '',
       productType: data['ProductType'] ?? '',
       images: List<String>.from(data['Images'] ?? []),
       productAttributes: (data['ProductAttributes'] as List?)

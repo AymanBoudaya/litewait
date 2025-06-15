@@ -1,19 +1,25 @@
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:caferesto/features/shop/controllers/product/all_products_controller.dart';
 import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/models/product_model.dart';
+
 class TSortableProducts extends StatelessWidget {
   const TSortableProducts({
-    super.key,
+    super.key, required this.products,
   });
+
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProductController());
+    final controller = Get.put(AllProductsController());
+    controller.assignProducts(products);
     return Column(
       children: [
         /// DropDown
@@ -23,20 +29,25 @@ class TSortableProducts extends StatelessWidget {
               'Nom',
               'Prix croissant',
               'Prix décroissant',
-              'Ventes',
               'Récent',
-              'Tendance'
+              'Ventes',
             ]
                 .map((option) =>
                     DropdownMenuItem(value: option, child: Text(option)))
                 .toList(),
-            onChanged: (value) {}),
+            value: controller.selectedSortOption.value,
+            onChanged: (value) {
+              controller.sortProducts(value!);
+            }),
         const SizedBox(height: TSizes.spaceBtwSections),
 
         /// Products
-        GridLayout(
-            itemCount: 8,
-            itemBuilder: (_, index) => TProductCardVertical(product : controller.featuredProducts[index]))
+        Obx(
+          () => GridLayout(
+              itemCount: controller.products.length,
+              itemBuilder: (_, index) => TProductCardVertical(
+                  product: controller.products[index])),
+        )
       ],
     );
   }
