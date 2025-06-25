@@ -44,12 +44,11 @@ class ProductController extends GetxController {
       // Fetch products from an API or database
       final products = await productRepository.getFeaturedProducts();
       return products;
-    
     } catch (e) {
       // Handle error
       TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
       return [];
-    } 
+    }
   }
 
   /// get product price or price range for variations

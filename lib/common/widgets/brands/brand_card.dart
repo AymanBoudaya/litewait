@@ -1,8 +1,8 @@
+import 'package:caferesto/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/enums.dart';
-import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
 import '../images/circular_image.dart';
@@ -11,9 +11,13 @@ import '../products/product_cards/product_card_vertical.dart';
 
 class BrandCard extends StatelessWidget {
   const BrandCard({
-    super.key, required this.showBorder, this.onTap,
+    super.key,
+    required this.showBorder,
+    this.onTap,
+    required this.brand,
   });
 
+  final BrandModel brand;
   final bool showBorder;
   final void Function()? onTap;
 
@@ -30,8 +34,8 @@ class BrandCard extends StatelessWidget {
             /// Icon
             Flexible(
               child: CircularImage(
-                isNetworkImage: false,
-                image: TImages.animalIcon,
+                isNetworkImage: true,
+                image: brand.image,
                 backgroundColor: Colors.transparent,
                 overlayColor: THelperFunctions.isDarkMode(context)
                     ? TColors.white
@@ -48,11 +52,11 @@ class BrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const BrandTitleWithVerifiedIcon(
-                    title: 'Mokador',
+                  BrandTitleWithVerifiedIcon(
+                    title: brand.name,
                     brandTextSize: TextSizes.large,
                   ),
-                  Text('256 produits 13qsdfqsdfqsdfqsdfqdssdfqsdf',
+                  Text('${brand.productsCount ?? 0} produits',
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.labelMedium),
                 ],

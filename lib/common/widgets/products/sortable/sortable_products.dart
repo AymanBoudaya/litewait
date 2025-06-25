@@ -1,7 +1,6 @@
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/features/shop/controllers/product/all_products_controller.dart';
-import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

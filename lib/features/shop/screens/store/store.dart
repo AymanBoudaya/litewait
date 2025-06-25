@@ -2,8 +2,11 @@ import 'package:caferesto/common/widgets/custom_shapes/containers/search_contain
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:caferesto/common/widgets/brands/brand_card.dart';
+import 'package:caferesto/common/widgets/shimmer/TBrandsShimmer.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
+import 'package:caferesto/features/shop/controllers/brand_controller.dart';
 import 'package:caferesto/features/shop/screens/brand/all_brands.dart';
+import 'package:caferesto/features/shop/screens/brand/brand_products.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +15,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../controllers/category_controller.dart';
 import 'widgets/category_tab.dart';
 
 class StoreScreen extends StatelessWidget {
@@ -19,6 +23,8 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brandController = Get.put(BrandController());
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
       length: 6,
       child: Scaffold(
@@ -39,20 +45,22 @@ class StoreScreen extends StatelessWidget {
               headerSliverBuilder: (_, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
-                    automaticallyImplyLeading: false,
                     pinned: true,
                     floating: true,
+                    expandedHeight: 440,
+                    // Space between appBar and TabBar
+                    automaticallyImplyLeading: false,
                     backgroundColor: THelperFunctions.isDarkMode(context)
                         ? TColors.black
                         : TColors.white,
-                    expandedHeight: 440,
+
                     flexibleSpace: Padding(
-                      padding: EdgeInsets.all(TSizes.defaultSpace),
+                      padding: const EdgeInsets.all(TSizes.defaultSpace),
                       child: ListView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          /// SearchBar
+                          /// -- SearchBar
                           const SizedBox(
                             height: TSizes.spaceBtwItems,
                           ),
@@ -66,34 +74,65 @@ class StoreScreen extends StatelessWidget {
                             height: TSizes.spaceBtwSections,
                           ),
 
-                          /// Featured Brands
+                          /// -- Featured Brands
                           TSectionHeading(
                             title: 'Marques Populaires',
-                            onPressed: () => Get.to(()=> const AllBrandsScreen()),
+                            onPressed: () =>
+                                Get.to(() => const AllBrandsScreen()),
                           ),
                           const SizedBox(
                             height: TSizes.spaceBtwItems / 1.5,
                           ),
 
-                          GridLayout(
-                              itemCount: 4,
-                              mainAxisExtent: 80,
-                              itemBuilder: (_, index) {
-                                return BrandCard(showBorder: false);
-                              }),
+                          /// -- Brands Grid
+                          Obx(() {
+                            if (brandController.isLoading.value) {
+                              return const TbrandsShimmer();
+                            }
+
+                            if (brandController.featuredBrands.isEmpty) {
+                              return Center(
+                                child: Text('Aucune marque trouvée',
+                                style : Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .apply(color: Colors.white))
+                              );
+                            }
+                            return GridLayout(
+                                itemCount: brandController.featuredBrands.length,
+                                mainAxisExtent: 80,
+                                itemBuilder: (_, index) {
+                                  final brand = brandController.featuredBrands[index];
+                                  return BrandCard(showBorder: true, brand: brand, onTap: ()=> Get.to(()=> BrandProducts(brand: brand)));
+                                });
+                          }),
                         ],
                       ),
                     ),
 
                     /// TABS
-                    bottom: Tabbar(tabs: [
+                    bottom: Tabbar(
+                        tabs: categories
+                            .map((category) => Tab(
+                                  child: Text(
+                                    category.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .apply(color: TColors.primary),
+                                  ),
+                                ))
+                            .toList()),
+                    /*
+                    [
                       Tab(child: Text("Café")),
                       Tab(child: Text("Sandwichs")),
                       Tab(child: Text("Pâtisseries")),
                       Tab(child: Text("Boissons")),
                       Tab(child: Text("Plats")),
                       Tab(child: Text("Pizzas")),
-                    ]),
+                    ] */
                   )
                 ];
               },

@@ -1,5 +1,4 @@
 import 'package:caferesto/features/shop/screens/all_products/all_products.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
