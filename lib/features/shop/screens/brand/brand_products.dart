@@ -35,7 +35,7 @@ class BrandProducts extends StatelessWidget {
               height: TSizes.spaceBtwSections,
             ),
             FutureBuilder(
-                future: controller.getBrandProducts(brand.id),
+                future: controller.getBrandProducts(brandId: brand.id),
                 builder: (context, snapshot) {
                   /// Handle loader , No record, Or Error Message
                   const loader = TVerticalProductShimmer();

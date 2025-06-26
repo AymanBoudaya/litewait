@@ -16,7 +16,6 @@ import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../controllers/category_controller.dart';
-import 'widgets/category_tab.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -92,19 +91,24 @@ class StoreScreen extends StatelessWidget {
 
                             if (brandController.featuredBrands.isEmpty) {
                               return Center(
-                                child: Text('Aucune marque trouvée',
-                                style : Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .apply(color: Colors.white))
-                              );
+                                  child: Text('Aucune marque trouvée',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .apply(color: Colors.white)));
                             }
                             return GridLayout(
-                                itemCount: brandController.featuredBrands.length,
+                                itemCount:
+                                    brandController.featuredBrands.length,
                                 mainAxisExtent: 80,
                                 itemBuilder: (_, index) {
-                                  final brand = brandController.featuredBrands[index];
-                                  return BrandCard(showBorder: true, brand: brand, onTap: ()=> Get.to(()=> BrandProducts(brand: brand)));
+                                  final brand =
+                                      brandController.featuredBrands[index];
+                                  return BrandCard(
+                                      showBorder: true,
+                                      brand: brand,
+                                      onTap: () => Get.to(
+                                          () => BrandProducts(brand: brand)));
                                 });
                           }),
                         ],
@@ -137,14 +141,7 @@ class StoreScreen extends StatelessWidget {
                 ];
               },
               body: TabBarView(
-                children: [
-                  CategoryTab(),
-                  CategoryTab(),
-                  CategoryTab(),
-                  CategoryTab(),
-                  CategoryTab(),
-                  CategoryTab(),
-                ],
+                children: [],
               ))),
     );
   }

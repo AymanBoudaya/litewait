@@ -31,4 +31,33 @@ class BrandRepository extends GetxController {
       throw 'Quelque chose s\'est mal passée lors de la récupération des bannières.';
     }
   }
+
+   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
+    try {
+      // Query to get all documents where categoryId matches the previous categoryId
+      QuerySnapshot brandCategoryQuery = await _db.collection('BrandCategory').where('categoryId', isEqualTo: categoryId).get();
+
+      // Extract brandIds from the brandCategoryQuery documents
+      List<String> brandIds =
+          brandCategoryQuery.docs.map((doc) => doc['brandId'] as String).toList();
+
+          // Query to get the brands using the extracted brandIds, FieldPath.documentId is used to match the document IDs
+    final brandQuery = await _db.collection('Brands').where(FieldPath.documentId, whereIn: brandIds).limit(2).get();
+
+      // Map the documents to BrandModel
+      List<BrandModel> brands = brandQuery.docs.map((doc) {
+        return BrandModel.fromSnapshot(doc);
+      }).toList();
+
+      return brands;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Quelque chose s\'est mal passée lors de la récupération des bannières.';
+    }
+  }
 }

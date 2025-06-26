@@ -1,4 +1,6 @@
+import 'package:caferesto/data/repositories/product/product_repository.dart';
 import 'package:caferesto/features/shop/models/category_model.dart';
+import 'package:caferesto/features/shop/models/product_model.dart';
 import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +41,18 @@ class CategoryController extends GetxController {
       TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  /// Get Category or Subcategory Products
+  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit =4}) async {
+    try {
+      // Fetch products for the given category ID
+      final products = await ProductRepository.instance.getProductsForCategory(categoryId: categoryId, limit : limit);
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Erreur', message: e.toString());
+      return [];
     }
   }
 }
