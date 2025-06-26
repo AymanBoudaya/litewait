@@ -1,4 +1,5 @@
 import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
+import 'package:caferesto/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:caferesto/common/widgets/texts/product_price_text.dart';
@@ -10,7 +11,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../../icons/t_circular_icon.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
   const TProductCardHorizontal({super.key});
@@ -63,12 +63,7 @@ class TProductCardHorizontal extends StatelessWidget {
 
                   /// Favorite Icon
                   Positioned(
-                      top: 0,
-                      right: 0,
-                      child: TCircularIcon(
-                        icon: Iconsax.heart5,
-                        color: Colors.red,
-                      ))
+                      top: 0, right: 0, child: FavoriteIcon(productId: ''))
                 ],
               ),
             ),
@@ -93,13 +88,13 @@ class TProductCardHorizontal extends StatelessWidget {
                         BrandTitleWithVerifiedIcon(title: 'Nike'),
                       ],
                     ),
-
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///Pricing
-                        const Flexible(child: ProductPriceText(price: '256.0 - 23651.21')),
+                        const Flexible(
+                            child: ProductPriceText(price: '256.0 - 23651.21')),
 
                         ///Add to cart
                         Container(

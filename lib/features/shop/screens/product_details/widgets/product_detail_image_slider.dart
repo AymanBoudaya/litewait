@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caferesto/common/widgets/appbar/appbar.dart';
 import 'package:caferesto/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
+import 'package:caferesto/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:caferesto/features/shop/controllers/product/images_controller.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../common/widgets/icons/t_circular_icon.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../models/product_model.dart';
 
@@ -99,10 +99,7 @@ class TProductImageSlider extends StatelessWidget {
                   showBackArrow: true,
                   actions: [
                     /// Favorite Icon
-                    TCircularIcon(
-                      icon: Iconsax.heart5,
-                      color: Colors.red,
-                    ),
+                    FavoriteIcon(productId: product.id,),
                     const SizedBox(width: TSizes.defaultSpace),
                   ],
                 )

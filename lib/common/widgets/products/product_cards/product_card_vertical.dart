@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:caferesto/common/widgets/icons/t_circular_icon.dart';
 import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
+import 'package:caferesto/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:caferesto/features/shop/controllers/product/product_controller.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
@@ -83,10 +83,7 @@ class TProductCardVertical extends StatelessWidget {
                       Positioned(
                           top: 0,
                           right: 0,
-                          child: TCircularIcon(
-                            icon: Iconsax.heart5,
-                            color: Colors.red,
-                          ))
+                          child: FavoriteIcon(productId: product.id))
                     ],
                   )),
               const SizedBox(
