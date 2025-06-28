@@ -49,7 +49,7 @@ class TProductMetaData extends StatelessWidget {
             if (product.productType == ProductType.single.toString() &&
                 product.salePrice > 0)
               Text(
-                '\DT${product.price}',
+                'sssssssssssssDT${product.price}',
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!
@@ -75,7 +75,8 @@ class TProductMetaData extends StatelessWidget {
           children: [
             const TProductTitleText(title: "Statut :"),
             const SizedBox(width: TSizes.spaceBtwItems),
-            Text(controller.getProductStockStatus(product.stock), style: Theme.of(context).textTheme.titleMedium),
+            Text(controller.getProductStockStatus(product.stock),
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -91,7 +92,8 @@ class TProductMetaData extends StatelessWidget {
             ),
             const SizedBox(width: TSizes.spaceBtwItems),
             BrandTitleWithVerifiedIcon(
-              title: product.brand != null ? product.brand!.name : 'Sans marque',
+              title:
+                  product.brand != null ? product.brand!.name : 'Sans marque',
               brandTextSize: TextSizes.medium,
             ),
           ],

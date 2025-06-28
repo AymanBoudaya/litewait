@@ -1,5 +1,5 @@
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
-import 'package:caferesto/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:caferesto/common/widgets/shimmer/horizontal_product_shimmer.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
 import 'package:caferesto/features/shop/controllers/category_controller.dart';
 import 'package:caferesto/features/shop/screens/all_products/all_products.dart';

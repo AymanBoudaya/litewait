@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
+import '../../../../common/widgets/shimmer/horizontal_product_shimmer.dart';
 import '../../../../common/widgets/shimmer/vertical_product_shimmer.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/image_strings.dart';
@@ -87,9 +88,9 @@ class HomeScreen extends StatelessWidget {
                     /// -- Heading
                     TSectionHeading(
                       title: 'Produits Populaires',
-                      onPressed: () => Get.to(() => AllProducts(title: 'Produits populaires', 
-                      futureMethod: controller.fetchAllFeaturedProducts())
-                      ),
+                      onPressed: () => Get.to(() => AllProducts(
+                          title: 'Produits populaires',
+                          futureMethod: controller.fetchAllFeaturedProducts())),
                     ),
                     const SizedBox(
                       height: TSizes.spaceBtwItems,
@@ -98,9 +99,7 @@ class HomeScreen extends StatelessWidget {
                     /// Popular products
                     Obx(() {
                       if (controller.isLoading.value) {
-                        return const TVerticalProductShimmer(
-                      
-                        );
+                        return const TVerticalProductShimmer();
                       }
                       if (controller.featuredProducts.isEmpty) {
                         return const Center(

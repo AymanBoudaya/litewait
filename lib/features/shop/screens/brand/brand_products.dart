@@ -1,11 +1,11 @@
 import 'package:caferesto/common/widgets/appbar/appbar.dart';
 import 'package:caferesto/common/widgets/brands/brand_card.dart';
 import 'package:caferesto/common/widgets/products/sortable/sortable_products.dart';
-import 'package:caferesto/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/widgets/shimmer/vertical_product_shimmer.dart';
 import '../../controllers/brand_controller.dart';
 import '../../models/brand_model.dart';
 

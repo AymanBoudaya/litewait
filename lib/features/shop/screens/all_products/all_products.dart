@@ -1,11 +1,11 @@
 import 'package:caferesto/common/widgets/appbar/appbar.dart';
-import 'package:caferesto/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/widgets/products/sortable/sortable_products.dart';
+import '../../../../common/widgets/shimmer/vertical_product_shimmer.dart';
 import '../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../controllers/product/all_products_controller.dart';
 import '../../models/product_model.dart';

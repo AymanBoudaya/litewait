@@ -116,11 +116,11 @@ class ProductRepository extends GetxController {
     try {
       QuerySnapshot productCategoryQuery = limit == -1
           ? await _db
-              .collection('ProductsCategory')
+              .collection('ProductCategory')
               .where('categoryId', isEqualTo: categoryId)
               .get()
           : await _db
-              .collection('ProductsCategory')
+              .collection('ProductCategory')
               .where('categoryId', isEqualTo: categoryId)
               .limit(limit)
               .get();
@@ -272,7 +272,6 @@ class ProductRepository extends GetxController {
         await _db.collection('Products').doc(product.id).set(product.toJson());
       }
 
-      print('Dummy products uploaded successfully.');
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {

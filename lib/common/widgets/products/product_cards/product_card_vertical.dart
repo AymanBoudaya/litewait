@@ -49,7 +49,7 @@ class TProductCardVertical extends StatelessWidget {
               /// Thumbnail
               TRoundedContainer(
                   height: 180,
-                  width : 180,
+                  width: 180,
                   padding: const EdgeInsets.all(TSizes.sm),
                   backgroundColor: dark ? TColors.dark : TColors.light,
                   child: Stack(
@@ -61,23 +61,23 @@ class TProductCardVertical extends StatelessWidget {
                       ),
 
                       /// Sale Tag
-                      if(salePercentage != null)
-                      Positioned(
-                        top: 12,
-                        child: TRoundedContainer(
-                          radius: TSizes.sm,
-                          backgroundColor: TColors.secondary.withOpacity(0.8),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: TSizes.xs, horizontal: TSizes.sm),
-                          child: Text(
-                            '$salePercentage%',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .apply(color: TColors.black),
+                      if (salePercentage != null)
+                        Positioned(
+                          top: 12,
+                          child: TRoundedContainer(
+                            radius: TSizes.sm,
+                            backgroundColor: TColors.secondary.withOpacity(0.8),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: TSizes.xs, horizontal: TSizes.sm),
+                            child: Text(
+                              '$salePercentage%',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .apply(color: TColors.black),
+                            ),
                           ),
                         ),
-                      ),
 
                       /// -- Favorite Icon Button
                       Positioned(
@@ -108,6 +108,7 @@ class TProductCardVertical extends StatelessWidget {
                         title: product.brand!.name,
                       ),
 
+                      /// Price Row
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -115,24 +116,24 @@ class TProductCardVertical extends StatelessWidget {
                           Flexible(
                             child: Column(
                               children: [
-                          if (product.productType ==
-                                  ProductType.single.toString() &&
-                              product.salePrice > 0)
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: TSizes.sm),
-                                  child: Text(
-                                    product.price.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium!
-                                        .apply(
-                                          color: TColors.textSecondary,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                        ),
+                                if (product.productType ==
+                                        ProductType.single.toString() &&
+                                    product.salePrice > 0)
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: TSizes.sm),
+                                    child: Text(
+                                      product.price.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium!
+                                          .apply(
+                                            color: TColors.textSecondary,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                    ),
                                   ),
-                                ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.only(left: TSizes.sm),
