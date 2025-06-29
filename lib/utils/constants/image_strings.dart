@@ -37,12 +37,15 @@ class TImages {
   static const String pumaLogo = "assets/icons/brands/puma-logo.png";
   static const String zaraLogo = "assets/icons/brands/zara-logo.png";
   static const String kenwoodLogo = "assets/icons/brands/kenwood-logo.png";
+  static const String hsouna = "assets/icons/brands/hsouna.png";
   static const String hermanMillerLogo =
       "assets/icons/brands/herman-miller-logo.png";
   static const String ikeaLogo = "assets/icons/brands/ikea_logo.png";
   static const String acerlogo = "assets/icons/brands/acer_logo.png";
 
   // -- Animations
+    static const String cartAnimation =
+      "assets/images/animations/sammy-line-workout.gif";
   static const String productsIllustration =
       "assets/images/animations/sammy-line-workout.gif";
   static const String productsSaleIllustration =
@@ -59,6 +62,9 @@ class TImages {
       "assets/images/animations/141594-animation-of-docer.json";
   static const String successfullyRegisterAnimation =
       "assets/images/animations/72462-check-register.json";
+  static const String pencilAnimation =
+      "assets/images/animations/140429-pencil-drawing.json";
+
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
       "assets/images/on_boarding_images/sammy-line-searching.gif";
@@ -68,6 +74,8 @@ class TImages {
       "assets/images/on_boarding_images/sammy-line-delivery.gif";
 
   // -- Products
+  static const String delice = "assets/images/products/cafe/delice.jpg";
+  static const String mlewi = "assets/images/products/mlewi.png";
   static const String productImage1 = "assets/images/products/nike-shoes.png";
   static const String productImage2 = "assets/images/products/product-1.png";
   static const String productImage3 =

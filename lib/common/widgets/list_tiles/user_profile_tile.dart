@@ -17,22 +17,55 @@ class TUserProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
-    return ListTile(
-      leading:
-          CircularImage(image: TImages.user, width: 60, height: 60, padding: 0),
-      title: Text(controller.user.value.fullName,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .apply(color: TColors.white)),
-      subtitle: Text(controller.user.value.email,
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .apply(color: TColors.white)),
-      trailing: IconButton(
-        icon: const Icon(Iconsax.edit, color: TColors.white),
-        onPressed: onPressed,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Circular image with custom size
+          CircularImage(
+            image: TImages.user,
+            width: 80,
+            height: 80,
+            padding: 1,
+          ),
+          const SizedBox(width: 16), // Spacing between image and text
+          // Expanded text section to prevent overflow
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // User name
+                Text(
+                  controller.user.value.fullName,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .apply(color: TColors.white),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4), // Spacing between name and email
+                // User email
+                Text(
+                  controller.user.value.email,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .apply(color: TColors.white),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          // Edit button
+          IconButton(
+            onPressed: onPressed,
+            icon: const Icon(Iconsax.edit, color: TColors.white),
+          ),
+        ],
       ),
     );
   }

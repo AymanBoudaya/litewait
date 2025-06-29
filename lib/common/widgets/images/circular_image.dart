@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:caferesto/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,7 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 
 class CircularImage extends StatelessWidget {
-  const CircularImage({
+const CircularImage({
     super.key,
     this.fit = BoxFit.cover,
     required this.image,
@@ -16,7 +18,7 @@ class CircularImage extends StatelessWidget {
     this.backgroundColor,
     this.width = 70,
     this.height = 70,
-    this.padding = TSizes.sm,
+    this.padding = TSizes.sm / 4,
   });
 
   final BoxFit fit;
@@ -42,28 +44,24 @@ class CircularImage extends StatelessWidget {
             (THelperFunctions.isDarkMode(context)
                 ? TColors.black
                 : TColors.white),
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(min(width, height) / 2),
       ),
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Center(
-              child: isNetworkImage
-                  ? CachedNetworkImage(
-                      fit: fit,
-                      color: overlayColor,
-                      imageUrl: image,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              const TShimmerEffect(
-                                  width: 70, height: 70, radius: 100),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    )
-                  : Image(
-                      fit: fit,
-                      image: AssetImage(image) as ImageProvider,
-                      color: overlayColor,
-                    ))),
+          borderRadius: BorderRadius.circular(min(width, height) / 2),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  color: overlayColor,
+                  imageUrl: image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const TShimmerEffect(width: 70, height: 70, radius: 100),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(
+                  fit: fit,
+                  image: AssetImage(image) as ImageProvider,
+                  color: overlayColor,
+                )),
     );
   }
 }

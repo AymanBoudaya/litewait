@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
-import '../../../../common/widgets/shimmer/horizontal_product_shimmer.dart';
 import '../../../../common/widgets/shimmer/vertical_product_shimmer.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/image_strings.dart';

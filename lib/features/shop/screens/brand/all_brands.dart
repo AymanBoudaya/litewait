@@ -8,7 +8,7 @@ import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/widgets/shimmer/TBrandsShimmer.dart';
+import '../../../../common/widgets/shimmer/brands_shimmer.dart';
 
 class AllBrandsScreen extends StatelessWidget {
   const AllBrandsScreen({super.key});
@@ -18,7 +18,7 @@ class AllBrandsScreen extends StatelessWidget {
     final brandController = BrandController.instance;
     return Scaffold(
         appBar: TAppBar(
-          title: Text("Marque"),
+          title: Text("Marques"),
           showBackArrow: true,
         ),
         body: SingleChildScrollView(

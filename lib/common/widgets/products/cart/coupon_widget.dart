@@ -1,9 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
+
+import '../product_cards/widgets/rounded_container.dart';
 
 class TCouponCode extends StatelessWidget {
   const TCouponCode({

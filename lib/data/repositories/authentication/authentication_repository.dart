@@ -38,7 +38,9 @@ class AuthenticationRepository extends GetxController {
   /// Function to show relevant screen
   screenRedirect() async {
     final user = _auth.currentUser;
+
     if (user != null) {
+      // si l'utilisateur est authentifié
       if (user.emailVerified) {
 
         // Initializing user specific storage

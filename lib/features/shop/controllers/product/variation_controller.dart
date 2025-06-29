@@ -3,6 +3,7 @@ import 'package:caferesto/features/shop/models/product_variation_model.dart';
 import 'package:get/get.dart';
 
 import '../../models/product_model.dart';
+import 'cart_controller.dart';
 
 class VariationController extends GetxController {
   static VariationController get instance => Get.find();
@@ -17,8 +18,8 @@ class VariationController extends GetxController {
   void onAttributeSelected(ProductModel product, attributeName, attribueValue) {
     final selectedAttributes = Map<String, dynamic>.from(
         this.selectedAttributes); // Create a copy of the selected attributes
-  selectedAttributes[attributeName] = attribueValue;
-  this.selectedAttributes[attributeName] = attribueValue;
+    selectedAttributes[attributeName] = attribueValue;
+    this.selectedAttributes[attributeName] = attribueValue;
 
     // Check if the selected attributes match any variation attributes
     final selectedVariation = product.productVariations?.firstWhere(
@@ -33,47 +34,58 @@ class VariationController extends GetxController {
     if (selectedVariation!.image.isNotEmpty) {
       ImagesController.instance.selectedProductImage.value =
           selectedVariation.image;
-    } 
+    }
+
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController
+          .getVariationQuantityInCart(product.id, selectedVariation.id);
+    }
     // Assign the selected variation to the observable
     this.selectedVariation.value = selectedVariation;
     // Update stock status based on the selected variation
     getProductVariationStockStatus();
   }
 
-///   -- Check if selected attributes match any variation attributes
-bool _isSameAttributeValues(
-  Map<String, dynamic> variationAttributes,
-  Map<String, dynamic> selectedAttributes,
-    ) {
-      /// If selected attributes contains 3 attributes and current variation contains 2 then return
-      if (variationAttributes.length != selectedAttributes.length) {
+  ///   -- Check if selected attributes match any variation attributes
+  bool _isSameAttributeValues(
+    Map<String, dynamic> variationAttributes,
+    Map<String, dynamic> selectedAttributes,
+  ) {
+    /// If selected attributes contains 3 attributes and current variation contains 2 then return
+    if (variationAttributes.length != selectedAttributes.length) {
+      return false;
+    }
+
+    // If any of the attributes is diffrent then return
+    for (final key in variationAttributes.keys) {
+      if (variationAttributes[key] != selectedAttributes[key]) {
         return false;
       }
-
-      // If any of the attributes is diffrent then return
-      for (final key in variationAttributes.keys) {
-        if (variationAttributes[key] != selectedAttributes[key]) {
-          return false;
-        }
-      }
-
-      return true;
     }
+
+    return true;
+  }
+
   /// -- Check Attribute availability / Stock in variation
   Set<String?> getAttributesAvailabilityInVariation(
       List<ProductVariationModel> variations, String attributeName) {
-        final availableVariationAttributeValues = variations.where((variation) =>
-            variation.attributeValues[attributeName] != null && variation.attributeValues[attributeName]!.isNotEmpty && variation.stock > 0)
-            .map((variation) => variation.attributeValues[attributeName]
-            ).toSet();
+    final availableVariationAttributeValues = variations
+        .where((variation) =>
+            variation.attributeValues[attributeName] != null &&
+            variation.attributeValues[attributeName]!.isNotEmpty &&
+            variation.stock > 0)
+        .map((variation) => variation.attributeValues[attributeName])
+        .toSet();
     return availableVariationAttributeValues;
-      }
+  }
 
-      String getVariationPrice() {
-        return (selectedVariation.value.salePrice > 0 ?
-                selectedVariation.value.salePrice :
-             selectedVariation.value.price).toString();
-      }
+  String getVariationPrice() {
+    return (selectedVariation.value.salePrice > 0
+            ? selectedVariation.value.salePrice
+            : selectedVariation.value.price)
+        .toString();
+  }
 
   /// -- Check Product Variation Stock status
   void getProductVariationStockStatus() {

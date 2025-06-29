@@ -154,10 +154,10 @@ class ProductRepository extends GetxController {
           stock: 10,
           price: 1.5,
           isFeatured: true,
-          thumbnail: TImages.productImage1,
+          thumbnail: TImages.productImage10,
           description: 'Freshly roasted organic coffee beans.',
           salePrice: 1,
-          productType: 'Simple',
+          productType: 'ProductType.single',
           sku: 'COF-001',
           categoryId: 'cat1',
           images: [
@@ -204,7 +204,7 @@ class ProductRepository extends GetxController {
           stock: 50,
           price: 5.5,
           isFeatured: true,
-          thumbnail: TImages.productImage5,
+          thumbnail: TImages.productImage1,
           description: 'Mlewi de différentes variétés et gouts.',
           salePrice: 5.9,
           productType: 'ProductType.variable',
@@ -217,7 +217,7 @@ class ProductRepository extends GetxController {
           brand: BrandModel(
             id: 'b2',
             name: 'Hsouna',
-            image: TImages.productImage3,
+            image: TImages.hsouna,
             isFeatured: true,
             productsCount: 10,
           ),
@@ -271,7 +271,6 @@ class ProductRepository extends GetxController {
       for (var product in dummyProducts) {
         await _db.collection('Products').doc(product.id).set(product.toJson());
       }
-
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {

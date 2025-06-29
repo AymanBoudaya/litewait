@@ -1,4 +1,3 @@
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/texts/product_price_text.dart';
 import 'package:caferesto/common/widgets/texts/product_title_text.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common/widgets/chips/choice_chip.dart';
+import '../../../../../common/widgets/products/product_cards/widgets/rounded_container.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../models/product_model.dart';
 

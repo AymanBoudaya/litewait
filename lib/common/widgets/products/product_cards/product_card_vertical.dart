@@ -7,7 +7,6 @@ import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../features/shop/models/product_model.dart';
 import '../../../../features/shop/screens/product_details/product_detail.dart';
@@ -17,6 +16,8 @@ import '../../../styles/shadows.dart';
 import '../../texts/brand_title_text_with_verified_icon.dart';
 import '../../texts/product_price_text.dart';
 import '../../texts/product_title_text.dart';
+import 'widgets/add_to_cart_button.dart';
+import 'widgets/rounded_container.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({
@@ -146,26 +147,7 @@ class TProductCardVertical extends StatelessWidget {
                           ),
 
                           /// Add To cart button
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: TColors.dark,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(TSizes.cardRadiusMd),
-                                bottomRight:
-                                    Radius.circular(TSizes.productImageRadius),
-                              ),
-                            ),
-                            child: const SizedBox(
-                              width: TSizes.iconLg * 1.2,
-                              height: TSizes.iconLg * 1.2,
-                              child: Center(
-                                child: Icon(
-                                  Iconsax.add,
-                                  color: TColors.white,
-                                ),
-                              ),
-                            ),
-                          )
+                          ProductCardAddToCartButton(product: product)
                         ],
                       )
                     ],
@@ -173,49 +155,5 @@ class TProductCardVertical extends StatelessWidget {
             ],
           )),
     );
-  }
-}
-
-class TRoundedContainer extends StatelessWidget {
-  const TRoundedContainer({
-    super.key,
-    this.height,
-    this.width,
-    this.radius = TSizes.cardRadiusLg,
-    this.child,
-    this.showBorder = false,
-    this.borderColor = TColors.borderPrimary,
-    this.backgroundColor = TColors.white,
-    this.padding,
-    this.margin,
-  });
-
-  final double? height;
-  final double? width;
-  final double radius;
-  final Widget? child;
-  final bool showBorder;
-  final Color borderColor;
-  final Color backgroundColor;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? margin;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: width,
-        height: height,
-        padding: padding,
-        margin: margin,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(radius),
-          border: showBorder
-              ? Border.all(
-                  color: borderColor,
-                )
-              : null,
-        ),
-        child: child);
   }
 }

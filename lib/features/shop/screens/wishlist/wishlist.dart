@@ -32,9 +32,13 @@ class FavoriteScreen extends StatelessWidget {
                 icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen())),
           ],
         ),
+
+        /// Body
         body: SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsets.all(TSizes.defaultSpace),
+
+                /// Products Grid
                 child: Column(
                   children: [
                     Obx(
@@ -43,9 +47,9 @@ class FavoriteScreen extends StatelessWidget {
                           builder: (context, snapshot) {
                             final emptyWidget = TAnimationLoaderWidget(
                                 text: "La liste de favoris est vide !",
-                                animation: TImages.productsIllustration,
+                                animation: TImages.pencilAnimation,
                                 showAction: true,
-                                actionText: "Ajountons des favoris !",
+                                actionText: "Ajoutons des favoris !",
                                 onActionPressed: () =>
                                     Get.off(() => const NavigationMenu()));
 

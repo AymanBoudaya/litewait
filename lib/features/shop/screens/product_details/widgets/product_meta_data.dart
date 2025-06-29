@@ -1,5 +1,4 @@
 import 'package:caferesto/common/widgets/images/circular_image.dart';
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:caferesto/common/widgets/texts/product_title_text.dart';
 import 'package:caferesto/features/shop/models/product_model.dart';
@@ -7,6 +6,7 @@ import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../common/widgets/products/product_cards/widgets/rounded_container.dart';
 import '../../../../../common/widgets/texts/product_price_text.dart';
 import '../../../../../utils/constants/enums.dart';
 import '../../../../../utils/helpers/helper_functions.dart';

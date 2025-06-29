@@ -2,7 +2,7 @@ import 'package:caferesto/common/widgets/custom_shapes/containers/search_contain
 import 'package:caferesto/common/widgets/layouts/grid_layout.dart';
 import 'package:caferesto/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:caferesto/common/widgets/brands/brand_card.dart';
-import 'package:caferesto/common/widgets/shimmer/TBrandsShimmer.dart';
+import 'package:caferesto/common/widgets/shimmer/brands_shimmer.dart';
 import 'package:caferesto/common/widgets/texts/section_heading.dart';
 import 'package:caferesto/features/shop/controllers/brand_controller.dart';
 import 'package:caferesto/features/shop/screens/brand/all_brands.dart';
@@ -25,7 +25,7 @@ class StoreScreen extends StatelessWidget {
     final brandController = Get.put(BrandController());
     final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 6,
+      length: categories.length,
       child: Scaffold(
           appBar: TAppBar(
             title: Text(
@@ -34,8 +34,8 @@ class StoreScreen extends StatelessWidget {
             ),
             actions: [
               TCartCounterIcon(
-                onPressed: () {},
-              )
+                iconColor: TColors.primary,
+                counterBgColor: TColors.primary,)
             ],
           ),
           body: NestedScrollView(
@@ -130,18 +130,19 @@ class StoreScreen extends StatelessWidget {
                             .toList()),
                     /*
                     [
-                      Tab(child: Text("Café")),
-                      Tab(child: Text("Sandwichs")),
-                      Tab(child: Text("Pâtisseries")),
-                      Tab(child: Text("Boissons")),
-                      Tab(child: Text("Plats")),
-                      Tab(child: Text("Pizzas")),
+
                     ] */
                   )
                 ];
               },
               body: TabBarView(
-                children: [],
+                children: [
+                  Tab(child: Text("Café")),
+                  Tab(child: Text("Sandwichs")),
+                  Tab(child: Text("Pâtisseries")),
+                  Tab(child: Text("Boissons")),
+                  Tab(child: Text("Plats")),
+                ],
               ))),
     );
   }

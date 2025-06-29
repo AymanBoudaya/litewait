@@ -18,7 +18,7 @@ class FavoritesController extends GetxController {
     initFavorites();
   }
 
-  initFavorites() {
+  void initFavorites() {
     final json = TLocalStorage.instance().readData('favorites');
     if (json != null) {
       final storedFavorites = jsonDecode(json) as Map<String, dynamic>;

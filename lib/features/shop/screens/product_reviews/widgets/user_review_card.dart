@@ -1,4 +1,3 @@
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/products/ratings/rating_indicator.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/constants/image_strings.dart';
@@ -6,6 +5,7 @@ import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../../common/widgets/products/product_cards/widgets/rounded_container.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 
 class UserReviewCard extends StatelessWidget {

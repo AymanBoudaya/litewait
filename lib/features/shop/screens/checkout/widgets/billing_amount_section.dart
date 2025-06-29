@@ -1,12 +1,16 @@
+import 'package:caferesto/utils/helpers/pricing_calculator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/sizes.dart';
+import '../../../controllers/product/cart_controller.dart';
 
 class TBillingAmountSection extends StatelessWidget {
   const TBillingAmountSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
     return Column(
       children: [
         /// Subtotal
@@ -18,7 +22,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '256 DT',
+              '$subTotal DT',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -36,7 +40,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '6 DT',
+              '${TPricingCalculator.calculateShippingCost(subTotal, 'tn')} DT',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -55,7 +59,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '6 DT',
+              '${TPricingCalculator.calculateTax(subTotal, 'tn')} DT',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -73,7 +77,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
-              '6 DT',
+              '${TPricingCalculator.calculateTotalPrice(subTotal, 'tn')} DT',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

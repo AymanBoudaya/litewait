@@ -1,13 +1,11 @@
 import 'package:caferesto/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/enums.dart';
 import '../../../utils/constants/sizes.dart';
-import '../../../utils/helpers/helper_functions.dart';
 import '../images/circular_image.dart';
+import '../products/product_cards/widgets/rounded_container.dart';
 import '../texts/brand_title_text_with_verified_icon.dart';
-import '../products/product_cards/product_card_vertical.dart';
 
 class BrandCard extends StatelessWidget {
   const BrandCard({
@@ -30,17 +28,19 @@ class BrandCard extends StatelessWidget {
         showBorder: showBorder,
         backgroundColor: Colors.transparent,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// Icon
-            Flexible(
-              child: CircularImage(
-                isNetworkImage: true,
-                image: brand.image,
-                backgroundColor: Colors.transparent,
-                overlayColor: THelperFunctions.isDarkMode(context)
-                    ? TColors.white
-                    : TColors.black,
-              ),
+            CircularImage(
+              isNetworkImage: true,
+              image: brand.image,
+              backgroundColor: Colors.transparent,
+              width: 50,
+              height: 50,
+              padding: 2,
+              // overlayColor: THelperFunctions.isDarkMode(context)
+              //     ? TColors.white
+              //     : TColors.black,
             ),
             const SizedBox(
               width: TSizes.spaceBtwItems / 2,
@@ -52,13 +52,31 @@ class BrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BrandTitleWithVerifiedIcon(
-                    title: brand.name,
-                    brandTextSize: TextSizes.large,
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SizedBox(
+                        width: constraints.maxWidth,
+                        child: BrandTitleWithVerifiedIcon(
+                          title: brand.name,
+                          brandTextSize: TextSizes.large,
+                        ),
+                      );
+                    },
                   ),
-                  Text('${brand.productsCount ?? 0} produits',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.labelMedium),
+                  // Product Count
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SizedBox(
+                        width: constraints.maxWidth,
+                        child: Text(
+                          '${brand.productsCount ?? 0} produits',
+                          style: Theme.of(context).textTheme.labelMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             )

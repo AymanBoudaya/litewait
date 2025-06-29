@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caferesto/common/widgets/brands/brand_card.dart';
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:caferesto/features/shop/models/brand_model.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
@@ -10,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../features/shop/screens/brand/brand_products.dart';
+import '../products/product_cards/widgets/rounded_container.dart';
 
 class BrandShowcase extends StatelessWidget {
   const BrandShowcase({

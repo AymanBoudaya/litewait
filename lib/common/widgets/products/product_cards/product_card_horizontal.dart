@@ -1,6 +1,5 @@
 import 'package:caferesto/common/widgets/images/t_rounded_image.dart';
 import 'package:caferesto/common/widgets/products/favorite_icon/favorite_icon.dart';
-import 'package:caferesto/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:caferesto/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:caferesto/common/widgets/texts/product_price_text.dart';
 import 'package:caferesto/common/widgets/texts/product_title_text.dart';
@@ -13,6 +12,7 @@ import '../../../../features/shop/controllers/product/product_controller.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/sizes.dart';
+import 'widgets/rounded_container.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
   const TProductCardHorizontal({super.key, required this.product});

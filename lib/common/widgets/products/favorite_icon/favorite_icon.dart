@@ -18,6 +18,7 @@ class FavoriteIcon extends StatelessWidget {
         icon:
             controller.isFavourite(productId) ? Iconsax.heart5 : Iconsax.heart,
         color: controller.isFavourite(productId) ? TColors.error : null,
-        onPressed: () => controller.toggleFavoriteProduct(productId)));
+        onPressed: () => controller.toggleFavoriteProduct(productId)
+        ));
   }
 }

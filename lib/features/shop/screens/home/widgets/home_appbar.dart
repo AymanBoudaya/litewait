@@ -1,5 +1,4 @@
 import 'package:caferesto/features/personalization/controllers/user_controller.dart';
-import 'package:caferesto/features/shop/screens/cart/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,13 +41,13 @@ class THomeAppBar extends StatelessWidget {
                       .titleSmall!
                       .apply(color: TColors.grey));
             }
-          }
-          ),
+          }),
         ],
       ),
       actions: [
         TCartCounterIcon(
-            onPressed: () => Get.to(() => const CartScreen()),
+            counterBgColor: TColors.black,
+            counterTextColor: TColors.white,
             iconColor: TColors.white)
       ],
     );
