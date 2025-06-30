@@ -1,7 +1,8 @@
 import 'package:caferesto/features/shop/models/cart_item_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
+import '../../../utils/constants/enums.dart';
+import '../../../utils/helpers/helper_functions.dart';
 import '../../personalization/models/address_model.dart';
 
 class OrderModel {
@@ -28,96 +29,53 @@ class OrderModel {
   });
 
   /// Format the order date
-  String get formattedOrderDate =>
-      DateFormat('yyyy-MM-dd – kk:mm').format(orderDate);
+  String get formattedOrderDate => THelperFunctions.getFormattedDate(orderDate);
 
   /// Format the delivery date if available
   String get formattedDeliveryDate => deliveryDate != null
-      ? DateFormat('yyyy-MM-dd – kk:mm').format(deliveryDate!)
-      : 'N/A';
+      ? THelperFunctions.getFormattedDate(deliveryDate!)
+      : '';
 
   /// Human-readable order status
-  String get orderStatusText {
-    switch (status) {
-      case OrderStatus.pending:
-        return 'Pending';
-      case OrderStatus.processing:
-        return 'Processing';
-      case OrderStatus.shipped:
-        return 'Shipped';
-      case OrderStatus.delivered:
-        return 'Delivered';
-      case OrderStatus.cancelled:
-        return 'Cancelled';
-      default:
-        return 'Unknown';
-    }
-  }
+  String get orderStatusText => status == OrderStatus.delivered
+      ? 'Livrée'
+      : status == OrderStatus.shipped
+          ? 'Livraison en cours'
+          : 'En cours de traitement';
 
   /// Convert model to JSON (for Firestore)
   Map<String, dynamic> toJson() {
     return {
-      'UserId': userId,
-      'PaymentMethod': paymentMethod,
-      'Status': status.name, // save as string
-      'TotalAmount': totalAmount,
-      'OrderDate': orderDate.toIso8601String(),
-      'DeliveryDate': deliveryDate?.toIso8601String(),
-      'Address': address?.toJson(),
-      'Items': items.map((item) => item.toJson()).toList(),
+      'id': id,
+      'userId': userId,
+      'paymentMethod': paymentMethod,
+      'status': status.toString(), // save as string
+      'totalAmount': totalAmount,
+      'orderDate': orderDate,
+      'deliveryDate': deliveryDate,
+      'address': address?.toJson(),
+      'items': items.map((item) => item.toJson()).toList(),
     };
   }
 
   /// Create model from Firestore document
   factory OrderModel.fromSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
-    return OrderModel.fromJson(data, snapshot.id);
-  }
-
-  /// Create model from JSON with id
-  factory OrderModel.fromJson(Map<String, dynamic> data, String id) {
     return OrderModel(
-      id: id,
-      userId: data['UserId'] ?? '',
-      paymentMethod: data['PaymentMethod'] ?? '',
-      status: _statusFromString(data['Status']),
-      totalAmount: (data['TotalAmount'] as num).toDouble(),
-      orderDate: DateTime.parse(data['OrderDate']),
-      deliveryDate: data['DeliveryDate'] != null
-          ? DateTime.tryParse(data['DeliveryDate'])
+      id: data['id'] as String,
+      userId: data['UserId'] as String,
+      status:
+          OrderStatus.values.firstWhere((e) => e.toString() == data['Status']),
+      totalAmount: data['totalAmount'] as double,
+      orderDate: (data['orderDate'] as Timestamp).toDate(),
+      paymentMethod: data['PaymentMethod'] as String,
+      address: AddressModel.fromJson(data['address'] as Map<String, dynamic>),
+      deliveryDate: data['deliveryDate'] != null
+          ? (data['deliveryDate'] as Timestamp).toDate()
           : null,
-      address: data['Address'] != null
-          ? AddressModel.fromJson(data['Address'])
-          : null,
-      items: (data['Items'] as List<dynamic>)
+      items: (data['items'] as List<dynamic>)
           .map((item) => CartItemModel.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
   }
-
-  /// Helper to parse string to enum
-  static OrderStatus _statusFromString(String? status) {
-    switch (status) {
-      case 'pending':
-        return OrderStatus.pending;
-      case 'processing':
-        return OrderStatus.processing;
-      case 'shipped':
-        return OrderStatus.shipped;
-      case 'delivered':
-        return OrderStatus.delivered;
-      case 'cancelled':
-        return OrderStatus.cancelled;
-      default:
-        return OrderStatus.pending;
-    }
-  }
-}
-
-enum OrderStatus {
-  pending,
-  processing,
-  shipped,
-  delivered,
-  cancelled,
 }

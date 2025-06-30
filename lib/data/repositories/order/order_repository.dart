@@ -1,3 +1,4 @@
+import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class OrderRepository extends GetxController {
           .collection("Orders")
           .add(order.toJson());
     } catch (e) {
-      throw 'Something went wrong while fetching order information, try again later';
+      TLoaders.errorSnackBar(title: 'Erreur', message: e.toString());
     }
   }
 } 

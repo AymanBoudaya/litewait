@@ -1,10 +1,16 @@
+import 'package:caferesto/features/shop/controllers/product/order_controller.dart';
 import 'package:caferesto/utils/constants/colors.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
 import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/products/product_cards/widgets/rounded_container.dart';
+import '../../../../../navigation_menu.dart';
+import '../../../../../utils/constants/image_strings.dart';
+import '../../../../../utils/helpers/cloud_helper_functions.dart';
+import '../../../../../utils/loaders/animation_loader.dart';
 
 class TOrderListItems extends StatelessWidget {
   const TOrderListItems({super.key});
@@ -12,112 +18,143 @@ class TOrderListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: 10,
-      separatorBuilder: (_, __) => const SizedBox(
-        height: TSizes.spaceBtwItems,
-      ),
-      itemBuilder: (_, index) => TRoundedContainer(
-          showBorder: true,
-          padding: const EdgeInsets.all(TSizes.md),
-          backgroundColor: dark ? TColors.dark : TColors.light,
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            /// -- Row 1
-            Row(children: [
-              /// Icon
-              const Icon(Iconsax.ship),
-              const SizedBox(
-                width: TSizes.spaceBtwItems / 2,
-              ),
+    final controller = Get.put(OrderController());
+    return FutureBuilder(
+        future: controller.fetchUserOrders(),
+        builder: (_, snapshot) {
+          final emptyWidget = TAnimationLoaderWidget(
+            text: "Aucune commande",
+            animation: TImages.orderCompletedAnimation,
+            showAction: true,
+            actionText: 'Ajouter des commandes',
+            onActionPressed: () => Get.off(() => const NavigationMenu()),
+          );
 
-              /// Status and Date
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'En cours',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .apply(color: TColors.primary, fontWeightDelta: 1),
-                    ),
-                    Text(
-                      '07 Nov 2024',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    )
-                  ],
-                ),
-              ),
+          final response = TCloudHelperFunctions.checkMultiRecordState(
+              snapshot: snapshot, nothingFound: emptyWidget);
+          if (response != null) return response;
 
-              /// Icon
-              IconButton(
-                  onPressed: () {},
-                  icon:
-                      const Icon(Iconsax.arrow_right_34, size: TSizes.iconSm)),
-            ]),
-            const SizedBox(
-              height: TSizes.spaceBtwItems,
-            ),
+          final orders = snapshot.data!;
+          return ListView.separated(
+              shrinkWrap: true,
+              itemCount: orders.length,
+              separatorBuilder: (_, __) => const SizedBox(
+                    height: TSizes.spaceBtwItems,
+                  ),
+              itemBuilder: (_, index) {
+                final order = orders[index];
+                return TRoundedContainer(
+                    showBorder: true,
+                    padding: const EdgeInsets.all(TSizes.md),
+                    backgroundColor: dark ? TColors.dark : TColors.light,
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      /// -- Row 1
+                      Row(children: [
+                        /// Icon
+                        const Icon(Iconsax.ship),
+                        const SizedBox(
+                          width: TSizes.spaceBtwItems / 2,
+                        ),
 
-            /// -- Row 2
-            Row(
-              children: [
-                Expanded(
-                  child: Row(children: [
-                    /// Icon
-                    const Icon(Iconsax.tag),
-                    const SizedBox(
-                      width: TSizes.spaceBtwItems / 2,
-                    ),
+                        /// Status and Date
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                order.orderStatusText,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .apply(
+                                        color: TColors.primary,
+                                        fontWeightDelta: 1),
+                              ),
+                              Text(
+                                order.formattedOrderDate,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              )
+                            ],
+                          ),
+                        ),
 
-                    /// Status and Date
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Commande',
-                              style: Theme.of(context).textTheme.labelMedium),
-                          Text(
-                            '[4145033100]',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          )
-                        ],
+                        /// Icon
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Iconsax.arrow_right_34,
+                                size: TSizes.iconSm)),
+                      ]),
+                      const SizedBox(
+                        height: TSizes.spaceBtwItems,
                       ),
-                    ),
-                  ]),
-                ),
-                Expanded(
-                  child: Row(children: [
-                    /// Icon
-                    const Icon(Iconsax.calendar),
-                    const SizedBox(
-                      width: TSizes.spaceBtwItems / 2,
-                    ),
 
-                    /// Status and Date
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      /// -- Row 2
+                      Row(
                         children: [
-                          Text('Date de livraison',
-                              style: Theme.of(context).textTheme.labelMedium),
-                          Text(
-                            '03 FEV 2025',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          )
+                          Expanded(
+                            child: Row(children: [
+                              /// Icon
+                              const Icon(Iconsax.tag),
+                              const SizedBox(
+                                width: TSizes.spaceBtwItems / 2,
+                              ),
+
+                              /// Status and Date
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Commande',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium),
+                                    Text(
+                                      order.id,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
+                          Expanded(
+                            child: Row(children: [
+                              /// Icon
+                              const Icon(Iconsax.calendar),
+                              const SizedBox(
+                                width: TSizes.spaceBtwItems / 2,
+                              ),
+
+                              /// Status and Date
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Date de livraison',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium),
+                                    Text(
+                                      order.formattedDeliveryDate,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
                         ],
-                      ),
-                    ),
-                  ]),
-                ),
-              ],
-            )
-          ])),
-    );
+                      )
+                    ]));
+              });
+        });
   }
 }

@@ -44,6 +44,10 @@ class TImages {
   static const String acerlogo = "assets/icons/brands/acer_logo.png";
 
   // -- Animations
+
+  
+      static const String orderCompletedAnimation =
+      "assets/images/animations/order-complete-car-delivery-animation.json";
     static const String cartAnimation =
       "assets/images/animations/sammy-line-workout.gif";
   static const String productsIllustration =
