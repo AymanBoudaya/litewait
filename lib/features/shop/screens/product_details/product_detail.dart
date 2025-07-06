@@ -22,7 +22,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: TBottomAddToCart(product : product),
+        bottomNavigationBar: TBottomAddToCart(product: product),
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -40,7 +40,7 @@ class ProductDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     /// - Rating & share
-                    TRatingAndShare(),
+                    //TRatingAndShare(),
 
                     /// - Price title stock and brand
                     TProductMetaData(product: product),
@@ -50,7 +50,7 @@ class ProductDetailScreen extends StatelessWidget {
 
                     /// Attributes
                     if (product.productType == ProductType.variable.toString())
-                      TProductAttributes(product : product),
+                      TProductAttributes(product: product),
                     const SizedBox(
                       height: TSizes.spaceBtwSections,
                     ),
@@ -90,14 +90,14 @@ class ProductDetailScreen extends StatelessWidget {
                     const SizedBox(
                       height: TSizes.spaceBtwItems,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        /*
                         const TSectionHeading(
                           title: 'Reviews(199)',
                           showActionButton: false,
-                        ),
+                        ),*/
                         IconButton(
                           icon: const Icon(Iconsax.arrow_right, size: 18),
                           onPressed: () =>

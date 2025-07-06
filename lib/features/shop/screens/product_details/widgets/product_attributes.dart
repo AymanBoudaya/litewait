@@ -29,69 +29,76 @@ class TProductAttributes extends StatelessWidget {
           TRoundedContainer(
               padding: const EdgeInsets.all(TSizes.md),
               backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
-              child: Column(children: [
-                /// Title Price and Stock status
-                Row(children: [
-                  TSectionHeading(
-                    title: 'Variation',
-                    showActionButton: false,
-                  ),
-                  const SizedBox(
-                    width: TSizes.spaceBtwItems,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TSectionHeading(
+                      title: 'Variation',
+                    ),
+
+                    /// Title Price and Stock status
+                    Row(children: [
+                      const SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const TProductTitleText(
-                            title: 'Prix : ',
-                            smallSize: true,
+                          Row(
+                            children: [
+                              const TProductTitleText(
+                                title: 'Prix : ',
+                                smallSize: true,
+                              ),
+
+                              ///Actual price
+                              if (controller.selectedVariation.value.salePrice >
+                                  0)
+                                Text(
+                                  '${controller.selectedVariation.value.price} DT',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .apply(
+                                          decoration:
+                                              TextDecoration.lineThrough),
+                                ),
+                              const SizedBox(
+                                width: TSizes.spaceBtwItems,
+                              ),
+
+                              ///Sale price
+                              ProductPriceText(
+                                  price: controller.getVariationPrice())
+                            ],
                           ),
-      
-                          ///Actual price
-                          if (controller.selectedVariation.value.salePrice > 0)
-                          Text(
-                            '\$${controller.selectedVariation.value.price}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .apply(decoration: TextDecoration.lineThrough),
-                          ),
-                          const SizedBox(
-                            width: TSizes.spaceBtwItems,
-                          ),
-      
-                          ///Sale price
-                          ProductPriceText(price: controller.getVariationPrice())
+                          Row(
+                            children: [
+                              const TProductTitleText(
+                                title: 'Stock : ',
+                                smallSize: true,
+                              ),
+                              Text(controller.variationStockStatus.value,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium)
+                            ],
+                          )
                         ],
                       ),
-                      Row(
-                        children: [
-                          const TProductTitleText(
-                            title: 'Stock : ',
-                            smallSize: true,
-                          ),
-                          Text(controller.variationStockStatus.value,
-                              style: Theme.of(context).textTheme.titleMedium)
-                        ],
-                      )
-                    ],
-                  ),
-                ]),
-      
-                /// Variation description
-                TProductTitleText(
-                  title:
-                      controller.selectedVariation.value.description ?? '',
-                  smallSize: true,
-                  maxLines: 4,
-                )
-              ])),
+                    ]),
+
+                    /// Variation description
+                    TProductTitleText(
+                      title:
+                          controller.selectedVariation.value.description ?? '',
+                      smallSize: true,
+                      maxLines: 4,
+                    )
+                  ])),
         const SizedBox(
           width: TSizes.spaceBtwItems,
         ),
-      
+
         /// Attributes
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,12 +117,13 @@ class TProductAttributes extends StatelessWidget {
                           () => Wrap(
                               spacing: 8,
                               children: attribute.values!.map((attributeValue) {
-                                final isSelected =
-                                    controller.selectedAttributes[attribute.name] ==
-                                        attributeValue;
+                                final isSelected = controller
+                                        .selectedAttributes[attribute.name] ==
+                                    attributeValue;
                                 final available = controller
                                     .getAttributesAvailabilityInVariation(
-                                        product.productVariations!, attribute.name!)
+                                        product.productVariations!,
+                                        attribute.name!)
                                     .contains(attributeValue);
                                 return TChoiceChip(
                                   text: attributeValue,

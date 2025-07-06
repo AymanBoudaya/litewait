@@ -61,9 +61,9 @@ dependencies:
   flutter_rating_bar:
 
   # Firebase
-  firebase_core : 
+  firebase_core:
   firebase_auth:
-  cloud_firestore:  
+  cloud_firestore:
   google_sign_in: ^6.3.0
 
 dev_dependencies:
@@ -101,6 +101,7 @@ flutter:
     - assets/icons/brands/
     - assets/icons/payment_methods/
     - assets/images/reviews/
+    - assets/images/products/cafe/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -114,23 +115,23 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: Poppins
-       fonts:
-         - asset: assets/fonts/Poppins-Light.ttf
-           weight : 300
-         - asset: assets/fonts/Poppins-Regular.ttf
-           weight : 400
-         - asset: assets/fonts/Poppins-Italic.ttf
-           style: italic
-         - asset: assets/fonts/Poppins-Medium.ttf
-           weight : 500
-         - asset: assets/fonts/Poppins-MediumItalic.ttf
-           weight : 400
-           style: italic
-         - asset: assets/fonts/Poppins-SemiBold.ttf
-           weight : 600
-         - asset: assets/fonts/Poppins-Bold.ttf
-           weight : 800
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-MediumItalic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 800
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

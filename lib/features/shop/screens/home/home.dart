@@ -50,8 +50,7 @@ class HomeScreen extends StatelessWidget {
                             const EdgeInsets.only(left: TSizes.defaultSpace),
                         child: TSectionHeading(
                           title: 'Catégories Populaires',
-                          showActionButton: false,
-                          textColor: Colors.white,
+                          showActionButton: true,
                         ),
                       ),
                       const SizedBox(

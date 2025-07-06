@@ -1,19 +1,18 @@
-import 'package:caferesto/features/shop/controllers/product/variation_controller.dart'
-    show VariationController;
-import 'package:caferesto/features/shop/models/cart_item_model.dart';
-import 'package:caferesto/utils/local_storage/storage_utility.dart';
-import 'package:caferesto/utils/popups/loaders.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../../utils/constants/enums.dart';
+import '../../../../utils/popups/loaders.dart';
+import '../../models/cart_item_model.dart';
 import '../../models/product_model.dart';
+import 'variation_controller.dart';
 
 class CartController extends GetxController {
   static CartController get instance => Get.find();
 
   RxInt cartItemsCount = 0.obs;
   RxDouble totalCartPrice = 0.0.obs;
-  RxInt productQuantityInCart = 0.obs;
+  final RxMap<String, int> tempQuantityMap = <String, int>{}.obs;
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
   final variationController = Get.put(VariationController());
 
@@ -21,22 +20,48 @@ class CartController extends GetxController {
     loadCartItems();
   }
 
-  // Add items in the cart
+  String _getKey(ProductModel product) {
+    final variationId = product.productType == ProductType.variable.toString()
+        ? variationController.selectedVariation.value.id
+        : "";
+    return '${product.id}-$variationId';
+  }
+
+  void updateTempQuantity(ProductModel product, int quantity) {
+    final key = _getKey(product);
+    tempQuantityMap[key] = quantity;
+  }
+
+  int getTempQuantity(ProductModel product) {
+    final key = _getKey(product);
+    return tempQuantityMap[key] ?? getExistingQuantity(product);
+  }
+
+  int getExistingQuantity(ProductModel product) {
+    if (product.productType == ProductType.single.toString()) {
+      return getProductQuantityInCart(product.id);
+    } else {
+      final variationId = variationController.selectedVariation.value.id;
+      return variationId.isNotEmpty
+          ? getVariationQuantityInCart(product.id, variationId)
+          : 0;
+    }
+  }
+
   void addToCart(ProductModel product) {
-    // Quantity check
-    if (productQuantityInCart.value < 1) {
+    final quantity = getTempQuantity(product);
+
+    if (quantity < 1) {
       TLoaders.customToast(message: 'Veuillez choisir une quantité');
       return;
     }
 
-    // Variation Selected?
     if (product.productType == ProductType.variable.toString() &&
         variationController.selectedVariation.value.id.isEmpty) {
       TLoaders.customToast(message: 'Veuillez choisir une variante');
       return;
     }
 
-    // Out of Stock status
     if (product.productType == ProductType.variable.toString()) {
       if (variationController.selectedVariation.value.stock < 1) {
         TLoaders.customToast(message: 'Produit hors stock');
@@ -49,15 +74,11 @@ class CartController extends GetxController {
       }
     }
 
-    final selectedCartItem =
-        productToCartItem(product, productQuantityInCart.value);
-
-    // Check if the item is already in the cart
+    final selectedCartItem = productToCartItem(product, quantity);
     int index = cartItems.indexWhere((cartItem) =>
         cartItem.productId == selectedCartItem.productId &&
         cartItem.variationId == selectedCartItem.variationId);
 
-    // If the item is already in the cart, update its quantity
     if (index >= 0) {
       cartItems[index].quantity = selectedCartItem.quantity;
     } else {
@@ -65,11 +86,9 @@ class CartController extends GetxController {
     }
 
     updateCart();
-
-    TLoaders.customToast(message: 'Produit ajouté au panier');
+    TLoaders.customToast(message: 'Produit ajouté au panier');
   }
 
-  /// Convert a ProductModel to a CartItemModel
   CartItemModel productToCartItem(ProductModel product, int quantity) {
     if (product.productType == ProductType.single.toString()) {
       variationController.resetSelectedAttributes();
@@ -90,14 +109,14 @@ class CartController extends GetxController {
       price: price,
       image: isVariation ? variation.image : product.thumbnail,
       quantity: quantity,
-      variationId: variationController.selectedVariation.value.id,
+      variationId: variation.id,
       brandName: product.brand != null ? product.brand!.name : '',
       selectedVariation: isVariation ? variation.attributeValues : null,
     );
   }
 
   void updateCart() {
-    updateCartTotals(); // cartItemsCount totalCartPrice
+    updateCartTotals();
     saveCartItems();
     cartItems.refresh();
   }
@@ -124,7 +143,6 @@ class CartController extends GetxController {
       if (cartItems[index].quantity > 1) {
         cartItems[index].quantity--;
       } else {
-        // Show dialog before completely removing
         cartItems[index].quantity == 1
             ? removeFromCartDialog(index)
             : cartItems.removeAt(index);
@@ -145,7 +163,7 @@ class CartController extends GetxController {
         TLoaders.customToast(message: 'Produit supprimé du panier');
         Get.back();
       },
-      onCancel: () => () => Get.back(),
+      onCancel: () => Get.back(),
     );
   }
 
@@ -161,26 +179,23 @@ class CartController extends GetxController {
   }
 
   void saveCartItems() async {
-    // Save cart items in SharedPreferences
     final cartItemStrings = cartItems.map((item) => item.toJson()).toList();
-    TLocalStorage.instance().saveData('cartItems', cartItemStrings);
+    await GetStorage().write('cartItems', cartItemStrings);
   }
 
   void loadCartItems() async {
-    // Load cart items from SharedPreferences
-    final cartItemStrings =
-        TLocalStorage.instance().readData<List<dynamic>>('cartItems');
+    final cartItemStrings = GetStorage().read<List<dynamic>>('cartItems');
     if (cartItemStrings != null) {
       cartItems.assignAll(cartItemStrings
           .map((item) => CartItemModel.fromJson(item as Map<String, dynamic>)));
+      updateCartTotals();
     }
   }
 
   int getProductQuantityInCart(String productId) {
-    final foundItem = cartItems
+    return cartItems
         .where((item) => item.productId == productId)
         .fold(0, (previousValue, element) => previousValue + element.quantity);
-    return foundItem;
   }
 
   int getVariationQuantityInCart(String productId, String variationId) {
@@ -192,23 +207,8 @@ class CartController extends GetxController {
   }
 
   void clearCart() {
-    productQuantityInCart.value = 0;
+    tempQuantityMap.clear();
     cartItems.clear();
     updateCart();
-  }
-
-  /// --initialize already added Item(s Count in the cart)
-  void updateAlreadyAddedProductCount(ProductModel product) {
-    if (product.productType == ProductType.single.toString()) {
-      productQuantityInCart.value = getProductQuantityInCart(product.id);
-    } else {
-      final variationId = variationController.selectedVariation.value.id;
-      if (variationId.isNotEmpty) {
-        productQuantityInCart.value =
-            getVariationQuantityInCart(product.id, variationId);
-      } else {
-        productQuantityInCart.value = 0;
-      }
-    }
   }
 }

@@ -45,10 +45,9 @@ class TImages {
 
   // -- Animations
 
-  
-      static const String orderCompletedAnimation =
+  static const String orderCompletedAnimation =
       "assets/images/animations/order-complete-car-delivery-animation.json";
-    static const String cartAnimation =
+  static const String cartAnimation =
       "assets/images/animations/sammy-line-workout.gif";
   static const String productsIllustration =
       "assets/images/animations/sammy-line-workout.gif";

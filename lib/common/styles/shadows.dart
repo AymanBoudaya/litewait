@@ -11,7 +11,7 @@ class TShadowStyle {
     offset: const Offset(0, 2),
   );
 
-  static final horizonalProductShadow = BoxShadow(
+  static final horizontalProductShadow = BoxShadow(
     // ignore: deprecated_member_use
     color: TColors.darkGrey.withOpacity(0.1),
     blurRadius: 50,

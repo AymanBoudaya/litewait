@@ -15,6 +15,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController {
+  //  Getter statique, accessible globalement via .instance
   static AuthenticationRepository get instance => Get.find();
 
   /// Variables
@@ -42,14 +43,15 @@ class AuthenticationRepository extends GetxController {
     if (user != null) {
       // si l'utilisateur est authentifié
       if (user.emailVerified) {
-
         // Initializing user specific storage
         await TLocalStorage.init(user.uid);
-        
+
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(
-              email: _auth.currentUser?.email,
+          // si on utilise _auth.currentUser => (! erreur ajouter ?) meme pour authUser les deux sont des getters qui peuvent etre nuls
+          // Dart dit : « Je ne suis pas sûr que currentUser n’est plus null. Tu dois utiliser ? ou le stocker dans une variable.
+              email: user.email,
             ));
       }
     } else {
@@ -141,8 +143,10 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
   /// [ReAuthenticate] - RE-AUTHENTICATE USER
-  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+  Future<void> reAuthenticateWithEmailAndPassword(
+      String email, String password) async {
     try {
       // Create a credential
       AuthCredential credential = EmailAuthProvider.credential(

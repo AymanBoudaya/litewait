@@ -9,75 +9,82 @@ class VariationController extends GetxController {
   static VariationController get instance => Get.find();
 
   /// Variables
-  RxMap selectedAttributes = {}.obs;
-  RxString variationStockStatus = ''.obs;
-  Rx<ProductVariationModel> selectedVariation =
+  final RxMap<String, dynamic> selectedAttributes = <String, dynamic>{}.obs;
+  final RxString variationStockStatus = ''.obs;
+  final Rx<ProductVariationModel> selectedVariation =
       ProductVariationModel.empty().obs;
 
-  /// -- Select Attribute, and variation
-  void onAttributeSelected(ProductModel product, attributeName, attribueValue) {
-    final selectedAttributes = Map<String, dynamic>.from(
-        this.selectedAttributes); // Create a copy of the selected attributes
-    selectedAttributes[attributeName] = attribueValue;
-    this.selectedAttributes[attributeName] = attribueValue;
+  /// -- Select Attribute and variation
+  void onAttributeSelected(
+      ProductModel product, String attributeName, dynamic attributeValue) {
+    // Update selected attributes
+    selectedAttributes[attributeName] = attributeValue;
 
-    // Check if the selected attributes match any variation attributes
-    final selectedVariation = product.productVariations?.firstWhere(
-      (variation) => _isSameAttributeValues(
-        variation.attributeValues,
-        selectedAttributes,
-      ),
-      orElse: () => ProductVariationModel.empty(),
-    );
+    // Find matching variation
+    final selectedVariation = _findMatchingVariation(product);
 
-    // If a matching variation is found, update the selected variation and stock status
-    if (selectedVariation!.image.isNotEmpty) {
-      ImagesController.instance.selectedProductImage.value =
-          selectedVariation.image;
-    }
-
-    if (selectedVariation.id.isNotEmpty) {
-      final cartController = CartController.instance;
-      cartController.productQuantityInCart.value = cartController
-          .getVariationQuantityInCart(product.id, selectedVariation.id);
-    }
-    // Assign the selected variation to the observable
-    this.selectedVariation.value = selectedVariation;
-    // Update stock status based on the selected variation
-    getProductVariationStockStatus();
+    // Update UI and cart state
+    _updateSelectionStates(product, selectedVariation);
   }
 
-  ///   -- Check if selected attributes match any variation attributes
+  ProductVariationModel _findMatchingVariation(ProductModel product) {
+    return product.productVariations?.firstWhere(
+          (variation) => _isSameAttributeValues(
+            variation.attributeValues,
+            selectedAttributes,
+          ),
+          orElse: () => ProductVariationModel.empty(),
+        ) ??
+        ProductVariationModel.empty();
+  }
+
+  void _updateSelectionStates(
+      ProductModel product, ProductVariationModel variation) {
+    // Update selected variation
+    selectedVariation.value = variation;
+
+    // Update product image if variation has one
+    if (variation.image.isNotEmpty) {
+      ImagesController.instance.selectedProductImage.value = variation.image;
+    }
+
+    // Update stock status
+    getProductVariationStockStatus();
+
+    // Reset temp quantity when variation changes
+    if (variation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.updateTempQuantity(
+        product,
+        cartController.getExistingQuantity(product),
+      );
+    }
+  }
+
+  /// -- Check if selected attributes match variation attributes
   bool _isSameAttributeValues(
     Map<String, dynamic> variationAttributes,
     Map<String, dynamic> selectedAttributes,
   ) {
-    /// If selected attributes contains 3 attributes and current variation contains 2 then return
-    if (variationAttributes.length != selectedAttributes.length) {
-      return false;
-    }
+    if (variationAttributes.length != selectedAttributes.length) return false;
 
-    // If any of the attributes is diffrent then return
     for (final key in variationAttributes.keys) {
-      if (variationAttributes[key] != selectedAttributes[key]) {
-        return false;
-      }
+      if (variationAttributes[key] != selectedAttributes[key]) return false;
     }
 
     return true;
   }
 
-  /// -- Check Attribute availability / Stock in variation
+  /// -- Get available attribute values based on stock
   Set<String?> getAttributesAvailabilityInVariation(
       List<ProductVariationModel> variations, String attributeName) {
-    final availableVariationAttributeValues = variations
+    return variations
         .where((variation) =>
             variation.attributeValues[attributeName] != null &&
             variation.attributeValues[attributeName]!.isNotEmpty &&
             variation.stock > 0)
         .map((variation) => variation.attributeValues[attributeName])
         .toSet();
-    return availableVariationAttributeValues;
   }
 
   String getVariationPrice() {
@@ -87,13 +94,13 @@ class VariationController extends GetxController {
         .toString();
   }
 
-  /// -- Check Product Variation Stock status
+  /// -- Update stock status text
   void getProductVariationStockStatus() {
     variationStockStatus.value =
         selectedVariation.value.stock > 0 ? 'En Stock' : 'Hors Stock';
   }
 
-  /// -- Reset Selected Attributes when switching products
+  /// -- Reset all selections
   void resetSelectedAttributes() {
     selectedAttributes.clear();
     variationStockStatus.value = '';

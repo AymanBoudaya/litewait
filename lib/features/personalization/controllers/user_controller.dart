@@ -39,6 +39,7 @@ class UserController extends GetxController {
       this.user(user);
     } catch (e) {
       user(UserModel.empty());
+      Get.snackbar('Erreur', 'Impossible de récupérer les données utilisateur');
     } finally {
       profileLoading.value = false;
     }

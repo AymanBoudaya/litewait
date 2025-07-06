@@ -1,41 +1,54 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants/sizes.dart';
+
 class TSectionHeading extends StatelessWidget {
   const TSectionHeading({
     super.key,
-    this.textColor,
-    this.showActionButton = true,
     required this.title,
-    this.buttonTitle = 'Voir tout',
+    this.showActionButton = false,
+    this.buttonTitle = 'Voir plus',
     this.onPressed,
+    this.padding,
   });
 
-  final Color? textColor;
+  final String title;
   final bool showActionButton;
-  final String title, buttonTitle;
-  final void Function()? onPressed;
+  final String buttonTitle;
+  final VoidCallback? onPressed;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Text(
-            title,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .apply(color: textColor),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+    return Padding(
+      padding: padding ??
+          const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+      child: SizedBox(
+        width: double.infinity, // Contrainte de largeur
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              // Remplace Expanded par Flexible
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headlineSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            if (showActionButton)
+              Flexible(
+                // Ajoute Flexible pour le bouton
+                child: TextButton(
+                  onPressed: onPressed,
+                  child: Text(buttonTitle),
+                ),
+              ),
+          ],
         ),
-        if (showActionButton)
-          Expanded(
-              child:
-                  TextButton(onPressed: onPressed, child: Text(buttonTitle))),
-      ],
+      ),
     );
   }
 }
