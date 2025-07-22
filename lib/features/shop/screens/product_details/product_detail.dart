@@ -32,27 +32,27 @@ class ProductDetailScreen extends StatelessWidget {
             /// 2 - Product Details
             Padding(
                 padding: EdgeInsets.only(
-                    right: TSizes.defaultSpace,
-                    left: TSizes.defaultSpace,
-                    bottom: TSizes.defaultSpace),
+                    right: AppSizes.defaultSpace,
+                    left: AppSizes.defaultSpace,
+                    bottom: AppSizes.defaultSpace),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     /// - Rating & share
-                    //TRatingAndShare(),
+                    TRatingAndShare(),
 
                     /// - Price title stock and brand
                     TProductMetaData(product: product),
                     const SizedBox(
-                      height: TSizes.sm,
+                      height: AppSizes.sm,
                     ),
 
                     /// Attributes
                     if (product.productType == ProductType.variable.toString())
                       TProductAttributes(product: product),
                     const SizedBox(
-                      height: TSizes.spaceBtwSections,
+                      height: AppSizes.spaceBtwSections,
                     ),
 
                     /// Checkout button
@@ -62,7 +62,7 @@ class ProductDetailScreen extends StatelessWidget {
                           onPressed: () {}, child: Text('Cmandi -  كماندي')),
                     ),
                     const SizedBox(
-                      height: TSizes.spaceBtwSections,
+                      height: AppSizes.spaceBtwSections,
                     ),
 
                     /// Description
@@ -71,7 +71,7 @@ class ProductDetailScreen extends StatelessWidget {
                       showActionButton: false,
                     ),
                     const SizedBox(
-                      height: TSizes.spaceBtwItems,
+                      height: AppSizes.spaceBtwItems,
                     ),
                     ReadMoreText(
                       product.description ?? '',
@@ -88,16 +88,17 @@ class ProductDetailScreen extends StatelessWidget {
                     /// Reviews
                     const Divider(),
                     const SizedBox(
-                      height: TSizes.spaceBtwItems,
+                      height: AppSizes.spaceBtwItems,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        /*
-                        const TSectionHeading(
-                          title: 'Reviews(199)',
-                          showActionButton: false,
-                        ),*/
+                        Expanded(
+                          child: const TSectionHeading(
+                            title: 'Reviews(199)',
+                            showActionButton: false,
+                          ),
+                        ),
                         IconButton(
                           icon: const Icon(Iconsax.arrow_right, size: 18),
                           onPressed: () =>
@@ -106,7 +107,7 @@ class ProductDetailScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: TSizes.spaceBtwSections,
+                      height: AppSizes.spaceBtwSections,
                     ),
                   ],
                 ))

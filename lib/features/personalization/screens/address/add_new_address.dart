@@ -21,7 +21,7 @@ class AddNewAddressScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: Form(
             key: controller.addressFormKey,
             child: Column(
@@ -35,7 +35,7 @@ class AddNewAddressScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       prefixIcon: Icon(Iconsax.user), labelText: 'Nom'),
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                 // Phone number
                 TextFormField(
@@ -45,7 +45,7 @@ class AddNewAddressScreen extends StatelessWidget {
                       prefixIcon: Icon(Iconsax.mobile),
                       labelText: 'Numéro de téléphone'),
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                 // Rue et code postal
                 Row(
@@ -60,7 +60,7 @@ class AddNewAddressScreen extends StatelessWidget {
                             labelText: 'Rue'),
                       ),
                     ),
-                    const SizedBox(width: TSizes.spaceBtwInputFields),
+                    const SizedBox(width: AppSizes.spaceBtwInputFields),
                     Expanded(
                       child: TextFormField(
                         controller: controller.postalCode,
@@ -73,7 +73,7 @@ class AddNewAddressScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
                 Row(
                   children: [
                     Expanded(
@@ -86,7 +86,7 @@ class AddNewAddressScreen extends StatelessWidget {
                             labelText: 'Cité'),
                       ),
                     ),
-                    const SizedBox(width: TSizes.spaceBtwInputFields),
+                    const SizedBox(width: AppSizes.spaceBtwInputFields),
                     Expanded(
                       child: TextFormField(
                         controller: controller.state,
@@ -99,7 +99,7 @@ class AddNewAddressScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                 // Country
                 TextFormField(
@@ -109,7 +109,7 @@ class AddNewAddressScreen extends StatelessWidget {
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Iconsax.global), labelText: 'Pays'),
                 ),
-                const SizedBox(height: TSizes.defaultSpace),
+                const SizedBox(height: AppSizes.defaultSpace),
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

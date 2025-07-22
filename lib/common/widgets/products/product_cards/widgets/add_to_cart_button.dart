@@ -20,38 +20,46 @@ class ProductCardAddToCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = CartController.instance;
-    return InkWell(
-      onTap: () {
-        if (product.productType == ProductType.single.toString()) {
-          final cartItem = cartController.productToCartItem(product, 1);
-          cartController.addOneToCart(cartItem);
-        } else {
-          Get.to(() => ProductDetailScreen(product: product,));
-        }
-      },
-      child: Obx(() {
-        final productQuantityInCart = cartController.getProductQuantityInCart(product.id);
+    return Obx(() {
+      final productQuantityInCart =
+          cartController.getProductQuantityInCart(product.id);
 
-        return Container(
+      return GestureDetector(
+        onTap: () {
+          if (product.productType == ProductType.single.toString()) {
+            final cartItem = cartController.productToCartItem(product, 1);
+            cartController.addOneToCart(cartItem);
+          } else {
+            Get.to(() => ProductDetailScreen(product: product));
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: productQuantityInCart > 0 ? 36 : 32,
+          height: 32,
           decoration: BoxDecoration(
-            color: productQuantityInCart > 0 ? TColors.primary : TColors.dark,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(TSizes.cardRadiusMd),
-              bottomRight: Radius.circular(TSizes.productImageRadius),
-            ),
+            color: productQuantityInCart > 0
+                ? AppColors.primary
+                : AppColors.dark.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(12),
           ),
-          child: SizedBox(
-            width: TSizes.iconLg * 1.2,
-            height: TSizes.iconLg * 1.2,
-            child: Center(
-              child: productQuantityInCart > 0 ? Text(productQuantityInCart.toString(), style: Theme.of(context).textTheme.bodyLarge!.apply(color: TColors.white)) : const Icon(
-                Iconsax.add,
-                color: TColors.white,
-              ),
-            ),
+          child: Center(
+            child: productQuantityInCart > 0
+                ? Text(
+                    productQuantityInCart.toString(),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  )
+                : const Icon(
+                    Icons.add_rounded,
+                    color: Colors.white,
+                    size: 18,
+                  ),
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../features/authentication/screens/onboarding/onboarding.dart';
 import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController {
@@ -49,8 +50,8 @@ class AuthenticationRepository extends GetxController {
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(
-          // si on utilise _auth.currentUser => (! erreur ajouter ?) meme pour authUser les deux sont des getters qui peuvent etre nuls
-          // Dart dit : « Je ne suis pas sûr que currentUser n’est plus null. Tu dois utiliser ? ou le stocker dans une variable.
+              // si on utilise _auth.currentUser => (! erreur ajouter ?) meme pour authUser les deux sont des getters qui peuvent etre nuls
+              // Dart dit : « Je ne suis pas sûr que currentUser n’est plus null. Tu dois utiliser ? ou le stocker dans une variable.
               email: user.email,
             ));
       }
@@ -62,7 +63,7 @@ class AuthenticationRepository extends GetxController {
       deviceStorage.read('IsFirstTime') != true
           ? Get.offAll(() => const LoginScreen()) // Redirect to login Screen
           : Get.offAll(
-              () => const LoginScreen()); // Redirect to On barding Screen
+              () => const OnBoardingScreen()); // Redirect to On barding Screen
     }
   }
 
@@ -111,8 +112,10 @@ class AuthenticationRepository extends GetxController {
 
   /// [EmailVerification] - MAIL VERIFICATION
   Future<void> sendEmailVerification() async {
+    final user = _auth.currentUser;
+    if (user == null) throw 'No authenticated user found.';
     try {
-      await _auth.currentUser?.sendEmailVerification();
+      await user.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

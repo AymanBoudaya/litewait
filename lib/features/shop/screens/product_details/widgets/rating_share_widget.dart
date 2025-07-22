@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../../common/widgets/icons/t_circular_icon.dart';
 import '../../../../../utils/constants/colors.dart';
 
-
 class TRatingAndShare extends StatelessWidget {
   const TRatingAndShare({
     super.key,
@@ -19,7 +18,7 @@ class TRatingAndShare extends StatelessWidget {
         Row(
           children: [
             Icon(Iconsax.star5, color: Colors.amber, size: 24),
-            const SizedBox(width: TSizes.spaceBtwItems / 2),
+            const SizedBox(width: AppSizes.spaceBtwItems / 2),
             Text.rich(TextSpan(
               children: [
                 TextSpan(
@@ -33,14 +32,14 @@ class TRatingAndShare extends StatelessWidget {
             )),
           ],
         ),
-    
+
         /// Share button
         IconButton(
           onPressed: () {},
           icon: TCircularIcon(
             icon: Iconsax.share,
-            color: TColors.primary,
-            size: TSizes.iconMd,
+            color: AppColors.primary,
+            size: AppSizes.iconMd,
           ),
         )
       ],

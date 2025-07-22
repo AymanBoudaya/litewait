@@ -5,16 +5,35 @@ import 'package:flutter/material.dart';
 import 'widgets/order_list.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({super.key});
+  const OrderScreen({super.key}); // super
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       /// Appbar
-      appBar: TAppBar(title: Text('Mes commandes', style: Theme.of(context).textTheme.headlineSmall,), showBackArrow: true,),
-      body: const Padding(padding: EdgeInsets.all(TSizes.defaultSpace),
-      /// Orders
-      child : TOrderListItems(),
+      appBar: TAppBar(
+        title: Row(
+          children: [
+            Text(
+              'Mes',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              ' commandes',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ],
+        ),
+        showBackArrow: true,
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(AppSizes.defaultSpace),
+
+        /// Orders
+        child: TOrderListItems(),
       ),
     );
   }

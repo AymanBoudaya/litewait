@@ -36,7 +36,7 @@ class CartScreen extends StatelessWidget {
         } else {
           return SingleChildScrollView(
             child: Padding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                padding: const EdgeInsets.all(AppSizes.defaultSpace),
 
                 /// Items in cart
                 child: TCartItems()),
@@ -46,7 +46,7 @@ class CartScreen extends StatelessWidget {
       bottomNavigationBar: controller.cartItems.isEmpty
           ? null
           : Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.all(AppSizes.defaultSpace),
               child: ElevatedButton(
                   onPressed: () => Get.to(() => const CheckoutScreen()),
                   child: Obx(() =>

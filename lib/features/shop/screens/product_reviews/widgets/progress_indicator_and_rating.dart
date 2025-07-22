@@ -28,9 +28,9 @@ class TRatingProgressIndicator extends StatelessWidget {
             child: LinearProgressIndicator(
               value: value,
               minHeight: 11,
-              backgroundColor: TColors.grey,
+              backgroundColor: AppColors.grey,
               borderRadius: BorderRadius.circular(7),
-              valueColor: const AlwaysStoppedAnimation(TColors.primary),
+              valueColor: const AlwaysStoppedAnimation(AppColors.primary),
             ),
           ),
         )

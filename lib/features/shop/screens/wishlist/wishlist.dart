@@ -36,7 +36,7 @@ class FavoriteScreen extends StatelessWidget {
         /// Body
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.all(TSizes.defaultSpace),
+                padding: EdgeInsets.all(AppSizes.defaultSpace),
 
                 /// Products Grid
                 child: Column(
@@ -65,7 +65,7 @@ class FavoriteScreen extends StatelessWidget {
                             final products = snapshot.data!;
                             return GridLayout(
                                 itemCount: products.length,
-                                itemBuilder: (_, index) => TProductCardVertical(
+                                itemBuilder: (_, index) => ProductCardVertical(
                                       product: products[index],
                                     ));
                           }),

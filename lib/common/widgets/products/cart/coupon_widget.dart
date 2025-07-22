@@ -18,9 +18,12 @@ class TCouponCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return TRoundedContainer(
       showBorder: true,
-      backgroundColor: dark ? TColors.dark : TColors.white,
+      backgroundColor: dark ? AppColors.dark : AppColors.white,
       padding: const EdgeInsets.only(
-          top: TSizes.sm, bottom: TSizes.sm, right: TSizes.sm, left: TSizes.md),
+          top: AppSizes.sm,
+          bottom: AppSizes.sm,
+          right: AppSizes.sm,
+          left: AppSizes.md),
       child: Row(
         children: [
           Flexible(
@@ -43,8 +46,8 @@ class TCouponCode extends StatelessWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 foregroundColor: dark
-                    ? TColors.white.withOpacity(0.5)
-                    : TColors.dark.withOpacity(0.5),
+                    ? AppColors.white.withOpacity(0.5)
+                    : AppColors.dark.withOpacity(0.5),
                 backgroundColor: Colors.grey.withOpacity(0.2),
                 side: BorderSide(color: Colors.grey.withOpacity(0.1)),
               ),

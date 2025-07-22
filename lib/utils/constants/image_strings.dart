@@ -11,6 +11,12 @@ class TImages {
   static const String facebook = "assets/logos/facebook-icon.png";
 
   // -- Category Icons
+
+  static const String coffee = "assets/icons/categories/coffee.jpg";
+  static const String mlewi = "assets/icons/categories/mlewi.png";
+    static const String boissonsCategory = "assets/icons/categories/boissons.png";
+  static const String petitdej = "assets/icons/categories/petitdej.jpg";
+
   static const String sportIcon =
       "assets/icons/categories/icons8-bowling-64.png";
   static const String clothIcon =
@@ -78,7 +84,8 @@ class TImages {
 
   // -- Products
   static const String delice = "assets/images/products/cafe/delice.jpg";
-  static const String mlewi = "assets/images/products/mlewi.png";
+  static const String mlewiCategory = "assets/images/products/mlewi.png";
+
   static const String productImage1 = "assets/images/products/nike-shoes.png";
   static const String productImage2 = "assets/images/products/product-1.png";
   static const String productImage3 =

@@ -23,14 +23,14 @@ class ProductReviewsScreen extends StatelessWidget {
         ///
         body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.all(TSizes.defaultSpace),
+              padding: EdgeInsets.all(AppSizes.defaultSpace),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                       "Ratings and reviews are verfied and are from pople who use the same type of device that you use"),
                   const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                    height: AppSizes.spaceBtwItems,
                   ),
 
                   /// Overall Product Ratings
@@ -43,7 +43,7 @@ class ProductReviewsScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(
-                    height: TSizes.spaceBtwSections,
+                    height: AppSizes.spaceBtwSections,
                   ),
 
                   /// User Reviews List

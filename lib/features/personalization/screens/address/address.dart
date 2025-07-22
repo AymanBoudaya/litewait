@@ -18,11 +18,11 @@ class UserAddressScreen extends StatelessWidget {
     final controller = Get.put(AddressController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: TColors.primary,
+        backgroundColor: AppColors.primary,
         onPressed: () => Get.to(() => const AddNewAddressScreen()),
         child: const Icon(
           Iconsax.add,
-          color: TColors.white,
+          color: AppColors.white,
         ),
       ),
       appBar: TAppBar(
@@ -34,36 +34,35 @@ class UserAddressScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
-          child: 
-              Obx(
-                () => FutureBuilder(
-                  // Use key to trigger refresh
-                  key: Key(controller.refreshData.value.toString()),
-                  future: controller.getAllUserAddresses(),
-                  builder: (context, snapshot) {
-                
-                    /// Handle loader , No record, Or Error Message
-                    final widget = TCloudHelperFunctions.checkMultiRecordState(
-                        snapshot: snapshot,
-                        );
-                    if (widget != null) return widget;
-                
-                    /// Records found
-                    final addresses = snapshot.data!;
-                    return ListView.builder(
+          padding: const EdgeInsets.all(AppSizes.defaultSpace),
+          child: Obx(
+            () => FutureBuilder(
+                // Use key to trigger refresh
+                key: Key(controller.refreshData.value.toString()),
+                future: controller.getAllUserAddresses(),
+                builder: (context, snapshot) {
+                  /// Handle loader , No record, Or Error Message
+                  final widget = TCloudHelperFunctions.checkMultiRecordState(
+                    snapshot: snapshot,
+                  );
+                  if (widget != null) return widget;
+
+                  /// Records found
+                  final addresses = snapshot.data!;
+                  return ListView.builder(
                       shrinkWrap: true,
                       itemCount: addresses.length,
                       itemBuilder: (_, index) {
-                        return TSingleAddress(address: addresses[index], 
-                        onTap:()=> controller.selectAddress(addresses[index]) ,);
-                      }
-                    );
-                  }
-                ),
-              ),
+                        return TSingleAddress(
+                          address: addresses[index],
+                          onTap: () =>
+                              controller.selectAddress(addresses[index]),
+                        );
+                      });
+                }),
           ),
         ),
+      ),
     );
   }
 }

@@ -27,13 +27,13 @@ class TCartItem extends StatelessWidget {
             width: 60,
             height: 60,
             isNetworkImage: true,
-            padding: EdgeInsets.all(TSizes.sm),
+            padding: EdgeInsets.all(AppSizes.sm),
             backgroundColor: THelperFunctions.isDarkMode(context)
-                ? TColors.darkerGrey
-                : TColors.light,
+                ? AppColors.darkerGrey
+                : AppColors.light,
           ),
           const SizedBox(
-            width: TSizes.spaceBtwItems,
+            width: AppSizes.spaceBtwItems,
           ),
 
           /// Title , Price & size

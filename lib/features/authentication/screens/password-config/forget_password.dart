@@ -21,28 +21,29 @@ class ForgetPassword extends StatelessWidget {
         title: const Text("Mot de passe oublié"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+
           /// Headings
           children: [
             Text(
               TTexts.forgetPassword,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: AppSizes.spaceBtwItems),
             Text(
               TTexts.forgetPasswordSubTitle,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: TSizes.spaceBtwItems * 2),
+            const SizedBox(height: AppSizes.spaceBtwItems * 2),
 
             /// Champ Email
             Form(
               key: controller.forgetPasswordFormKey,
               child: TextFormField(
                 controller: controller.email,
-                validator: TValidator.validateEmail ,
+                validator: TValidator.validateEmail,
                 decoration: const InputDecoration(
                   labelText: TTexts.email,
                   prefixIcon: Icon(Iconsax.direct_right),
@@ -50,7 +51,7 @@ class ForgetPassword extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Bouton subbmit
             SizedBox(

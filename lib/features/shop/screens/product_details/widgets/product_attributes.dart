@@ -27,8 +27,8 @@ class TProductAttributes extends StatelessWidget {
         /// Display variation price and stock when some variation is selected
         if (controller.selectedVariation.value.id.isNotEmpty)
           TRoundedContainer(
-              padding: const EdgeInsets.all(TSizes.md),
-              backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
+              padding: const EdgeInsets.all(AppSizes.md),
+              backgroundColor: dark ? AppColors.darkerGrey : AppColors.grey,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -39,7 +39,7 @@ class TProductAttributes extends StatelessWidget {
                     /// Title Price and Stock status
                     Row(children: [
                       const SizedBox(
-                        width: TSizes.spaceBtwItems,
+                        width: AppSizes.spaceBtwItems,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class TProductAttributes extends StatelessWidget {
                                               TextDecoration.lineThrough),
                                 ),
                               const SizedBox(
-                                width: TSizes.spaceBtwItems,
+                                width: AppSizes.spaceBtwItems,
                               ),
 
                               ///Sale price
@@ -96,7 +96,7 @@ class TProductAttributes extends StatelessWidget {
                     )
                   ])),
         const SizedBox(
-          width: TSizes.spaceBtwItems,
+          width: AppSizes.spaceBtwItems,
         ),
 
         /// Attributes
@@ -111,7 +111,7 @@ class TProductAttributes extends StatelessWidget {
                           showActionButton: false,
                         ),
                         const SizedBox(
-                          height: TSizes.spaceBtwItems / 2,
+                          height: AppSizes.spaceBtwItems / 2,
                         ),
                         Obx(
                           () => Wrap(

@@ -27,7 +27,7 @@ class VerifyEmailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: Column(
             children: [
               /// Image
@@ -35,7 +35,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 image: const AssetImage(TImages.deliveredEmailIllustration),
                 width: THelperFunctions.screenWidth() * 0.6,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
               /// Title & SubTitle
               Text(
@@ -43,7 +43,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
               Text(
                 email ?? "",
                 style: Theme.of(context).textTheme.labelLarge,
@@ -55,7 +55,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
               /// Button: Retour à Login
               SizedBox(
@@ -65,7 +65,7 @@ class VerifyEmailScreen extends StatelessWidget {
                   child: const Text(TTexts.tContinue),
                 ),
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: AppSizes.spaceBtwItems),
 
               /// Button: Renvoyer Email
               SizedBox(

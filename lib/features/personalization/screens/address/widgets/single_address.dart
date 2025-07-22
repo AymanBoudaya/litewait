@@ -20,22 +20,22 @@ class TSingleAddress extends StatelessWidget {
     final controller = AddressController.instance;
     return Obx(() {
       final selectedAddressId = controller.selectedAddress.value.id;
-      final selectedAddress = selectedAddressId == address.id ;
+      final selectedAddress = selectedAddressId == address.id;
       return InkWell(
         onTap: onTap,
         child: TRoundedContainer(
           width: double.infinity,
-          padding: const EdgeInsets.all(TSizes.md),
+          padding: const EdgeInsets.all(AppSizes.md),
           showBorder: true,
           backgroundColor: selectedAddress
-              ? TColors.primary.withOpacity(0.5)
+              ? AppColors.primary.withOpacity(0.5)
               : Colors.transparent,
           borderColor: selectedAddress
               ? Colors.transparent
               : dark
-                  ? TColors.darkerGrey
-                  : TColors.grey,
-          margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
+                  ? AppColors.darkerGrey
+                  : AppColors.grey,
+          margin: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Stack(
@@ -46,8 +46,8 @@ class TSingleAddress extends StatelessWidget {
                     child: Icon(selectedAddress ? Iconsax.tick_circle5 : null,
                         color: selectedAddress
                             ? dark
-                                ? TColors.light
-                                : TColors.dark.withOpacity(0.6)
+                                ? AppColors.light
+                                : AppColors.dark.withOpacity(0.6)
                             : null),
                   ),
                   Column(
@@ -59,13 +59,13 @@ class TSingleAddress extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const SizedBox(height: TSizes.sm / 2),
+                      const SizedBox(height: AppSizes.sm / 2),
                       Text(
                         address.phoneNumber,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: TSizes.sm / 2),
+                      const SizedBox(height: AppSizes.sm / 2),
                       Text(
                         address.toString(),
                         softWrap: true,

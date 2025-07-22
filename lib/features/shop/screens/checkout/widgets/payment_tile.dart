@@ -27,9 +27,9 @@ class TPaymentTile extends StatelessWidget {
           width: 60,
           height: 40,
           backgroundColor: THelperFunctions.isDarkMode(context)
-              ? TColors.light
-              : TColors.white,
-          padding: const EdgeInsets.all(TSizes.sm),
+              ? AppColors.light
+              : AppColors.white,
+          padding: const EdgeInsets.all(AppSizes.sm),
           child: Image(
               image: AssetImage(paymentMethod.image), fit: BoxFit.contain),
         ),

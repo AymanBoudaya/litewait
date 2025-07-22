@@ -29,14 +29,14 @@ class TProductImageSlider extends StatelessWidget {
     final images = controller.getAllProductImages(product);
     return TCurvedEdgeWidget(
         child: Container(
-            color: dark ? TColors.darkGrey : TColors.light,
+            color: dark ? AppColors.darkGrey : AppColors.light,
             child: Stack(
               children: [
                 /// Main Large Image
                 SizedBox(
                     height: 400,
                     child: Padding(
-                      padding: EdgeInsets.all(TSizes.productImageRadius * 2),
+                      padding: EdgeInsets.all(AppSizes.productImageRadius * 2),
                       child: Center(child: Obx(() {
                         final image = controller.selectedProductImage.value;
 
@@ -50,7 +50,7 @@ class TProductImageSlider extends StatelessWidget {
                                   (_, __, downloadProgress) => Center(
                                         child: CircularProgressIndicator(
                                           value: downloadProgress.progress,
-                                          color: TColors.primary,
+                                          color: AppColors.primary,
                                         ),
                                       ),
                               errorWidget: (_, __, ___) =>
@@ -63,7 +63,7 @@ class TProductImageSlider extends StatelessWidget {
                 Positioned(
                   right: 0,
                   bottom: 30,
-                  left: TSizes.defaultSpace,
+                  left: AppSizes.defaultSpace,
                   child: SizedBox(
                     height: 80,
                     child: ListView.separated(
@@ -72,23 +72,28 @@ class TProductImageSlider extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemBuilder: (_, index) => Obx(() {
-                        final imageSelected = controller.selectedProductImage.value ==
-                            images[index];
+                        final imageSelected =
+                            controller.selectedProductImage.value ==
+                                images[index];
                         return TRoundedImage(
                           width: 80,
                           isNetworkImage: true,
                           imageUrl: images[index],
-                          padding: const EdgeInsets.all(TSizes.sm),
-                          backgroundColor: dark ? TColors.dark : TColors.white,
+                          padding: const EdgeInsets.all(AppSizes.sm),
+                          backgroundColor:
+                              dark ? AppColors.dark : AppColors.white,
                           onPressed: () {
                             controller.selectedProductImage.value =
                                 images[index];
                           },
-                          border: Border.all(color: imageSelected ? TColors.primary : Colors.transparent),
+                          border: Border.all(
+                              color: imageSelected
+                                  ? AppColors.primary
+                                  : Colors.transparent),
                         );
                       }),
                       separatorBuilder: (_, __) => const SizedBox(
-                        width: TSizes.spaceBtwItems,
+                        width: AppSizes.spaceBtwItems,
                       ),
                     ),
                   ),
@@ -99,8 +104,10 @@ class TProductImageSlider extends StatelessWidget {
                   showBackArrow: true,
                   actions: [
                     /// Favorite Icon
-                    FavoriteIcon(productId: product.id,),
-                    const SizedBox(width: TSizes.defaultSpace),
+                    FavoriteIcon(
+                      productId: product.id,
+                    ),
+                    const SizedBox(width: AppSizes.defaultSpace),
                   ],
                 )
               ],

@@ -69,7 +69,7 @@ class OrderModel {
       totalAmount: data['totalAmount'] as double,
       orderDate: (data['orderDate'] as Timestamp).toDate(),
       paymentMethod: data['PaymentMethod'] as String,
-      address: AddressModel.fromJson(data['address'] as Map<String, dynamic>),
+      address: AddressModel.fromJson2(data['address'] as Map<String, dynamic>),
       deliveryDate: data['deliveryDate'] != null
           ? (data['deliveryDate'] as Timestamp).toDate()
           : null,

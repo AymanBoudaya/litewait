@@ -8,28 +8,24 @@ class Tabbar extends StatelessWidget implements PreferredSizeWidget {
   const Tabbar({
     super.key,
     required this.tabs,
-
   });
 
   final List<Widget> tabs;
-
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return Material(
-      color: dark ? TColors.black : TColors.white,
-      child: TabBar(
-        tabs: tabs,
-        isScrollable: true,
-        indicatorColor: TColors.primary,
-        labelColor: dark ? TColors.white : TColors.primary,
-        unselectedLabelColor:    TColors.darkGrey,
-        )
-    );
+        color: dark ? AppColors.black : AppColors.white,
+        child: TabBar(
+          tabs: tabs,
+          isScrollable: true,
+          indicatorColor: AppColors.primary,
+          labelColor: dark ? AppColors.white : AppColors.primary,
+          unselectedLabelColor: AppColors.darkGrey,
+        ));
   }
-  
+
   @override
   Size get preferredSize => Size.fromHeight(TDeviceUtils.getAppBarHeight());
-  
 }

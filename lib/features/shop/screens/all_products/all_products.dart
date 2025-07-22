@@ -20,7 +20,7 @@ class AllProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AllProductsController());
+    final controller = AllProductsController.instance;
     return Scaffold(
       appBar: TAppBar(
         title: Text(title),
@@ -28,17 +28,18 @@ class AllProducts extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding: EdgeInsets.all(TSizes.defaultSpace),
+        padding: EdgeInsets.all(AppSizes.defaultSpace),
         child: FutureBuilder(
             future: futureMethod ?? controller.fetchProductsByQuery(query),
             builder: (context, snapshot) {
               const loader = TVerticalProductShimmer();
-            final widget = TCloudHelperFunctions.checkMultiRecordState(
+              final widget = TCloudHelperFunctions.checkMultiRecordState(
                 snapshot: snapshot,
                 loader: loader,
-                            );
+              );
 
               if (widget != null) return widget;
+
               /// If data is available, display the products
               final products = snapshot.data!;
               return TSortableProducts(products: products);

@@ -14,6 +14,7 @@ class AllProductsController extends GetxController {
   final RxString selectedSortOption = 'Nom'.obs;
   final RxList<ProductModel> products = <ProductModel>[].obs;
 
+
   Future<List<ProductModel>> fetchProductsByQuery(Query? query) async {
     try {
       if (query == null) {

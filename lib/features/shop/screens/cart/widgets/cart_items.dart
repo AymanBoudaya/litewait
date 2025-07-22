@@ -19,16 +19,18 @@ class TCartItems extends StatelessWidget {
         shrinkWrap: true,
         itemCount: cartController.cartItems.length,
         separatorBuilder: (_, __) =>
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: AppSizes.spaceBtwSections),
         itemBuilder: (_, index) => Obx(() {
           final item = cartController.cartItems[index];
           return Column(
             children: [
               /// Cart Item
-              TCartItem(cartItem: item,),
+              TCartItem(
+                cartItem: item,
+              ),
               if (showAddRemoveButtons)
                 const SizedBox(
-                  height: TSizes.spaceBtwItems,
+                  height: AppSizes.spaceBtwItems,
                 ),
               if (showAddRemoveButtons)
                 Padding(
@@ -42,15 +44,17 @@ class TCartItems extends StatelessWidget {
                       ),
 
                       /// Add Remove Buttons
-                      TProductQuantityWithAddRemoveButton(quantity: item.quantity,
-                      add :() => cartController.addOneToCart(item),
-                      remove :() => cartController.removeOneFromCart(item),
-                      
+                      TProductQuantityWithAddRemoveButton(
+                        quantity: item.quantity,
+                        add: () => cartController.addOneToCart(item),
+                        remove: () => cartController.removeOneFromCart(item),
                       ),
                       Spacer(),
 
                       /// Product total price
-                      ProductPriceText(price: (item.price * item.quantity).toStringAsFixed(1), )
+                      ProductPriceText(
+                        price: (item.price * item.quantity).toStringAsFixed(1),
+                      )
                     ],
                   ),
                 )

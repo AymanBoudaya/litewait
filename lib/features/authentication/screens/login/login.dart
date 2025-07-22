@@ -4,7 +4,6 @@ import 'package:caferesto/features/authentication/screens/login/widgets/login_fo
 import 'package:caferesto/features/authentication/screens/login/widgets/login_header.dart';
 import 'package:caferesto/common/widgets.login_signup/social_buttons.dart';
 import 'package:caferesto/utils/constants/sizes.dart';
-import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +14,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(
@@ -24,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: [
             /// Logo, Title and Sub tilte
-            TLoginHeader(dark: dark),
+            TLoginHeader(),
 
             /// form
             const TLoginForm(),
@@ -32,7 +29,7 @@ class LoginScreen extends StatelessWidget {
             /// Divider
             TFormDivider(dividerText: TTexts.orSignInWith.capitalize!),
             const SizedBox(
-              height: TSizes.spaceBtwSections,
+              height: AppSizes.spaceBtwSections,
             ),
 
             /// Footer

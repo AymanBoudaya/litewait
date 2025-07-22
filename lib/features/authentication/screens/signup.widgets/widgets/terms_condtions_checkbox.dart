@@ -25,12 +25,12 @@ class TermsAndConditionsCheckbox extends StatelessWidget {
           child: Obx(
             () => Checkbox(
               value: controller.privacyPolicy.value,
-              onChanged: (value) =>
-                  controller.privacyPolicy.value = !controller.privacyPolicy.value,
+              onChanged: (value) => controller.privacyPolicy.value =
+                  !controller.privacyPolicy.value,
             ),
           ),
         ),
-        const SizedBox(width: TSizes.spaceBtwItems),
+        const SizedBox(width: AppSizes.spaceBtwItems),
         Expanded(
           child: Text.rich(
             TextSpan(
@@ -42,9 +42,10 @@ class TermsAndConditionsCheckbox extends StatelessWidget {
                 TextSpan(
                   text: '${TTexts.privacyPolicy} ',
                   style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: dark ? TColors.white : TColors.primary,
+                        color: dark ? AppColors.white : AppColors.primary,
                         decoration: TextDecoration.underline,
-                        decorationColor: dark ? TColors.white : TColors.primary,
+                        decorationColor:
+                            dark ? AppColors.white : AppColors.primary,
                       ),
                 ),
                 TextSpan(
@@ -54,9 +55,10 @@ class TermsAndConditionsCheckbox extends StatelessWidget {
                 TextSpan(
                   text: TTexts.termsOfUse,
                   style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: dark ? TColors.white : TColors.primary,
+                        color: dark ? AppColors.white : AppColors.primary,
                         decoration: TextDecoration.underline,
-                        decorationColor: dark ? TColors.white : TColors.primary,
+                        decorationColor:
+                            dark ? AppColors.white : AppColors.primary,
                       ),
                 ),
               ],

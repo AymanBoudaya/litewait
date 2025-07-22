@@ -25,13 +25,13 @@ class CategoryTab extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           Padding(
-            padding: const EdgeInsets.all(TSizes.defaultSpace),
+            padding: const EdgeInsets.all(AppSizes.defaultSpace),
             child: Column(
               children: [
                 /// Brands
                 CategoryBrands(category: category),
                 const SizedBox(
-                  height: TSizes.spaceBtwItems,
+                  height: AppSizes.spaceBtwItems,
                 ),
 
                 /// Products
@@ -62,15 +62,15 @@ class CategoryTab extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: TSizes.spaceBtwItems,
+                            height: AppSizes.spaceBtwItems,
                           ),
                           GridLayout(
                             itemCount: products.length,
                             itemBuilder: (_, index) =>
-                                TProductCardVertical(product: products[index]),
+                                ProductCardVertical(product: products[index]),
                           ),
                           const SizedBox(
-                            height: TSizes.spaceBtwSections,
+                            height: AppSizes.spaceBtwSections,
                           ),
                         ],
                       );

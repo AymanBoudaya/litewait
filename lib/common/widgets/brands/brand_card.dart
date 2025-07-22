@@ -24,7 +24,7 @@ class BrandCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: TRoundedContainer(
-        padding: const EdgeInsets.all(TSizes.sm),
+        padding: const EdgeInsets.all(AppSizes.sm),
         showBorder: showBorder,
         backgroundColor: Colors.transparent,
         child: Row(
@@ -39,11 +39,11 @@ class BrandCard extends StatelessWidget {
               height: 50,
               padding: 2,
               // overlayColor: THelperFunctions.isDarkMode(context)
-              //     ? TColors.white
-              //     : TColors.black,
+              //     ? AppColors.white
+              //     : AppColors.black,
             ),
             const SizedBox(
-              width: TSizes.spaceBtwItems / 2,
+              width: AppSizes.spaceBtwItems / 2,
             ),
 
             /// Text
@@ -58,7 +58,7 @@ class BrandCard extends StatelessWidget {
                         width: constraints.maxWidth,
                         child: BrandTitleWithVerifiedIcon(
                           title: brand.name,
-                          brandTextSize: TextSizes.large,
+                          brandTextSize: TexAppSizes.large,
                         ),
                       );
                     },

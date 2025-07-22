@@ -23,7 +23,7 @@ class BrandProducts extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding: EdgeInsets.all(TSizes.defaultSpace),
+        padding: EdgeInsets.all(AppSizes.defaultSpace),
         child: Column(
           children: [
             /// Brand Detail
@@ -32,7 +32,7 @@ class BrandProducts extends StatelessWidget {
               brand: brand,
             ),
             SizedBox(
-              height: TSizes.spaceBtwSections,
+              height: AppSizes.spaceBtwSections,
             ),
             FutureBuilder(
                 future: controller.getBrandProducts(brandId: brand.id),
@@ -40,8 +40,7 @@ class BrandProducts extends StatelessWidget {
                   /// Handle loader , No record, Or Error Message
                   const loader = TVerticalProductShimmer();
                   final widget = TCloudHelperFunctions.checkMultiRecordState(
-                      snapshot: snapshot,
-                      loader: loader);
+                      snapshot: snapshot, loader: loader);
                   if (widget != null) return widget;
 
                   /// Records found

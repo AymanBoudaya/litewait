@@ -19,7 +19,7 @@ class ReAuthLoginForm extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: Form(
             key: controller.reAuthFormKey,
             child: Column(
@@ -28,29 +28,36 @@ class ReAuthLoginForm extends StatelessWidget {
                 /// Email
                 TextFormField(
                   controller: controller.verifyEmail,
-                  decoration: const InputDecoration(prefixIcon:Icon(Iconsax.direct_right), labelText: TTexts.email),
-                  validator:TValidator.validateEmail,
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(Iconsax.direct_right),
+                      labelText: TTexts.email),
+                  validator: TValidator.validateEmail,
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
+                const SizedBox(height: AppSizes.spaceBtwInputFields),
+
                 /// Password
 
-                Obx(() => TextFormField(
-                    obscureText : controller.hidePassword.value,
+                Obx(
+                  () => TextFormField(
+                    obscureText: controller.hidePassword.value,
                     controller: controller.verifyPassword,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Iconsax.password_check),
-                      suffixIcon: IconButton(
-                        onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
-                        icon : const Icon( Iconsax.eye_slash)),
-                      labelText: 'Mot de passe'),
-                    validator: (value) => TValidator.validateEmptyText("Mot de passe",value),
+                        prefixIcon: Icon(Iconsax.password_check),
+                        suffixIcon: IconButton(
+                            onPressed: () => controller.hidePassword.value =
+                                !controller.hidePassword.value,
+                            icon: const Icon(Iconsax.eye_slash)),
+                        labelText: 'Mot de passe'),
+                    validator: (value) =>
+                        TValidator.validateEmptyText("Mot de passe", value),
                   ),
                 ),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: ()=> controller.reAuthenticateEmailAndPasswordUser(),                   
+                    onPressed: () =>
+                        controller.reAuthenticateEmailAndPasswordUser(),
                     child: const Text('Vérifier'),
                   ),
                 ),

@@ -28,7 +28,7 @@ class TBillingAmountSection extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: TSizes.spaceBtwItems / 2,
+          height: AppSizes.spaceBtwItems / 2,
         ),
 
         /// Shipping fee
@@ -47,7 +47,7 @@ class TBillingAmountSection extends StatelessWidget {
         ),
 
         const SizedBox(
-          height: TSizes.spaceBtwItems / 2,
+          height: AppSizes.spaceBtwItems / 2,
         ),
 
         /// Tax fee
@@ -65,7 +65,7 @@ class TBillingAmountSection extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: TSizes.spaceBtwItems / 2,
+          height: AppSizes.spaceBtwItems / 2,
         ),
 
         /// Order total fee

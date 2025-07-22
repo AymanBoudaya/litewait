@@ -19,18 +19,18 @@ class TCategoryShimmer extends StatelessWidget {
         itemCount: itemCount,
         scrollDirection: Axis.horizontal,
         separatorBuilder: (_, __) =>
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
         itemBuilder: (_, index) {
-          return const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left : 16.0),
-                child: TShimmerEffect(width: 70, height: 70, radius: 100),
-              ),
-              SizedBox(height: TSizes.spaceBtwItems / 2),
-              TShimmerEffect(width: 80, height: 8),
-            ],
+          return Padding(
+            padding: const EdgeInsets.only(left: AppSizes.spaceBtwItems),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TShimmerEffect(width: 70, height: 70, radius: 100),
+                SizedBox(height: AppSizes.spaceBtwItems / 2),
+                TShimmerEffect(width: 60, height: 8),
+              ],
+            ),
           );
         },
       ),

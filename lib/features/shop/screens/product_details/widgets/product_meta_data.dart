@@ -31,19 +31,19 @@ class TProductMetaData extends StatelessWidget {
           children: [
             /// Sale tag
             TRoundedContainer(
-              radius: TSizes.sm,
-              backgroundColor: TColors.secondary.withOpacity(0.8),
+              radius: AppSizes.sm,
+              backgroundColor: AppColors.secondary.withOpacity(0.8),
               padding: const EdgeInsets.symmetric(
-                  vertical: TSizes.xs, horizontal: TSizes.sm),
+                  vertical: AppSizes.xs, horizontal: AppSizes.sm),
               child: Text(
                 'Remise : $salePercentage% !',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
-                    .apply(color: TColors.black),
+                    .apply(color: AppColors.black),
               ),
             ),
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
 
             /// Price
             if (product.productType == ProductType.single.toString() &&
@@ -57,48 +57,99 @@ class TProductMetaData extends StatelessWidget {
               ),
             if (product.productType == ProductType.single.toString() &&
                 product.salePrice > 0)
-              const SizedBox(width: TSizes.spaceBtwItems),
+              const SizedBox(width: AppSizes.spaceBtwItems),
             ProductPriceText(
               price: controller.getProductPrice(product),
               isLarge: true,
             ),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        const SizedBox(height: AppSizes.spaceBtwItems / 2),
 
         /// Title
 
         TProductTitleText(title: product.title),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        const SizedBox(height: AppSizes.spaceBtwItems / 2),
 
         /// Stock status
         Row(
           children: [
             const TProductTitleText(title: "Statut :"),
-            const SizedBox(width: TSizes.spaceBtwItems),
+            const SizedBox(width: AppSizes.spaceBtwItems),
             Text(controller.getProductStockStatus(product.stock),
                 style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
-        const SizedBox(height: TSizes.spaceBtwItems / 2),
-/*
+        const SizedBox(height: AppSizes.spaceBtwItems / 2),
+
         /// Brand
+        /// Brand Row inside TProductMetaData
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircularImage(
-              image: product.brand != null ? product.brand!.image : '',
-              width: 32,
-              height: 32,
-              overlayColor: darkMode ? TColors.white : TColors.black,
-            ),
-            const SizedBox(width: TSizes.spaceBtwItems),
-            BrandTitleWithVerifiedIcon(
-              title:
-                  product.brand != null ? product.brand!.name : 'Sans marque',
-              brandTextSize: TextSizes.medium,
+            /// Safe Circular Image with fallback and layout-safe wrapping
+            if (product.brand != null && product.brand!.image.isNotEmpty)
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return ClipOval(
+                    child: Image.network(
+                      product.brand!.image,
+                      width: 32,
+                      height: 32,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 32,
+                          height: 32,
+                          color: Colors.grey.shade300,
+                          child: Icon(Icons.image_not_supported, size: 16),
+                        );
+                      },
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return SizedBox(
+                          width: 32,
+                          height: 32,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              value: progress.expectedTotalBytes != null
+                                  ? progress.cumulativeBytesLoaded /
+                                      progress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              )
+            else
+
+              /// Fallback when no image is present
+              Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey,
+                ),
+                child: const Icon(Icons.image_not_supported,
+                    size: 16, color: Colors.white),
+              ),
+
+            const SizedBox(width: AppSizes.spaceBtwItems),
+
+            /// Brand title with optional verified icon
+            Expanded(
+              child: BrandTitleWithVerifiedIcon(
+                title: product.brand?.name ?? 'Sans marque',
+                brandTextSize: TexAppSizes.medium,
+              ),
             ),
           ],
-        )*/
+        ),
       ],
     );
   }

@@ -22,7 +22,7 @@ class TLoginForm extends StatelessWidget {
         key: controller.loginFormKey,
         child: Padding(
           padding:
-              const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
+              const EdgeInsets.symmetric(vertical: AppSizes.spaceBtwSections),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,7 +34,7 @@ class TLoginForm extends StatelessWidget {
                       prefixIcon: Icon(Iconsax.direct_right),
                       labelText: TTexts.email)),
               const SizedBox(
-                height: TSizes.spaceBtwInputFields,
+                height: AppSizes.spaceBtwInputFields,
               ),
               Obx(
                 () => TextFormField(
@@ -56,7 +56,7 @@ class TLoginForm extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: TSizes.spaceBtwInputFields / 2,
+                height: AppSizes.spaceBtwInputFields / 2,
               ),
 
               /// Remember Me & Forget Password
@@ -83,19 +83,17 @@ class TLoginForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: TSizes.spaceBtwSections,
+                height: AppSizes.spaceBtwSections,
               ),
 
               /// Sign in button
               SizedBox(
                   width: double.infinity,
-                  //Navigator.pushNamed(context, '/home');
                   child: ElevatedButton(
-                      onPressed: 
-                          () => controller.emailAndPasswordSignIn(),
+                      onPressed: () => controller.emailAndPasswordSignIn(),
                       child: const Text(TTexts.signIn))),
               const SizedBox(
-                height: TSizes.spaceBtwItems / 2,
+                height: AppSizes.spaceBtwItems / 2,
               ),
 
               /// Create account button

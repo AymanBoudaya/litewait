@@ -1,15 +1,9 @@
-import 'dart:math';
-
 import 'package:caferesto/common/widgets/shimmer/shimmer_effect.dart';
-import 'package:caferesto/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/sizes.dart';
-
 class CircularImage extends StatelessWidget {
-const CircularImage({
+  const CircularImage({
     super.key,
     this.fit = BoxFit.cover,
     required this.image,
@@ -18,7 +12,8 @@ const CircularImage({
     this.backgroundColor,
     this.width = 70,
     this.height = 70,
-    this.padding = TSizes.sm / 4,
+    this.padding = 2,
+    this.isActive = true,
   });
 
   final BoxFit fit;
@@ -27,41 +22,56 @@ const CircularImage({
   final Color? overlayColor;
   final Color? backgroundColor;
   final double width, height, padding;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Container(
-      width: width,
-      height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: dark ? Colors.white : TColors.black.withOpacity(0.1),
-          width: 1,
-        ),
-        color: backgroundColor ??
-            (THelperFunctions.isDarkMode(context)
-                ? TColors.black
-                : TColors.white),
-        borderRadius: BorderRadius.circular(min(width, height) / 2),
+        shape: BoxShape.circle,
+        gradient: isActive
+            ? LinearGradient(
+                colors: [
+                  Color(0xFF833AB4), // Purple
+                  Color(0xFFFD1D1D), // Red
+                  Color(0xFFFCB045),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )
+            : null,
+        border: isActive
+            ? null
+            : Border.all(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
       ),
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(min(width, height) / 2),
-          child: isNetworkImage
-              ? CachedNetworkImage(
-                  fit: fit,
-                  color: overlayColor,
-                  imageUrl: image,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      const TShimmerEffect(width: 70, height: 70, radius: 100),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                )
-              : Image(
-                  fit: fit,
-                  image: AssetImage(image) as ImageProvider,
-                  color: overlayColor,
-                )),
+      child: Container(
+        padding: EdgeInsets.all(padding),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: isNetworkImage
+                ? CachedNetworkImage(
+                    width: width,
+                    height: height,
+                    fit: fit,
+                    imageUrl: image,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => TShimmerEffect(
+                            width: width, height: height, radius: 100),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  )
+                : Image.asset(
+                    image,
+                    fit: fit,
+                    width: width,
+                    height: height,
+                  )),
+      ),
     );
   }
 }

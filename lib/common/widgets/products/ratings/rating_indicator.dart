@@ -16,10 +16,10 @@ class TRatingBarIndicator extends StatelessWidget {
     return RatingBarIndicator(
         rating: rating,
         itemSize: 20,
-        unratedColor: TColors.grey,
+        unratedColor: AppColors.grey,
         itemBuilder: (_, __) => Icon(
               Iconsax.star1,
-              color: TColors.primary,
+              color: AppColors.primary,
             ));
   }
 }

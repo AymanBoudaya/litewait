@@ -34,7 +34,7 @@ class TSignupform extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: TSizes.spaceBtwInputFields),
+              const SizedBox(width: AppSizes.spaceBtwInputFields),
               Expanded(
                 child: TextFormField(
                   controller: controller.lastName,
@@ -48,7 +48,7 @@ class TSignupform extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
 
           /// Nom d'utilisateur
           TextFormField(
@@ -60,7 +60,7 @@ class TSignupform extends StatelessWidget {
               prefixIcon: Icon(Iconsax.user_edit),
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
 
           /// Email
           TextFormField(
@@ -71,7 +71,7 @@ class TSignupform extends StatelessWidget {
               prefixIcon: Icon(Iconsax.direct),
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
 
           /// Numéro de téléphone
           TextFormField(
@@ -82,7 +82,7 @@ class TSignupform extends StatelessWidget {
               prefixIcon: Icon(Iconsax.call),
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
 
           /// Mot de passe
           Obx(
@@ -104,11 +104,11 @@ class TSignupform extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: TSizes.spaceBtwSections),
+          const SizedBox(height: AppSizes.spaceBtwSections),
 
           /// Case à cocher Conditions d'utilisation
           const TermsAndConditionsCheckbox(),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: AppSizes.spaceBtwInputFields),
 
           /// Bouton
           SizedBox(

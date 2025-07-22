@@ -81,7 +81,7 @@ class UserController extends GetxController {
   /// Delete account Warning
   void deleteAccountWarningPopup() {
     Get.defaultDialog(
-      contentPadding: const EdgeInsets.all(TSizes.md),
+      contentPadding: const EdgeInsets.all(AppSizes.md),
       title: 'Supprimer compte',
       middleText:
           "Êtes vous sûr? Cette action est irréversible et supprimera toutes vos données.",
@@ -92,7 +92,7 @@ class UserController extends GetxController {
           side: const BorderSide(color: Colors.red),
         ),
         child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: TSizes.lg),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.lg),
           child: Text("Supprimer"),
         ),
       ),

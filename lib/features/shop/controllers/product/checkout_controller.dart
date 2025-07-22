@@ -25,29 +25,28 @@ class CheckoutController extends GetxController {
         context: context,
         builder: (_) => SingleChildScrollView(
             child: Container(
-                padding: const EdgeInsets.all(TSizes.lg),
+                padding: const EdgeInsets.all(AppSizes.lg),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TSectionHeading(
                           title: 'Selectionner une methode de payement',
                           showActionButton: false),
-                      SizedBox(height: TSizes.spaceBtwSections),
+                      SizedBox(height: AppSizes.spaceBtwSections),
                       TPaymentTile(
                           paymentMethod: PaymentMethodModel(
                               name: 'Payement à la caisse',
                               image: TImages.masterCard)),
-                      const SizedBox(height: TSizes.spaceBtwItems / 2),
+                      const SizedBox(height: AppSizes.spaceBtwItems / 2),
                       TPaymentTile(
                           paymentMethod: PaymentMethodModel(
                               name: 'Payement à la livraison',
                               image: TImages.masterCard)),
-                      const SizedBox(height: TSizes.spaceBtwItems / 2),
+                      const SizedBox(height: AppSizes.spaceBtwItems / 2),
                       TPaymentTile(
                           paymentMethod: PaymentMethodModel(
-                              name: 'D17 ',
-                              image: TImages.masterCard)),
-                      const SizedBox(height: TSizes.spaceBtwSections),
+                              name: 'D17 ', image: TImages.masterCard)),
+                      const SizedBox(height: AppSizes.spaceBtwSections),
                     ]))));
   }
 }

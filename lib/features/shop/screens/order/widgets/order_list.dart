@@ -39,21 +39,21 @@ class TOrderListItems extends StatelessWidget {
               shrinkWrap: true,
               itemCount: orders.length,
               separatorBuilder: (_, __) => const SizedBox(
-                    height: TSizes.spaceBtwItems,
+                    height: AppSizes.spaceBtwItems,
                   ),
               itemBuilder: (_, index) {
                 final order = orders[index];
                 return TRoundedContainer(
                     showBorder: true,
-                    padding: const EdgeInsets.all(TSizes.md),
-                    backgroundColor: dark ? TColors.dark : TColors.light,
+                    padding: const EdgeInsets.all(AppSizes.md),
+                    backgroundColor: dark ? AppColors.dark : AppColors.light,
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       /// -- Row 1
                       Row(children: [
                         /// Icon
                         const Icon(Iconsax.ship),
                         const SizedBox(
-                          width: TSizes.spaceBtwItems / 2,
+                          width: AppSizes.spaceBtwItems / 2,
                         ),
 
                         /// Status and Date
@@ -68,7 +68,7 @@ class TOrderListItems extends StatelessWidget {
                                     .textTheme
                                     .bodyLarge!
                                     .apply(
-                                        color: TColors.primary,
+                                        color: AppColors.primary,
                                         fontWeightDelta: 1),
                               ),
                               Text(
@@ -84,10 +84,10 @@ class TOrderListItems extends StatelessWidget {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Iconsax.arrow_right_34,
-                                size: TSizes.iconSm)),
+                                size: AppSizes.iconSm)),
                       ]),
                       const SizedBox(
-                        height: TSizes.spaceBtwItems,
+                        height: AppSizes.spaceBtwItems,
                       ),
 
                       /// -- Row 2
@@ -98,7 +98,7 @@ class TOrderListItems extends StatelessWidget {
                               /// Icon
                               const Icon(Iconsax.tag),
                               const SizedBox(
-                                width: TSizes.spaceBtwItems / 2,
+                                width: AppSizes.spaceBtwItems / 2,
                               ),
 
                               /// Status and Date
@@ -127,7 +127,7 @@ class TOrderListItems extends StatelessWidget {
                               /// Icon
                               const Icon(Iconsax.calendar),
                               const SizedBox(
-                                width: TSizes.spaceBtwItems / 2,
+                                width: AppSizes.spaceBtwItems / 2,
                               ),
 
                               /// Status and Date

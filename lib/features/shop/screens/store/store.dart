@@ -34,8 +34,9 @@ class StoreScreen extends StatelessWidget {
             ),
             actions: [
               TCartCounterIcon(
-                iconColor: TColors.primary,
-                counterBgColor: TColors.primary,)
+                iconColor: AppColors.primary,
+                counterBgColor: AppColors.primary,
+              )
             ],
           ),
           body: NestedScrollView(
@@ -50,18 +51,18 @@ class StoreScreen extends StatelessWidget {
                     // Space between appBar and TabBar
                     automaticallyImplyLeading: false,
                     backgroundColor: THelperFunctions.isDarkMode(context)
-                        ? TColors.black
-                        : TColors.white,
+                        ? AppColors.black
+                        : AppColors.white,
 
                     flexibleSpace: Padding(
-                      padding: const EdgeInsets.all(TSizes.defaultSpace),
+                      padding: const EdgeInsets.all(AppSizes.defaultSpace),
                       child: ListView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           /// -- SearchBar
                           const SizedBox(
-                            height: TSizes.spaceBtwItems,
+                            height: AppSizes.spaceBtwItems,
                           ),
                           const TSearchContainer(
                             text: 'Rechercher un produit',
@@ -70,7 +71,7 @@ class StoreScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                           ),
                           const SizedBox(
-                            height: TSizes.spaceBtwSections,
+                            height: AppSizes.spaceBtwSections,
                           ),
 
                           /// -- Featured Brands
@@ -80,7 +81,7 @@ class StoreScreen extends StatelessWidget {
                                 Get.to(() => const AllBrandsScreen()),
                           ),
                           const SizedBox(
-                            height: TSizes.spaceBtwItems / 1.5,
+                            height: AppSizes.spaceBtwItems / 1.5,
                           ),
 
                           /// -- Brands Grid
@@ -124,7 +125,7 @@ class StoreScreen extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium!
-                                        .apply(color: TColors.primary),
+                                        .apply(color: AppColors.primary),
                                   ),
                                 ))
                             .toList()),

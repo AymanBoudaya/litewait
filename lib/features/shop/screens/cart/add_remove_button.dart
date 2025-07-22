@@ -7,7 +7,10 @@ import 'package:iconsax/iconsax.dart';
 
 class TProductQuantityWithAddRemoveButton extends StatelessWidget {
   const TProductQuantityWithAddRemoveButton({
-    super.key, required this.quantity, this.add, this.remove,
+    super.key,
+    required this.quantity,
+    this.add,
+    this.remove,
   });
 
   final int quantity;
@@ -22,32 +25,32 @@ class TProductQuantityWithAddRemoveButton extends StatelessWidget {
           icon: Iconsax.minus,
           width: 32,
           height: 32,
-          size: TSizes.md,
+          size: AppSizes.md,
           color: THelperFunctions.isDarkMode(context)
-              ? TColors.white
-              : TColors.black,
+              ? AppColors.white
+              : AppColors.black,
           backgroundColor: THelperFunctions.isDarkMode(context)
-              ? TColors.darkerGrey
-              : TColors.light,
+              ? AppColors.darkerGrey
+              : AppColors.light,
           onPressed: remove,
         ),
         const SizedBox(
-          width: TSizes.spaceBtwItems,
+          width: AppSizes.spaceBtwItems,
         ),
         Text(
           quantity.toString(),
           style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(
-          width: TSizes.spaceBtwItems,
+          width: AppSizes.spaceBtwItems,
         ),
         TCircularIcon(
             icon: Iconsax.add,
             width: 32,
             height: 32,
-            size: TSizes.md,
-            color: TColors.white,
-            backgroundColor: TColors.primary,
+            size: AppSizes.md,
+            color: AppColors.white,
+            backgroundColor: AppColors.primary,
             onPressed: add),
       ],
     );

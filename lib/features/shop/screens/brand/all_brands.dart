@@ -23,7 +23,7 @@ class AllBrandsScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(TSizes.defaultSpace),
+            padding: EdgeInsets.all(AppSizes.defaultSpace),
             child: Column(
               children: [
                 /// Heading
@@ -32,40 +32,36 @@ class AllBrandsScreen extends StatelessWidget {
                   showActionButton: false,
                 ),
                 SizedBox(
-                  height: TSizes.spaceBtwItems,
+                  height: AppSizes.spaceBtwItems,
                 ),
 
                 /// Brands
                 /// -- Brands Grid
-                          Obx(() {
-                            if (brandController.isLoading.value) {
-                              return const TbrandsShimmer();
-                            }
+                Obx(() {
+                  if (brandController.isLoading.value) {
+                    return const TbrandsShimmer();
+                  }
 
-                            if (brandController.allBrands.isEmpty) {
-                              return Center(
-                                child: Text('Aucune marque trouvée',
-                                style : Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .apply(color: Colors.white))
-                              );
-                            }
-                            return GridLayout(
-                                itemCount: brandController.allBrands.length,
-                                mainAxisExtent: 80,
-                                itemBuilder: (_, index) {
-                                  final brand = brandController.allBrands[index];
-                                  return BrandCard(showBorder: true, brand: brand,
-                                  onTap: () =>
-                                    Get.to(() => BrandProducts(
-                                      brand: brand
-                                    ))
-                                  
-                                  
-                                  );
-                                });
-                          }),
+                  if (brandController.allBrands.isEmpty) {
+                    return Center(
+                        child: Text('Aucune marque trouvée',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .apply(color: Colors.white)));
+                  }
+                  return GridLayout(
+                      itemCount: brandController.allBrands.length,
+                      mainAxisExtent: 80,
+                      itemBuilder: (_, index) {
+                        final brand = brandController.allBrands[index];
+                        return BrandCard(
+                            showBorder: true,
+                            brand: brand,
+                            onTap: () =>
+                                Get.to(() => BrandProducts(brand: brand)));
+                      });
+                }),
               ],
             ),
           ),

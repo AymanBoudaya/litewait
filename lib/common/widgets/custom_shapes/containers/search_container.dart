@@ -13,8 +13,9 @@ class TSearchContainer extends StatelessWidget {
     this.icon = Iconsax.search_normal,
     this.showBackground = true,
     this.showBorder = true,
-    this.onTap, this.padding = const EdgeInsets.symmetric(
-      horizontal: TSizes.defaultSpace,
+    this.onTap,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: AppSizes.defaultSpace,
     ),
   });
 
@@ -33,24 +34,29 @@ class TSearchContainer extends StatelessWidget {
         padding: padding,
         child: Container(
           width: TDeviceUtils.getScreenWidth(context),
-          padding: const EdgeInsets.all(TSizes.md),
+          padding: const EdgeInsets.all(AppSizes.md),
           decoration: BoxDecoration(
             color: showBackground
                 ? dark
-                    ? TColors.dark
-                    : TColors.light
+                    ? AppColors.eerieBlack
+                    : AppColors.light
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-            border: showBorder ? Border.all(color: TColors.grey) : null,
+            borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
+            border: showBorder ? Border.all(color: AppColors.grey) : null,
           ),
           child: Row(
             children: [
               Icon(
                 icon,
-                color: dark ? TColors.darkerGrey : TColors.grey,
+                color: dark ? AppColors.darkerGrey : AppColors.grey,
               ),
-              const SizedBox(width: TSizes.spaceBtwItems),
-              Text(text, style: Theme.of(context).textTheme.bodySmall),
+              const SizedBox(width: AppSizes.spaceBtwItems),
+              Expanded(
+                child: Text(text,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
+              ),
             ],
           ),
         ),

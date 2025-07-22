@@ -6,19 +6,19 @@ import '../../../../../utils/constants/sizes.dart';
 class TRoundedContainer extends StatelessWidget {
   const TRoundedContainer({
     super.key,
-    this.height,
-    this.width,
-    this.radius = TSizes.cardRadiusLg,
     this.child,
-    this.showBorder = false,
-    this.borderColor = TColors.borderPrimary,
-    this.backgroundColor = TColors.white,
-    this.padding,
+    this.width,
+    this.height,
     this.margin,
+    this.padding,
+    this.radius = AppSizes.cardRadiusLg,
+    this.backgroundColor = AppColors.white,
+    this.borderColor = AppColors.borderPrimary,
+    this.showBorder = false,
   });
 
-  final double? height;
   final double? width;
+  final double? height;
   final double radius;
   final Widget? child;
   final bool showBorder;

@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
         /// Body
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.all(TSizes.defaultSpace),
+                padding: EdgeInsets.all(AppSizes.defaultSpace),
                 child: Column(
                   children: [
                     /// Profile Picture
@@ -47,13 +47,13 @@ class ProfileScreen extends StatelessWidget {
                     ),
 
                     /// Détails
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    const SizedBox(height: AppSizes.spaceBtwItems / 2),
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     const TSectionHeading(
                         title: 'Informations du profil',
                         showActionButton: false),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     TProfileMenu(
                         title: "Nom",
@@ -64,14 +64,14 @@ class ProfileScreen extends StatelessWidget {
                         value: controller.user.value.username,
                         onPressed: () {}),
 
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     /// Heading Personal Info
                     const TSectionHeading(
                         title: 'Infos personnelles', showActionButton: false),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     TProfileMenu(
                         title: "ID utilisateur",
@@ -93,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                         value: "10 Oct 1988",
                         onPressed: () {}),
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     Center(
                       child: TextButton(

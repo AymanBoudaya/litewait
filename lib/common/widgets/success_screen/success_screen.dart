@@ -29,7 +29,7 @@ class SuccessScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.6,
             ),
             const SizedBox(
-              height: TSizes.spaceBtwSections,
+              height: AppSizes.spaceBtwSections,
             ),
 
             /// Title and SubTitle
@@ -39,7 +39,7 @@ class SuccessScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: TSizes.spaceBtwItems,
+              height: AppSizes.spaceBtwItems,
             ),
             Text(
               subTitle,
@@ -47,7 +47,7 @@ class SuccessScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: TSizes.spaceBtwSections,
+              height: AppSizes.spaceBtwSections,
             ),
 
             /// Buttons

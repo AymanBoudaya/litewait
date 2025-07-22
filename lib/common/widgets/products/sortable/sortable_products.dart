@@ -10,14 +10,15 @@ import '../../../../features/shop/models/product_model.dart';
 
 class TSortableProducts extends StatelessWidget {
   const TSortableProducts({
-    super.key, required this.products,
+    super.key,
+    required this.products,
   });
 
   final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(AllProductsController());
+    final controller = AllProductsController.instance;
     controller.assignProducts(products);
     return Column(
       children: [
@@ -38,14 +39,14 @@ class TSortableProducts extends StatelessWidget {
             onChanged: (value) {
               controller.sortProducts(value!);
             }),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: AppSizes.spaceBtwSections),
 
         /// Products
         Obx(
           () => GridLayout(
               itemCount: controller.products.length,
-              itemBuilder: (_, index) => TProductCardVertical(
-                  product: controller.products[index])),
+              itemBuilder: (_, index) =>
+                  ProductCardVertical(product: controller.products[index])),
         )
       ],
     );

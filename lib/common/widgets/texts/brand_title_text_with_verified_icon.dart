@@ -12,35 +12,34 @@ class BrandTitleWithVerifiedIcon extends StatelessWidget {
     required this.title,
     this.maxLines = 1,
     this.textColor,
-    this.iconColor = TColors.primary,
+    this.iconColor = AppColors.primary,
     this.textAlign = TextAlign.start,
-    this.brandTextSize = TextSizes.small,
+    this.brandTextSize = TexAppSizes.small,
   });
 
   final String title;
   final int maxLines;
   final Color? textColor, iconColor;
   final TextAlign? textAlign;
-  final TextSizes brandTextSize;
+  final TexAppSizes brandTextSize;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-            child: BrandTitleText(
+        BrandTitleText(
           title: title,
           textAlign: textAlign,
           maxLines: maxLines,
           color: textColor,
           brandTextSize: brandTextSize,
-        )),
+        ),
         const SizedBox(
-          width: TSizes.xs,
+          width: AppSizes.xs,
         ),
         Icon(
           Iconsax.verify5,
-          size: TSizes.iconXs,
+          size: AppSizes.iconXs,
           color: iconColor,
         ),
       ],

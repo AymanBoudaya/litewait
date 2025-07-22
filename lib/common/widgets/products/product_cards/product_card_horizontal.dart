@@ -30,16 +30,16 @@ class TProductCardHorizontal extends StatelessWidget {
         width: 310,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-          color: dark ? TColors.darkerGrey : TColors.softGrey,
-          borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+          color: dark ? AppColors.darkerGrey : AppColors.softGrey,
+          borderRadius: BorderRadius.circular(AppSizes.productImageRadius),
         ),
         child: Row(
           children: [
             /// Thumbnail
             TRoundedContainer(
               height: 120,
-              padding: const EdgeInsets.all(TSizes.sm),
-              backgroundColor: dark ? TColors.dark : TColors.light,
+              padding: const EdgeInsets.all(AppSizes.sm),
+              backgroundColor: dark ? AppColors.dark : AppColors.light,
               child: Stack(
                 children: [
                   /// Thumbnail Image
@@ -57,16 +57,16 @@ class TProductCardHorizontal extends StatelessWidget {
                     Positioned(
                       top: 12,
                       child: TRoundedContainer(
-                        radius: TSizes.sm,
-                        backgroundColor: TColors.secondary.withOpacity(0.8),
+                        radius: AppSizes.sm,
+                        backgroundColor: AppColors.secondary.withOpacity(0.8),
                         padding: const EdgeInsets.symmetric(
-                            vertical: TSizes.xs, horizontal: TSizes.sm),
+                            vertical: AppSizes.xs, horizontal: AppSizes.sm),
                         child: Text(
                           '$salePercentage%',
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge!
-                              .apply(color: TColors.black),
+                              .apply(color: AppColors.black),
                         ),
                       ),
                     ),
@@ -84,7 +84,8 @@ class TProductCardHorizontal extends StatelessWidget {
             SizedBox(
               width: 172,
               child: Padding(
-                padding: const EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
+                padding:
+                    const EdgeInsets.only(top: AppSizes.sm, left: AppSizes.sm),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,7 +97,7 @@ class TProductCardHorizontal extends StatelessWidget {
                           smallSize: true,
                         ),
                         SizedBox(
-                          height: TSizes.spaceBtwItems / 2,
+                          height: AppSizes.spaceBtwItems / 2,
                         ),
                         BrandTitleWithVerifiedIcon(title: product.brand!.name),
                       ],
@@ -116,21 +117,22 @@ class TProductCardHorizontal extends StatelessWidget {
                                   product.salePrice > 0)
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(left: TSizes.sm),
+                                      const EdgeInsets.only(left: AppSizes.sm),
                                   child: Text(
                                     product.price.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelMedium!
                                         .apply(
-                                          color: TColors.textSecondary,
+                                          color: AppColors.textSecondary,
                                           decoration:
                                               TextDecoration.lineThrough,
                                         ),
                                   ),
                                 ),
                               Padding(
-                                padding: const EdgeInsets.only(left: TSizes.sm),
+                                padding:
+                                    const EdgeInsets.only(left: AppSizes.sm),
                                 child: ProductPriceText(
                                   price: controller.getProductPrice(product),
                                 ),
@@ -142,20 +144,20 @@ class TProductCardHorizontal extends StatelessWidget {
                         /// Add To cart button
                         Container(
                           decoration: const BoxDecoration(
-                            color: TColors.dark,
+                            color: AppColors.dark,
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(TSizes.cardRadiusMd),
+                              topLeft: Radius.circular(AppSizes.cardRadiusMd),
                               bottomRight:
-                                  Radius.circular(TSizes.productImageRadius),
+                                  Radius.circular(AppSizes.productImageRadius),
                             ),
                           ),
                           child: const SizedBox(
-                            width: TSizes.iconLg * 1.2,
-                            height: TSizes.iconLg * 1.2,
+                            width: AppSizes.iconLg * 1.2,
+                            height: AppSizes.iconLg * 1.2,
                             child: Center(
                               child: Icon(
                                 Iconsax.add,
-                                color: TColors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),

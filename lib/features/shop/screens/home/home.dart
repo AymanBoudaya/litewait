@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -30,45 +31,28 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// AppBar
-                  THomeAppBar(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-
-                  /// SearchBar --
-                  TSearchContainer(
-                    text: 'Rechercher un produit',
-                  ),
-                  SizedBox(
-                    height: TSizes.spaceBtwSections,
-                  ),
+                  const THomeAppBar(),
+                  const SizedBox(height: AppSizes.spaceBtwSections),
 
                   /// Categories
-                  Column(
-                    children: [
-                      /// -- Heading
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: TSizes.defaultSpace),
-                        child: TSectionHeading(
-                          title: 'Catégories Populaires',
-                          showActionButton: true,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: TSizes.spaceBtwItems,
-                      ),
-
-                      /// Categories List
-                      THomeCategories()
-                    ],
+                  TSectionHeading(
+                    title: 'Catégories Populaires',
+                    showActionButton: true,
                   ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(
+                    height: AppSizes.spaceBtwItems,
+                  ),
+
+                  /// Categories List
+                  THomeCategories(),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                 ],
               ),
             ),
 
             /// Body
             Padding(
-                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                padding: const EdgeInsets.all(AppSizes.defaultSpace),
                 child: Column(
                   children: [
                     /// --PromoSlider
@@ -80,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: TSizes.spaceBtwSections,
+                      height: AppSizes.spaceBtwSections,
                     ),
 
                     /// -- Heading
@@ -91,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                           futureMethod: controller.fetchAllFeaturedProducts())),
                     ),
                     const SizedBox(
-                      height: TSizes.spaceBtwItems,
+                      height: AppSizes.spaceBtwItems,
                     ),
 
                     /// Popular products
@@ -106,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                       }
                       return GridLayout(
                         itemCount: controller.featuredProducts.length,
-                        itemBuilder: (_, index) => TProductCardVertical(
+                        itemBuilder: (_, index) => ProductCardVertical(
                           product: controller.featuredProducts[index],
                         ),
                       );

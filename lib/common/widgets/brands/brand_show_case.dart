@@ -14,34 +14,34 @@ import '../products/product_cards/widgets/rounded_container.dart';
 class BrandShowcase extends StatelessWidget {
   const BrandShowcase({
     super.key,
-    required this.images, required this.brand,
+    required this.images,
+    required this.brand,
   });
 
-final BrandModel brand;
+  final BrandModel brand;
   final List<String> images;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>Get.to(() => BrandProducts(brand: brand)),
+      onTap: () => Get.to(() => BrandProducts(brand: brand)),
       child: TRoundedContainer(
           showBorder: true,
-          borderColor: TColors.darkGrey,
+          borderColor: AppColors.darkGrey,
           backgroundColor: Colors.transparent,
-          padding: const EdgeInsets.all(TSizes.md),
-          margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.md),
+          margin: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
           child: Column(
             children: [
               /// Brand with products count
               BrandCard(
                 showBorder: false,
-                brand: brand ,
+                brand: brand,
               ),
               const SizedBox(
-                height: TSizes.spaceBtwItems,
+                height: AppSizes.spaceBtwItems,
               ),
-      
-      
+
               /// Brand top 3 products Images
               Row(
                 children: images
@@ -58,10 +58,10 @@ final BrandModel brand;
       child: TRoundedContainer(
         height: 100,
         backgroundColor: THelperFunctions.isDarkMode(context)
-            ? TColors.darkerGrey
-            : TColors.light,
-        margin: const EdgeInsets.only(right: TSizes.sm),
-        padding: const EdgeInsets.all(TSizes.md),
+            ? AppColors.darkerGrey
+            : AppColors.light,
+        margin: const EdgeInsets.only(right: AppSizes.sm),
+        padding: const EdgeInsets.all(AppSizes.md),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           imageUrl: image,

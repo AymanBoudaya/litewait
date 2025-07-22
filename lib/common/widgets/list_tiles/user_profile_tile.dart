@@ -42,7 +42,7 @@ class TUserProfileTile extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .headlineSmall!
-                      .apply(color: TColors.white),
+                      .apply(color: AppColors.white),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -53,7 +53,7 @@ class TUserProfileTile extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .apply(color: TColors.white),
+                      .apply(color: AppColors.white),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -63,7 +63,7 @@ class TUserProfileTile extends StatelessWidget {
           // Edit button
           IconButton(
             onPressed: onPressed,
-            icon: const Icon(Iconsax.edit, color: TColors.white),
+            icon: const Icon(Iconsax.edit, color: AppColors.white),
           ),
         ],
       ),

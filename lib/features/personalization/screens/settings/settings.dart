@@ -18,8 +18,6 @@ import '../address/address.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
     final controller = ProductRepository.instance;
@@ -33,6 +31,18 @@ class SettingsScreen extends StatelessWidget {
             snackPosition: SnackPosition.BOTTOM);
       }
     }
+
+    void uploadDummyCategories() async {
+      try {
+        await controller.uploadDummyCategories();
+        Get.snackbar("Succès", "Catégories factices chargées avec succès",
+            snackPosition: SnackPosition.BOTTOM);
+      } catch (e) {
+        Get.snackbar("Erreur", e.toString(),
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
@@ -46,12 +56,12 @@ class SettingsScreen extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium!
-                            .apply(color: TColors.white))),
+                            .apply(color: AppColors.white))),
 
                 /// Profile Picture card
                 TUserProfileTile(
                     onPressed: () => Get.to(() => const ProfileScreen())),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: AppSizes.spaceBtwSections),
               ],
             ),
           ),
@@ -59,14 +69,14 @@ class SettingsScreen extends StatelessWidget {
           /// Body
           ///
           Padding(
-              padding: EdgeInsets.all(TSizes.defaultSpace),
+              padding: EdgeInsets.all(AppSizes.defaultSpace),
               child: Column(children: [
                 /// Account Settings
                 TSectionHeading(
                   title: "Réglages du compte",
                   showActionButton: false,
                 ),
-                SizedBox(height: TSizes.spaceBtwItems),
+                SizedBox(height: AppSizes.spaceBtwItems),
 
                 TSettingsMenuTile(
                     title: "Mes Adresses",
@@ -105,9 +115,9 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () {}),
 
                 /// App Settings
-                SizedBox(height: TSizes.spaceBtwSections),
+                SizedBox(height: AppSizes.spaceBtwSections),
                 TSectionHeading(title: "Paramètres", showActionButton: false),
-                SizedBox(height: TSizes.spaceBtwItems),
+                SizedBox(height: AppSizes.spaceBtwItems),
                 TSettingsMenuTile(
                     icon: Iconsax.location,
                     title: "Géolocalisation",
@@ -126,19 +136,26 @@ class SettingsScreen extends StatelessWidget {
                     subTitle: "Définir la qualité d'image haute définition",
                     trailing: Switch(value: false, onChanged: (value) {})),
 
-                    
                 /// Developer Section - Dummy Data Upload
-                SizedBox(height: TSizes.spaceBtwSections),
-                TSectionHeading(title: "Développement", showActionButton: false),
-                SizedBox(height: TSizes.spaceBtwItems),
+                SizedBox(height: AppSizes.spaceBtwSections),
+                TSectionHeading(
+                    title: "Développement", showActionButton: false),
+                SizedBox(height: AppSizes.spaceBtwItems),
                 TSettingsMenuTile(
                   icon: Iconsax.document_upload,
                   title: "Charger des données factices",
                   subTitle: "Insère des données test dans l'application",
                   onTap: uploadDummyData,
                 ),
+                SizedBox(height: AppSizes.spaceBtwItems),
+                TSettingsMenuTile(
+                  icon: Iconsax.document_upload,
+                  title: "Charger des catégories factices",
+                  subTitle: "Insère des données test dans l'application",
+                  onTap: uploadDummyCategories,
+                ),
                 SizedBox(
-                  height: TSizes.spaceBtwSections,
+                  height: AppSizes.spaceBtwSections,
                 ),
                 SizedBox(
                     width: double.infinity,

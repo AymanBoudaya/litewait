@@ -17,49 +17,52 @@ class TBillingAddressSection extends StatelessWidget {
           buttonTitle: 'Changer',
           onPressed: () => addressController.selectNewAddressPopup(context),
         ),
-        addressController.selectedAddress.value.id.isNotEmpty ?
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'ALi karray',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Row(
-              children: [
-                Icon(Icons.phone, color: Colors.grey, size: 16),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
-                Text(
-                  '+216-55 21 52 36',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwItems / 2,
-            ),
-            Row(
-              children: [
-                Icon(Icons.location_history, color: Colors.grey, size: 16),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
-                Expanded(
-                  child: Text(
-                    'Gremda km 10, Sfax, Tunisie',
+        addressController.selectedAddress.value.id.isNotEmpty
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'ALi karray',
                     style: Theme.of(context).textTheme.bodyMedium,
-                    softWrap: true,
                   ),
-                )
-              ],
-            ),
-          ],
-        ) : Text('Sélectionner une adresse', style: Theme.of(context).textTheme.bodyMedium),
+                  const SizedBox(
+                    height: AppSizes.spaceBtwItems / 2,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.phone, color: Colors.grey, size: 16),
+                      const SizedBox(
+                        height: AppSizes.spaceBtwItems,
+                      ),
+                      Text(
+                        '+216-55 21 52 36',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: AppSizes.spaceBtwItems / 2,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_history,
+                          color: Colors.grey, size: 16),
+                      const SizedBox(
+                        height: AppSizes.spaceBtwItems,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Gremda km 10, Sfax, Tunisie',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          softWrap: true,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              )
+            : Text('Sélectionner une adresse',
+                style: Theme.of(context).textTheme.bodyMedium),
       ],
     );
   }

@@ -9,14 +9,14 @@ class BrandTitleText extends StatelessWidget {
     this.textAlign = TextAlign.start,
     required this.title,
     this.maxLines = 1,
-    this.brandTextSize = TextSizes.small,
+    this.brandTextSize = TexAppSizes.small,
   });
 
   final Color? color;
   final TextAlign? textAlign;
   final String title;
   final int maxLines;
-  final TextSizes brandTextSize;
+  final TexAppSizes brandTextSize;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class BrandTitleText extends StatelessWidget {
       textAlign: textAlign,
       overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
-      style: brandTextSize == TextSizes.small
+      style: brandTextSize == TexAppSizes.small
           ? Theme.of(context).textTheme.labelMedium?.apply(color: color)
-          : brandTextSize == TextSizes.medium
+          : brandTextSize == TexAppSizes.medium
               ? Theme.of(context).textTheme.bodyLarge?.apply(color: color)
-              : brandTextSize == TextSizes.large
+              : brandTextSize == TexAppSizes.large
                   ? Theme.of(context).textTheme.titleLarge?.apply(color: color)
                   : Theme.of(context).textTheme.bodyMedium?.apply(color: color),
     );

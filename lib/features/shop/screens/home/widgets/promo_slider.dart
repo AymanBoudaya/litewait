@@ -28,7 +28,7 @@ class TPromoSlider extends StatelessWidget {
                     controller.updatePageIndicator(index)),
             items: banners.map((url) => TRoundedImage(imageUrl: url)).toList()),
         const SizedBox(
-          height: TSizes.spaceBtwItems,
+          height: AppSizes.spaceBtwItems,
         ),
         Center(
           child: Obx(
@@ -42,8 +42,8 @@ class TPromoSlider extends StatelessWidget {
                       margin: EdgeInsets.only(right: 10),
                       backgroundColor:
                           controller.carousalCurrentIndex.value == i
-                              ? TColors.primary
-                              : TColors.grey),
+                              ? AppColors.primary
+                              : AppColors.grey),
               ],
             ),
           ),

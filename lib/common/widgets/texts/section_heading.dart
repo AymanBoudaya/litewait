@@ -22,29 +22,27 @@ class TSectionHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ??
-          const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+          const EdgeInsets.symmetric(horizontal: AppSizes.defaultSpace),
       child: SizedBox(
         width: double.infinity, // Contrainte de largeur
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              // Remplace Expanded par Flexible
+            Expanded(
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             if (showActionButton)
-              Flexible(
-                // Ajoute Flexible pour le bouton
-                child: TextButton(
-                  onPressed: onPressed,
-                  child: Text(buttonTitle),
-                ),
+              TextButton(
+                onPressed: onPressed,
+                child: Text(buttonTitle),
               ),
           ],
         ),

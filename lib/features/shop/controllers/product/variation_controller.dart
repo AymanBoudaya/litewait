@@ -7,7 +7,6 @@ import 'cart_controller.dart';
 
 class VariationController extends GetxController {
   static VariationController get instance => Get.find();
-
   /// Variables
   final RxMap<String, dynamic> selectedAttributes = <String, dynamic>{}.obs;
   final RxString variationStockStatus = ''.obs;

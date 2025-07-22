@@ -18,27 +18,27 @@ class TSocialButtons extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: TColors.grey),
+              border: Border.all(color: AppColors.grey),
               borderRadius: BorderRadius.circular(100)),
           child: IconButton(
               onPressed: () => controller.googleSignIn(),
               icon: const Image(
-                  width: TSizes.iconMd,
-                  height: TSizes.iconMd,
+                  width: AppSizes.iconMd,
+                  height: AppSizes.iconMd,
                   image: AssetImage(TImages.google))),
         ),
         const SizedBox(
-          width: TSizes.spaceBtwItems,
+          width: AppSizes.spaceBtwItems,
         ),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: TColors.grey),
+              border: Border.all(color: AppColors.grey),
               borderRadius: BorderRadius.circular(100)),
           child: IconButton(
               onPressed: () {},
               icon: const Image(
-                  width: TSizes.iconMd,
-                  height: TSizes.iconMd,
+                  width: AppSizes.iconMd,
+                  height: AppSizes.iconMd,
                   image: AssetImage(TImages.facebook))),
         )
       ],

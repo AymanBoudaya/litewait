@@ -28,7 +28,7 @@ class SubCategoriesScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
+          padding: EdgeInsets.all(AppSizes.defaultSpace),
           child: Column(
             children: [
               /// Banner
@@ -37,7 +37,7 @@ class SubCategoriesScreen extends StatelessWidget {
                 imageUrl: TImages.promoBanner3,
                 applyImageRadius: true,
               ),
-              SizedBox(height: TSizes.spaceBtwSections),
+              SizedBox(height: AppSizes.spaceBtwSections),
 
               /// Subcategories
               FutureBuilder(
@@ -90,7 +90,7 @@ class SubCategoriesScreen extends StatelessWidget {
                                                 limit: -1))),
                                   ),
                                   const SizedBox(
-                                    height: TSizes.spaceBtwItems / 2,
+                                    height: AppSizes.spaceBtwItems / 2,
                                   ),
 
                                   SizedBox(
@@ -100,13 +100,13 @@ class SubCategoriesScreen extends StatelessWidget {
                                         scrollDirection: Axis.horizontal,
                                         separatorBuilder: (context, index) =>
                                             const SizedBox(
-                                                width: TSizes.spaceBtwItems),
+                                                width: AppSizes.spaceBtwItems),
                                         itemBuilder: (context, index) =>
                                             TProductCardHorizontal(
                                                 product: products[index])),
                                   ),
                                   const SizedBox(
-                                    height: TSizes.spaceBtwSections,
+                                    height: AppSizes.spaceBtwSections,
                                   ),
                                 ],
                               );

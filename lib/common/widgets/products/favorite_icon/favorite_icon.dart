@@ -17,8 +17,7 @@ class FavoriteIcon extends StatelessWidget {
     return Obx(() => TCircularIcon(
         icon:
             controller.isFavourite(productId) ? Iconsax.heart5 : Iconsax.heart,
-        color: controller.isFavourite(productId) ? TColors.error : null,
-        onPressed: () => controller.toggleFavoriteProduct(productId)
-        ));
+        color: controller.isFavourite(productId) ? AppColors.error : null,
+        onPressed: () => controller.toggleFavoriteProduct(productId)));
   }
 }

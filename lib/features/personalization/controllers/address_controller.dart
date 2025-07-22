@@ -139,7 +139,7 @@ class AddressController extends GetxController {
     return showModalBottomSheet(
         context: context,
         builder: (_) => Container(
-            padding: const EdgeInsets.all(TSizes.lg),
+            padding: const EdgeInsets.all(AppSizes.lg),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -169,7 +169,7 @@ class AddressController extends GetxController {
                                 });
                           });
                     }),
-                const SizedBox(height: TSizes.defaultSpace * 2),
+                const SizedBox(height: AppSizes.defaultSpace * 2),
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

@@ -20,12 +20,13 @@ class TBottomAddToCart extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: TSizes.defaultSpace, vertical: TSizes.defaultSpace / 2),
+          horizontal: AppSizes.defaultSpace,
+          vertical: AppSizes.defaultSpace / 2),
       decoration: BoxDecoration(
-        color: dark ? TColors.darkerGrey : TColors.light,
+        color: dark ? AppColors.darkerGrey : AppColors.light,
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(TSizes.cardRadiusLg),
-          topRight: Radius.circular(TSizes.cardRadiusLg),
+          topLeft: Radius.circular(AppSizes.cardRadiusLg),
+          topRight: Radius.circular(AppSizes.cardRadiusLg),
         ),
       ),
       child: Obx(() {
@@ -38,28 +39,28 @@ class TBottomAddToCart extends StatelessWidget {
               children: [
                 TCircularIcon(
                   icon: Iconsax.minus,
-                  backgroundColor: TColors.darkGrey,
+                  backgroundColor: AppColors.darkGrey,
                   width: 40,
                   height: 40,
-                  color: TColors.white,
+                  color: AppColors.white,
                   onPressed: () {
                     if (quantity > 0) {
                       controller.updateTempQuantity(product, quantity - 1);
                     }
                   },
                 ),
-                const SizedBox(width: TSizes.spaceBtwItems),
+                const SizedBox(width: AppSizes.spaceBtwItems),
                 Text(
                   quantity.toString(),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const SizedBox(width: TSizes.spaceBtwItems),
+                const SizedBox(width: AppSizes.spaceBtwItems),
                 TCircularIcon(
                   icon: Iconsax.add,
-                  backgroundColor: TColors.black,
+                  backgroundColor: AppColors.black,
                   width: 40,
                   height: 40,
-                  color: TColors.white,
+                  color: AppColors.white,
                   onPressed: () {
                     controller.updateTempQuantity(product, quantity + 1);
                   },
@@ -70,9 +71,9 @@ class TBottomAddToCart extends StatelessWidget {
               onPressed:
                   quantity < 1 ? null : () => controller.addToCart(product),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(TSizes.md),
-                backgroundColor: TColors.black,
-                side: const BorderSide(color: TColors.black),
+                padding: const EdgeInsets.all(AppSizes.md),
+                backgroundColor: AppColors.black,
+                side: const BorderSide(color: AppColors.black),
               ),
               child: const Text('Ajouter à la carte'),
             ),

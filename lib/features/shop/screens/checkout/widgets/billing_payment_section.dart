@@ -25,7 +25,7 @@ class TBillingPaymentSection extends StatelessWidget {
           onPressed: () => controller.selectPaymentMethod(context),
         ),
         const SizedBox(
-          height: TSizes.spaceBtwItems / 2,
+          height: AppSizes.spaceBtwItems / 2,
         ),
         Obx(
           () => Row(
@@ -34,20 +34,20 @@ class TBillingPaymentSection extends StatelessWidget {
               TRoundedContainer(
                   width: 60,
                   height: 35,
-                  backgroundColor: dark ? TColors.light : TColors.white,
-                  padding: const EdgeInsets.all(TSizes.sm),
+                  backgroundColor: dark ? AppColors.light : AppColors.white,
+                  padding: const EdgeInsets.all(AppSizes.sm),
                   child: Image(
                       image: AssetImage(
                           controller.selectedPaymentMethod.value.image),
                       fit: BoxFit.contain)),
-              const SizedBox(width: TSizes.spaceBtwItems / 2),
+              const SizedBox(width: AppSizes.spaceBtwItems / 2),
               Text(controller.selectedPaymentMethod.value.name,
                   style: Theme.of(context).textTheme.bodyLarge)
             ],
           ),
         ),
         const SizedBox(
-          height: TSizes.spaceBtwItems / 2,
+          height: AppSizes.spaceBtwItems / 2,
         ),
       ],
     );

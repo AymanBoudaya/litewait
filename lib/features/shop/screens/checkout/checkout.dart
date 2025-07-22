@@ -33,7 +33,7 @@ class CheckoutScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall)),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(AppSizes.defaultSpace),
           child: Column(
             children: [
               /// Items in cart
@@ -41,31 +41,31 @@ class CheckoutScreen extends StatelessWidget {
                 showAddRemoveButtons: false,
               ),
               SizedBox(
-                height: TSizes.spaceBtwSections,
+                height: AppSizes.spaceBtwSections,
               ),
 
               /// --Coupon TextField
               TCouponCode(dark: dark),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
               /// --Billing section
               TRoundedContainer(
                 showBorder: true,
-                padding: const EdgeInsets.all(TSizes.md),
-                backgroundColor: dark ? TColors.black : TColors.white,
+                padding: const EdgeInsets.all(AppSizes.md),
+                backgroundColor: dark ? AppColors.black : AppColors.white,
                 child: Column(
                   children: [
                     /// Pricing
                     TBillingAmountSection(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     /// Divider
                     const Divider(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     /// Payment Methods
                     TBillingPaymentSection(),
-                    const SizedBox(height: TSizes.spaceBtwItems),
+                    const SizedBox(height: AppSizes.spaceBtwItems),
 
                     /// Address
                     TBillingAddressSection(),
@@ -79,7 +79,7 @@ class CheckoutScreen extends StatelessWidget {
 
       /// Checkout button
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: ElevatedButton(
             onPressed: subTotal > 0
                 ? () => orderController.processOrder(totalAmount)
